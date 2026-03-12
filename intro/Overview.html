@@ -1,0 +1,48 @@
+{{ block title }}
+   Overview & Payments
+{{ endblock }}
+
+{{ block content }}
+    <p>
+        Thre are 3 stages to this study. All participant will complete all stages in the same order.
+    </p>
+<p>
+    Throughout the study, you will earn bonus payments which will be quoted in the currency of <i>experimental pounds</i> (E£).
+    After the experiment you will receive a payout of your earned bonus at the exchange rate E£50=£1.
+</p>
+<p>
+    Click on the next to proceed to stage 1.
+</p>
+<div style="display:none">
+    {% for field in form %}
+      {% if field.name in hidden_fields %}
+        {{ formfield field.name }}
+      {% endif %}
+    {% endfor %}
+</div>
+    {{ next_button }}
+{{ endblock }}
+
+{{ block scripts }}
+    {{ super }}
+    {{ load static }}
+    <script>
+        // Reset blur tracking at the start of the experiment
+        document.addEventListener('DOMContentLoaded', function () {
+            localStorage.removeItem('blur_count_global');
+            localStorage.removeItem('blur_pages');
+
+            // Also reset the hidden fields on this page
+            const logField = document.getElementById('id_blur_log');
+            const countField = document.getElementById('id_blur_count');
+            const warnedField = document.getElementById('id_blur_warned');
+            if (logField) logField.value = '[]';
+            if (countField) countField.value = '0';
+            if (warnedField) warnedField.value = '0';
+        });
+    </script>
+    <script src="{{ static 'data_quality.js' }}"></script>
+{{ endblock }}
+
+
+

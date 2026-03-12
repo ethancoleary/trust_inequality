@@ -1,10 +1,21 @@
-{{ block title }}
-    Page title
-{{ endblock }}
+
 
 {{ block content }}
+<link rel="stylesheet" href="{{static 'css/css.css'}}">
+<link rel="stylesheet" href="{{static 'css/modal.css'}}">
+<script type="text/javascript" src="{{ static 'js/Script_modal.js' }}"></script>
 
+<div class="content-box box-white">
+    <div class="text-center">
+        <h3>Results of stage 1</h3>
+    </div><hr>
+    <p>
+        You successfully decrypted {{ player.score }} codes.<br>
+        Please click on 'next' to proceed to stage 2.
+    </p>
+    <center>
     {{ next_button }}
+        </center>
+</div>
+
 {{ endblock }}
-
-
