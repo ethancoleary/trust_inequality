@@ -1,0 +1,80 @@
+
+
+{{ block content }}
+<link rel="stylesheet" href="{{static 'css/css.css'}}">
+<link rel="stylesheet" href="{{static 'css/modal.css'}}">
+<script type="text/javascript" src="{{ static 'js/Script_modal.js' }}"></script>
+
+<!-- Box 1: white -->
+<div class="content-box box-white">
+    <div class="text-center">
+        <h3>Stage 2 Information</h3>
+    </div>
+    <hr>
+    <p>
+        <i>Pay attention to the following instructions as you will soon need to pass a comprehension check.</i>
+    </p>
+    <p>
+    In the previous study, participant correctly decrypted {{ average }} codes on average.
+        Since you correctly depicted {{ player.participant.score }} codes, you have been assigned to group {{ g }}.
+    </p>
+    <p>
+        For the rest of stage 2, you have been matched with a participant from your society who was assigned to group {{ m }} due to their score in stage 1.
+    </p>
+    <p>
+        In other words, due to your performance in stage 1, you have been assigned an initial bonus of E£{{ endowment }} and your match has been
+        assigned an initial bonus of E£{{ m_endowment }} for stage 2.
+    </p>
+    <p>
+        During stage 2, you will interact with your match in two <b>games</b>.
+        You will each make your decisions simultaneously and you will not learn the outcome of each other's decisions until the end of the study.
+        The games will be played in a random order.
+    </p>
+    <p>
+        In each game, there are two roles (first mover and second mover) and therefore two <b>situations</b>.
+        Each situation corresponds to a possible allocation of roles between you and your match.
+        You will make decisions for each situation i.e. for each possible allocation of roles.
+    </p>
+    <p>
+        This means that during stage 2, you will make decisions in 4 situations (2 decisions for each of 2 games).
+    </p>
+    <p>
+        At the end of this stage, one of the 4 situations will be chosen at random.
+        Your bonus payment will then be equal to your final bonus amount once your randomly selected situation is paid out according to your and your match's decisions.
+    </p>
+    <p>
+        <b>Therefore, it is in your best interest to treat every decision as if you will be paid for it.</b>
+    </p>
+    <center>
+    {{ next_button }}
+    </center>
+</div>
+
+<div style="display:none">
+    {% for field in form %}
+      {% if field.name in hidden_fields %}
+        {{ formfield field.name }}
+      {% endif %}
+    {% endfor %}
+</div>
+
+
+{{ endblock }}
+{{ block scripts }}
+    {{ super }}
+    {{ load static }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            localStorage.removeItem('blur_count_global');
+            localStorage.removeItem('blur_pages');
+            const logField = document.getElementById('id_blur_log');
+            const countField = document.getElementById('id_blur_count');
+            const warnedField = document.getElementById('id_blur_warned');
+            if (logField) logField.value = '[]';
+            if (countField) countField.value = '0';
+            if (warnedField) warnedField.value = '0';
+        });
+    </script>
+    <script src="{{ static 'data_quality.js' }}"></script>
+{{ endblock }}
+

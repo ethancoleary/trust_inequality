@@ -1,0 +1,111 @@
+
+{{ block content }}
+<link rel="stylesheet" href="{{static 'css/css.css'}}">
+<link rel="stylesheet" href="{{static 'css/modal.css'}}">
+<script type="text/javascript" src="{{ static 'js/Script_modal.js' }}"></script>
+
+<!-- Box 1: white -->
+<div class="content-box box-white">
+    <div class="text-center">
+        <h3>Situation 3: Second Mover</h3>
+        </div>
+    <hr>
+    <p>
+        You have an initial bonus of E£{{ initial_bonus }} and your match has an initial bonus of E£{{ match_bonus }}.
+    </p>
+    <p>
+        You are now the second mover. You do not make a decision in this situation.
+    </p>
+    <p>If this situation is chosen for final payment, these are the possible final payments for you and your match.</p>
+    <table class="table">
+        <thead>
+    <tr>
+        <th></th>
+        <th>Your match<br>transfers E£0</th>
+        <th>Your match<br>transfers E£10</th>
+    </tr>
+</thead>
+        <tbody>
+            <tr>
+                <td>Your final bonus</td>
+                <td>E£{{ initial_bonus }}</td>
+                <td>E£{{ transfer_bonus }}</td>
+            </tr>
+            <tr>
+                <td>Your match's final bonus</td>
+                <td>E£{{ match_bonus }}</td>
+                <td>E£{{ m_transfer_bonus }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>Click next to proceed to the next situation.</p>
+    <center>
+    {{ next_button }}
+    </center>
+</div>
+
+<style>
+    .transfer-btn {
+        padding: 14px 24px;
+        border: 2px solid #000;
+        border-radius: 10px;
+        background-color: #fff;
+        color: #000;
+        font-size: 15px;
+        cursor: pointer;
+        transition: background-color 0.2s, color 0.2s;
+        min-width: 220px;
+    }
+    .transfer-btn.selected {
+        background-color: #000;
+        color: #fff;
+    }
+    .transfer-btn:hover:not(.selected) {
+        background-color: #f0f0f0;
+    }
+</style>
+
+
+<div style="display:none">
+    {% for field in form %}
+      {% if field.name in hidden_fields %}
+        {{ formfield field.name }}
+      {% endif %}
+    {% endfor %}
+</div>
+
+{{ endblock }}
+{{ block scripts }}
+    {{ super }}
+    {{ load static }}
+    <script>
+        function selectTransfer(btn, value) {
+            // Update button highlights
+            document.querySelectorAll('.transfer-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            // Write value to the hidden oTree field
+            document.getElementById('id_transfer').value = value;
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Prevent form submission if no button selected
+            document.querySelector('form').addEventListener('submit', function (e) {
+                const val = document.getElementById('id_transfer').value;
+                if (val === '' || val === null) {
+                    e.preventDefault();
+                    alert('Please select a transfer decision before continuing.');
+                }
+            });
+
+            localStorage.removeItem('blur_count_global');
+            localStorage.removeItem('blur_pages');
+            const logField = document.getElementById('id_blur_log');
+            const countField = document.getElementById('id_blur_count');
+            const warnedField = document.getElementById('id_blur_warned');
+            if (logField) logField.value = '[]';
+            if (countField) countField.value = '0';
+            if (warnedField) warnedField.value = '0';
+        });
+    </script>
+    <script src="{{ static 'data_quality.js' }}"></script>
+{{ endblock }}

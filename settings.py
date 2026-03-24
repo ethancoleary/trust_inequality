@@ -1,11 +1,13 @@
 from os import environ
 
-SESSION_CONFIGS = SESSION_CONFIGS = [
+SESSION_CONFIGS = [
     dict(
         name='Main',
         app_sequence=[
             #'intro',
-            's1'
+            #'s1',
+            #'s2_intro',
+            's2_dg1'
         ],
         num_demo_participants=10,
     )
@@ -22,7 +24,11 @@ SESSION_CONFIG_DEFAULTS = dict(
 
 PARTICIPANT_FIELDS = [
 's_treatment',
-'m_treatment'
+'m_treatment',
+'group_assignment',
+'match',
+'score',
+    'TG_first',
 ]
 SESSION_FIELDS = []
 

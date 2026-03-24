@@ -1,0 +1,214 @@
+{{ block title }}{{ endblock }}
+
+{% block form_fields %}{% endblock %}
+{{ block content }}
+
+
+<link rel="stylesheet" href="{{static 'css/css.css'}}">
+<link rel="stylesheet" href="{{static 'css/modal.css'}}">
+
+<div class="section-box box-white">
+    <div class="text-center">
+        <h3>✅ Comprehension Check</h3>
+        <hr>
+        <p>
+            Please answer the following questions to check your understanding of the preceding instructions.
+            You must answer each question correctly before moving on to the next.
+            If you need to reread the instructions, click the button below.
+        </p>
+    </div>
+</div>
+
+<div class="text-center mb-3">
+    <button type="button" onclick="open_modal(2)" class="btn btn-primary btn-lg">
+        📋 Reread Stage 2 Instructions
+    </button>
+</div>
+
+<form method="post" id="cq-form">
+
+ <!-- Q1 -->
+<div class="content-box box-white question-block" id="block-Q1">
+    <h4>1. How much initial bonus have you been given for stage 2?</h4>
+    <input type="radio" name="CQ1" id="CQ1_1" value="1"> <label for="CQ1_1">20 NOK</label><br>
+    <input type="radio" name="CQ1" id="CQ1_2" value="2"> <label for="CQ1_2">40 NOK</label><br>
+    <input type="radio" name="CQ1" id="CQ1_3" value="3"> <label for="CQ1_3">60 NOK</label><br>
+    <input type="radio" name="CQ1" id="CQ1_4" value="4"> <label for="CQ1_4">80 NOK</label><br>
+    <div class="cq-feedback mt-2" id="feedback-Q1"></div>
+    <button type="button" class="btn btn-secondary mt-2 check-btn" data-q="Q1">Check Answer</button>
+</div>
+
+<!-- Q2 -->
+<div class="content-box box-white question-block" id="block-Q2" style="display:none;">
+    <h4>2. How much initial bonus has your match been given for stage 2?</h4>
+    <input type="radio" name="CQ2" id="CQ2_1" value="1"> <label for="CQ2_1">20 NOK</label><br>
+    <input type="radio" name="CQ2" id="CQ2_2" value="2"> <label for="CQ2_2">40 NOK</label><br>
+    <input type="radio" name="CQ2" id="CQ2_3" value="3"> <label for="CQ2_3">60 NOK</label><br>
+    <input type="radio" name="CQ2" id="CQ2_4" value="4"> <label for="CQ2_4">80 NOK</label><br>
+    <div class="cq-feedback mt-2" id="feedback-Q2"></div>
+    <button type="button" class="btn btn-secondary mt-2 check-btn" data-q="Q2">Check Answer</button>
+</div>
+
+<!-- Q3 -->
+<div class="content-box box-white question-block" id="block-Q3" style="display:none;">
+    <h4>3. True or false: the allocation of initial bonuses was random.</h4>
+    <input type="radio" name="CQ3" id="CQ3_1" value="1"> <label for="CQ3_1">True</label><br>
+    <input type="radio" name="CQ3" id="CQ3_2" value="2"> <label for="CQ3_2">False</label><br>
+    <div class="cq-feedback mt-2" id="feedback-Q3"></div>
+    <button type="button" class="btn btn-secondary mt-2 check-btn" data-q="Q3">Check Answer</button>
+</div>
+
+<!-- Q4 -->
+<div class="content-box box-white question-block" id="block-Q4" style="display:none;">
+    <h4>4. How many situations will you face during stage 2?</h4>
+    <input type="radio" name="CQ4" id="CQ4_1" value="1"> <label for="CQ4_1">1</label><br>
+    <input type="radio" name="CQ4" id="CQ4_2" value="2"> <label for="CQ4_2">2</label><br>
+    <input type="radio" name="CQ4" id="CQ4_3" value="3"> <label for="CQ4_3">3</label><br>
+    <input type="radio" name="CQ4" id="CQ4_4" value="4"> <label for="CQ4_4">4</label><br>
+    <div class="cq-feedback mt-2" id="feedback-Q4"></div>
+    <button type="button" class="btn btn-secondary mt-2 check-btn" data-q="Q4">Check Answer</button>
+</div>
+
+<!-- Q5 -->
+<div class="content-box box-white question-block" id="block-Q5" style="display:none;">
+    <h4>5. How is your bonus payment computed for stage 2?</h4>
+    <input type="radio" name="CQ5" id="CQ5_1" value="1"> <label for="CQ5_1">Initial bonus only</label><br>
+    <input type="radio" name="CQ5" id="CQ5_2" value="2"> <label for="CQ5_2">Sum of bonuses from each situation</label><br>
+    <input type="radio" name="CQ5" id="CQ5_3" value="3"> <label for="CQ5_3">Final bonus from a randomly chosen situation</label><br>
+    <div class="cq-feedback mt-2" id="feedback-Q5"></div>
+    <button type="button" class="btn btn-secondary mt-2 check-btn" data-q="Q5">Check Answer</button>
+</div>
+
+
+    <!-- Submit — hidden until all correct -->
+    <div class="buttons-container" id="submit-container" style="display:none;">
+        <button id="NextButton" class="otree-btn-next btn btn-primary">Next</button>
+    </div>
+
+</form>
+
+<!-- Instructions Modal -->
+<div id="myModal2" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Stage 2 Information</h2>
+            <span class="close" onclick="span_click(2)">&times;</span>
+        </div>
+        <div class="modal-body">
+           <p>
+    In the previous study, participant correctly decrypted {{ average }} codes on average.
+        Since you correctly depicted {{ player.participant.score }} codes, you have been assigned to group {{ g }}.
+    </p>
+    <p>
+        For the rest of stage 2, you have been matched with a participant from your society who was assigned to group {{ m }} due to their score in stage 1.
+    </p>
+    <p>
+        In other words, due to your performance in stage 1, you have been assigned an initial bonus of E£{{ endowment }} and your match has been
+        assigned an initial bonus of E£{{ m_endowment }} for stage 2.
+    </p>
+    <p>
+        During stage 2, you will interact with your match in two <b>games</b>.
+        You will each make your decisions simultaneously and you will not learn the outcome of each other's decisions until the end of the study.
+        The games will be played in a random order.
+    </p>
+    <p>
+        In each game, there are two roles (first mover and second mover) and therefore two <b>situations</b>.
+        Each situation corresponds to a possible allocation of roles between you and your match.
+        You will make decisions for each situation i.e. for each possible allocation of roles.
+    </p>
+    <p>
+        This means that during stage 2, you will make decisions in 4 situations (2 decisions for each of 2 games).
+    </p>
+    <p>
+        At the end of this stage, one of the 4 situations will be chosen at random.
+        Your bonus payment will then be equal to your final bonus amount once your randomly selected situation is paid out according to your and your match's decisions.
+    </p>
+    <p>
+        <b>Therefore, it is in your best interest to treat every decision as if you will be paid for it.</b>
+    </p>
+        </div>
+    </div>
+</div>
+
+<div style="display:none;">
+    {% for field in form %}
+        {% if field.name in hidden_fields %}
+            {{ formfield field.name }}
+        {% endif %}
+    {% endfor %}
+</div>
+
+{{ endblock }}
+
+{{ block scripts }}
+{{ super }}
+<script type="text/javascript" src="{{ static 'js/Script_modal.js' }}"></script>
+<script src="{{ static 'data_quality.js' }}"></script>
+<script>
+    const CORRECT = {
+        Q1: {{ correct_CQ1 }},
+        Q2: {{ correct_CQ2 }},
+        Q3: 2,
+        Q4: 4,
+        Q5: 3,
+    };
+
+    const ORDER = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5'];
+
+    function liveRecv(data) {
+        // acknowledge save_cq — no action needed
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+        localStorage.removeItem('blur_count_global');
+        localStorage.removeItem('blur_pages');
+        const logField    = document.getElementById('id_blur_log');
+        const countField  = document.getElementById('id_blur_count');
+        const warnedField = document.getElementById('id_blur_warned');
+        if (logField)    logField.value    = '[]';
+        if (countField)  countField.value  = '0';
+        if (warnedField) warnedField.value = '0';
+
+        document.querySelectorAll('.check-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const q        = this.dataset.q;
+                const block    = document.getElementById(`block-${q}`);
+                const feedback = document.getElementById(`feedback-${q}`);
+
+                // Use type="radio" selector — avoids name attribute escaping issues
+                const selected = block.querySelector('input[type="radio"]:checked');
+
+                if (!selected) {
+                    feedback.innerHTML = '<span class="text-warning">⚠️ Please select an answer first.</span>';
+                    return;
+                }
+
+                if (parseInt(selected.value) === CORRECT[q]) {
+                    liveSend({'type': 'save_cq', 'question': q, 'answer': parseInt(selected.value)});
+                    feedback.innerHTML = '<span class="text-success">✅ Correct!</span>';
+                    this.disabled = true;
+                    block.querySelectorAll('input[type="radio"]').forEach(r => r.disabled = true);
+
+                    const nextIdx = ORDER.indexOf(q) + 1;
+                    if (nextIdx < ORDER.length) {
+                        const nextBlock = document.getElementById(`block-${ORDER[nextIdx]}`);
+                        nextBlock.style.display = 'block';
+
+                    } else {
+                        const sub = document.getElementById('submit-container');
+                        sub.style.display = 'flex';
+                        
+                    }
+
+                } else {
+                    feedback.innerHTML = '<span class="text-danger">❌ Incorrect. Please reread the instructions and try again.</span>';
+                    selected.checked = false;
+                }
+            });
+        });
+
+    }); // closing DOMContentLoaded
+
+</script>
+{{ endblock }}

@@ -1,0 +1,177 @@
+{{ block title }}{{ endblock }}
+
+{% block form_fields %}{% endblock %}
+{{ block content }}
+
+
+<link rel="stylesheet" href="{{static 'css/css.css'}}">
+<link rel="stylesheet" href="{{static 'css/modal.css'}}">
+
+<div class="section-box box-white">
+    <div class="text-center">
+        <h3>✅ Comprehension Check</h3>
+        <hr>
+        <p>
+            Please answer the following 3 questions to check your understanding of the preceding instructions.
+            You must answer each question correctly before moving on to the next.
+            If you need to reread the instructions, click the button below.
+        </p>
+    </div>
+</div>
+
+<div class="text-center mb-3">
+    <button type="button" onclick="open_modal(2)" class="btn btn-primary btn-lg">
+        📋 Reread Game 2 Instructions
+    </button>
+</div>
+
+<form method="post" id="cq-form">
+
+ <!-- Q1 -->
+<div class="content-box box-white question-block" id="block-Q1">
+    <h4>1. In game 2, how many tokens can the first mover send?</h4>
+    <input type="radio" name="CQ1" id="CQ1_1" value="1"> <label for="CQ1_1">0 or 40</label><br>
+    <input type="radio" name="CQ1" id="CQ1_2" value="2"> <label for="CQ1_2">10 or 20</label><br>
+    <input type="radio" name="CQ1" id="CQ1_3" value="3"> <label for="CQ1_3">0 or 10</label><br>
+    <input type="radio" name="CQ1" id="CQ1_4" value="4"> <label for="CQ1_4">5 or 10</label><br>
+    <div class="cq-feedback mt-2" id="feedback-Q1"></div>
+    <button type="button" class="btn btn-secondary mt-2 check-btn" data-q="Q1">Check Answer</button>
+</div>
+
+<!-- Q2 -->
+<div class="content-box box-white question-block" id="block-Q2" style="display:none;">
+    <h4>2. In game 2, what must the second mover decide?</h4>
+    <input type="radio" name="CQ2" id="CQ2_1" value="1"> <label for="CQ2_1">How much to return to the first mover</label><br>
+    <input type="radio" name="CQ2" id="CQ2_2" value="2"> <label for="CQ2_2">How much to the first mover's transfer is multiplied by</label><br>
+    <input type="radio" name="CQ2" id="CQ2_3" value="3"> <label for="CQ2_3">Nothing</label><br>
+    <div class="cq-feedback mt-2" id="feedback-Q2"></div>
+    <button type="button" class="btn btn-secondary mt-2 check-btn" data-q="Q2">Check Answer</button>
+</div>
+
+<!-- Q3 -->
+<div class="content-box box-white question-block" id="block-Q3" style="display:none;">
+    <h4>3. In game 2, what happens to the amount of money the first mover chooses to send?</h4>
+    <input type="radio" name="CQ3" id="CQ3_1" value="1"> <label for="CQ3_1">It is transferred to the second mover's bonus</label><br>
+    <input type="radio" name="CQ3" id="CQ3_2" value="2"> <label for="CQ3_2">The second mover receives half the amount</label><br>
+    <input type="radio" name="CQ3" id="CQ3_3" value="3"> <label for="CQ3_3">The second mover receives a random share of the transfer</label><br>
+    <input type="radio" name="CQ3" id="CQ3_4" value="4"> <label for="CQ3_4">The second mover receives triple the transfer</label><br>
+    <div class="cq-feedback mt-2" id="feedback-Q3"></div>
+    <button type="button" class="btn btn-secondary mt-2 check-btn" data-q="Q3">Check Answer</button>
+</div>
+
+
+    <!-- Submit — hidden until all correct -->
+    <div class="buttons-container" id="submit-container" style="display:none;">
+        <button id="NextButton" class="otree-btn-next btn btn-primary">Next</button>
+    </div>
+
+</form>
+
+<!-- Instructions Modal -->
+<div id="myModal2" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Game 1 Information</h2>
+            <span class="close" onclick="span_click(2)">&times;</span>
+        </div>
+        <div class="modal-body">
+           <p>
+        The second game proceeds as follows:
+    </p>
+        <ul>
+            <li>The first mover decides whether to send E£10 to the second mover or send nothing.</li>
+            <li>If the first mover sends E£10, then this amount is tripled and the second mover receiver E£30.</li>
+            <li>The second mover does not make a decision.</li>
+        </ul>
+
+    <p>
+        In situation 3, you will be in the role of the {{ role1 }} mover and your match will be in the role of the {{ m_role1 }} mover.
+        In situation 4, the roles will be reversed.
+    </p>
+    <p>
+        Click on next to answer some brief questions about the game instructions and then begin game 1.
+    </p>
+        </div>
+    </div>
+</div>
+
+<div style="display:none;">
+    {% for field in form %}
+        {% if field.name in hidden_fields %}
+            {{ formfield field.name }}
+        {% endif %}
+    {% endfor %}
+</div>
+
+{{ endblock }}
+
+{{ block scripts }}
+{{ super }}
+<script type="text/javascript" src="{{ static 'js/Script_modal.js' }}"></script>
+<script src="{{ static 'data_quality.js' }}"></script>
+<script>
+    const CORRECT = {
+        Q1: 3,
+        Q2: 3,
+        Q3: 4,
+    };
+
+    const ORDER = ['Q1', 'Q2', 'Q3']
+
+    function liveRecv(data) {
+        // acknowledge save_cq — no action needed
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+        localStorage.removeItem('blur_count_global');
+        localStorage.removeItem('blur_pages');
+        const logField    = document.getElementById('id_blur_log');
+        const countField  = document.getElementById('id_blur_count');
+        const warnedField = document.getElementById('id_blur_warned');
+        if (logField)    logField.value    = '[]';
+        if (countField)  countField.value  = '0';
+        if (warnedField) warnedField.value = '0';
+
+        document.querySelectorAll('.check-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const q        = this.dataset.q;
+                const block    = document.getElementById(`block-${q}`);
+                const feedback = document.getElementById(`feedback-${q}`);
+
+                // Use type="radio" selector — avoids name attribute escaping issues
+                const selected = block.querySelector('input[type="radio"]:checked');
+
+                if (!selected) {
+                    feedback.innerHTML = '<span class="text-warning">⚠️ Please select an answer first.</span>';
+                    return;
+                }
+
+                if (parseInt(selected.value) === CORRECT[q]) {
+                    liveSend({'type': 'save_cq', 'question': q, 'answer': parseInt(selected.value)});
+                    feedback.innerHTML = '<span class="text-success">✅ Correct!</span>';
+                    this.disabled = true;
+                    block.querySelectorAll('input[type="radio"]').forEach(r => r.disabled = true);
+
+                    const nextIdx = ORDER.indexOf(q) + 1;
+                    if (nextIdx < ORDER.length) {
+                        const nextBlock = document.getElementById(`block-${ORDER[nextIdx]}`);
+                        nextBlock.style.display = 'block';
+
+                    } else {
+                        const sub = document.getElementById('submit-container');
+                        sub.style.display = 'flex';
+                        
+                    }
+
+                } else {
+                    feedback.innerHTML = '<span class="text-danger">❌ Incorrect. Please reread the instructions and try again.</span>';
+                    selected.checked = false;
+                }
+            });
+        });
+
+    }); // closing DOMContentLoaded
+
+</script>
+{{ endblock }}

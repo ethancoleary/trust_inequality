@@ -1,0 +1,74 @@
+
+{{ block content }}
+<link rel="stylesheet" href="{{static 'css/css.css'}}">
+<link rel="stylesheet" href="{{static 'css/modal.css'}}">
+<script type="text/javascript" src="{{ static 'js/Script_modal.js' }}"></script>
+
+<!-- Box 1: white -->
+<div class="content-box box-white">
+    <div class="text-center">
+        <h3>Game 3 Belief</h3>
+        </div>
+    <hr>
+    <p>
+        We have randomly selected 50 other decisions who faced the same decision you faced in game 2.
+    </p>
+    <p>
+        In each pair, the first mover had an initial bonus of {{ initial_bonus }}
+        {% if s_treatment == 1 %}randomly assigned to them.{% endif %}
+{% if s_treatment == 2 %}assigned to them according to their score in stage 1.{% endif %}
+Their match had an initial bonus of E£{{ match_bonus }}
+{% if s_treatment == 1 %}randomly assigned to them.{% endif %}
+{% if s_treatment == 2 %}assigned to them according to their score in stage 1.{% endif %}
+    </p>
+    <p>
+        Out of these matches, how many of the first movers do you believe chose to transfer E£10 to their match?
+    </p>
+    <p>
+        You will receive an additional bonus of E£40 at the end of the experiment if your guess is within 2 of the correct answer.
+    </p>
+        <div style="display: flex; justify-content: center; margin: 20px 0;">
+        <input type="number" id="id_belief" name="belief"
+               min="0" max="50" step="1"
+               placeholder="0 – 50"
+               style="
+                   width: 120px;
+                   padding: 10px;
+                   font-size: 18px;
+                   text-align: center;
+                   border: 2px solid #000;
+                   border-radius: 8px;
+                   background-color: #fff;
+               ">
+    </div>
+    <center>
+    {{ next_button }}
+    </center>
+</div>
+
+<div style="display:none">
+    {% for field in form %}
+      {% if field.name in hidden_fields %}
+        {{ formfield field.name }}
+      {% endif %}
+    {% endfor %}
+</div>
+
+{{ endblock }}
+{{ block scripts }}
+    {{ super }}
+    {{ load static }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            localStorage.removeItem('blur_count_global');
+            localStorage.removeItem('blur_pages');
+            const logField = document.getElementById('id_blur_log');
+            const countField = document.getElementById('id_blur_count');
+            const warnedField = document.getElementById('id_blur_warned');
+            if (logField) logField.value = '[]';
+            if (countField) countField.value = '0';
+            if (warnedField) warnedField.value = '0';
+        });
+    </script>
+    <script src="{{ static 'data_quality.js' }}"></script>
+{{ endblock }}

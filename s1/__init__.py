@@ -146,6 +146,7 @@ class Results(Page):
     def before_next_page(player, timeout_happened):
         player.m_treatment = random.randint(1,2)
         player.participant.m_treatment = player.m_treatment
+        player.participant.score = player.score
 
 
 page_sequence = [Intro, Task, Results]

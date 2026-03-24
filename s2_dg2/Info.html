@@ -1,49 +1,55 @@
 
-
 {{ block content }}
-
 <link rel="stylesheet" href="{{static 'css/css.css'}}">
 <link rel="stylesheet" href="{{static 'css/modal.css'}}">
 <script type="text/javascript" src="{{ static 'js/Script_modal.js' }}"></script>
 
+<!-- Box 1: white -->
 <div class="content-box box-white">
     <div class="text-center">
-        <h3>Overview & Payments</h3>
+        <h3>Game 2</h3>
         </div>
     <hr>
     <p>
-        There are 3 stages to this study. All participant will complete all stages in the same order.
+        <i>Pay attention to the following instructions as you will soon need to pass a comprehension check.</i>
     </p>
-<p>
-    Throughout the study, you will earn bonus payments which will be quoted in the currency of <i>experimental pounds</i> (E£).
-    After the experiment you will receive a payout of your earned bonus at the exchange rate E£50=£1.
-</p>
-<p>
-    Click on the next to proceed to stage 1.
-</p>
-<center>
+    <p>
+        The second game proceeds as follows:
+    </p>
+        <ul>
+            <li>The first mover decides whether to send E£10 to the second mover or send nothing.</li>
+            <li>If the first mover sends E£10, then this amount is tripled and the second mover receiver E£30.</li>
+            <li>The second mover does not make a decision.</li>
+        </ul>
+
+    <p>
+        In situation 3, you will be in the role of the {{ role1 }} mover and your match will be in the role of the {{ m_role1 }} mover.
+        In situation 4, the roles will be reversed.
+    </p>
+    <p>
+        Click on next to answer some brief questions about the game instructions and then begin game 1.
+    </p>
+    <center>
     {{ next_button }}
     </center>
 </div>
-    <div style="display:none">
+
+<div style="display:none">
     {% for field in form %}
       {% if field.name in hidden_fields %}
         {{ formfield field.name }}
       {% endif %}
     {% endfor %}
 </div>
-{{ endblock }}
 
+{{ endblock }}
 {{ block scripts }}
     {{ super }}
     {{ load static }}
     <script>
-        // Reset blur tracking at the start of the experiment
         document.addEventListener('DOMContentLoaded', function () {
             localStorage.removeItem('blur_count_global');
             localStorage.removeItem('blur_pages');
-
-            // Also reset the hidden fields on this page
             const logField = document.getElementById('id_blur_log');
             const countField = document.getElementById('id_blur_count');
             const warnedField = document.getElementById('id_blur_warned');
@@ -54,6 +60,3 @@
     </script>
     <script src="{{ static 'data_quality.js' }}"></script>
 {{ endblock }}
-
-
-

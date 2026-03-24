@@ -1,0 +1,71 @@
+
+
+{{ block content }}
+<link rel="stylesheet" href="{{static 'css/css.css'}}">
+<link rel="stylesheet" href="{{static 'css/modal.css'}}">
+<script type="text/javascript" src="{{ static 'js/Script_modal.js' }}"></script>
+
+<!-- Box 1: white -->
+<div class="content-box box-white">
+    <div class="text-center">
+        <h3>Stage 2 Intro</h3>
+    </div>
+    <hr>
+    <p>
+        <i>Pay attention to the following instructions as you will soon need to pass a comprehension check.</i>
+    </p>
+    <p>
+    For stage 2, you have been grouped with 299 other participants to form a <b>society</b>.
+    You will be shortly matched with someone from your society.
+
+    </p>
+    <p>
+        Each participant in your society will be assigned to a group (A or B).
+        This assignment will be made according to how their individual score in stage 1 compared to the scores of a group of participants in a previous study.
+        A participant in your society will be assigned to group A if their score is at least as high as the average score in the previous study.
+        Alternatively, they will be assigned to group B is their score is lower than the average score in the previous study.
+    </p>
+    <p>
+        In this previous study, participants had 2 minutes to decrypt as many codes as they could.
+        They faced the same sequence of codes and decryption keys as all participants in the current study.
+    </p>
+    <p>
+        The group assignment determines each participant's <b>initial bonus</b> for stage 2.
+        Those assigned to group A will receive E£80 and those assigned to group B will receive E£40.
+    </p>
+    <p>
+        Click on 'next' to find out what group you have been assigned to and who you have been matched with.
+    </p>
+    <center>
+    {{ next_button }}
+    </center>
+</div>
+
+<div style="display:none">
+    {% for field in form %}
+      {% if field.name in hidden_fields %}
+        {{ formfield field.name }}
+      {% endif %}
+    {% endfor %}
+</div>
+
+
+{{ endblock }}
+{{ block scripts }}
+    {{ super }}
+    {{ load static }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            localStorage.removeItem('blur_count_global');
+            localStorage.removeItem('blur_pages');
+            const logField = document.getElementById('id_blur_log');
+            const countField = document.getElementById('id_blur_count');
+            const warnedField = document.getElementById('id_blur_warned');
+            if (logField) logField.value = '[]';
+            if (countField) countField.value = '0';
+            if (warnedField) warnedField.value = '0';
+        });
+    </script>
+    <script src="{{ static 'data_quality.js' }}"></script>
+{{ endblock }}
+

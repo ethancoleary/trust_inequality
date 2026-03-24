@@ -1,7 +1,14 @@
 {{ block title }}
-Introduction
 {{ endblock }}
 {{ block content }}
+<link rel="stylesheet" href="{{static 'css/css.css'}}">
+<link rel="stylesheet" href="{{static 'css/modal.css'}}">
+<script type="text/javascript" src="{{ static 'js/Script_modal.js' }}"></script>
+<div class="content-box box-white">
+    <div class="text-center">
+        <h3>Introduction</h3>
+        </div>
+    <hr>
 <p>
 Welcome to this study. During your participation, you will make a number of decisions
 that will affect your bonus payments. The study will last approximately 10-12 minutes
@@ -18,7 +25,12 @@ completing this experiment to give us your full attention.
 <p>
     To complete the study, you will have to pass some comprehension questions.
 </p>
-<h3>Consent</h3>
+    </div>
+    <div class="content-box box-white2">
+    <div class="text-center">
+        <h3>Consent</h3></div>
+<hr>
+
 <p>
     All data collected in this experiment is anonymised.
     Only anonymous data may be shared in open science repositories.
@@ -51,10 +63,12 @@ At any point in the experiment, you may opt out and return your submission.
        name="consent"
        value="1">
 <b>I agree to participating in this experiment and understand how the data I provide will be used.</b>
-
 <br><br>
+        <center>
+        {{ next_button }}
+<br>
 {{ formfield_errors 'consent' }}
-<br><br>
+    </div>
 
 <div style="display:none">
     {% for field in form %}
@@ -63,8 +77,6 @@ At any point in the experiment, you may opt out and return your submission.
       {% endif %}
     {% endfor %}
 </div>
-
-{{ next_button }}
 
 {{ endblock }}
 
@@ -86,5 +98,5 @@ At any point in the experiment, you may opt out and return your submission.
             if (warnedField) warnedField.value = '0';
         });
     </script>
-    <script src="{{ static 'data_quality.js' }}"></script>
+
 {{ endblock }}
