@@ -33,7 +33,7 @@ body {
 .box-info     { background-color: #e8f6fe !important; }
 .box-task     { background-color: #fff5ee !important; }
 .box-warn     { background-color: #fffdf0 !important; }
-.box-contrast { background-color: #f5fffb !important; }
+.box-contrast { background-color: #edfdfa !important; }
 .box-success  { background-color: var(--success) !important; }
 .box-danger   { background-color: var(--danger)  !important; }
 

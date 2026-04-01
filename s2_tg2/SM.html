@@ -1,0 +1,234 @@
+{{ block content }}
+<link rel="stylesheet" href="{{static 'css/css.css'}}">
+<link rel="stylesheet" href="{{static 'css/modal.css'}}">
+<script type="text/javascript" src="{{ static 'js/Script_modal.js' }}"></script>
+
+<!-- Box 1: white -->
+<div class="content-box box-white">
+    <div class="text-center">
+        <h3>Game 2 : Second Mover</h3>
+    </div>
+    <hr>
+    <div class="text-center mb-3">
+           <button type="button" onclick="open_modal(2)" class="btn btn-instruct btn-lg">
+    📋 Click here to reread game 2 instructions
+</button>
+    </div>
+    <p>
+        You have an initial bonus of E£{{ initial_bonus }} and your match has an initial bonus of E£{{ match_bonus }}.
+        {% if player.participant.merit == 0 %}
+        These bonuses were allocated <b>randomly</b>.
+        {% endif %}
+        {% if player.participant.merit == 1 %}
+        These bonuses were allocated <b>according to your performances in stage 1</b>.
+        {% endif %}
+    </p>
+    <p>
+        You are the <b>second mover</b>.
+        You must decide how much you would like to return to your match if they choose to transfer E£10 to you.
+    </p>
+    <p>
+        If your match chooses to transfer nothing to you, then you cannot send any amount back.
+        If your match chooses to transfer E£10 to you, then this amount will be tripled and you can return up to E£30 back to them.
+    </p>
+    <p>When you make a selection, you will be able to see the corresponding potential final bonuses should this game be randomly chosen for payment and you be randomly chosen to be the second mover.</p>
+</div>
+
+<!-- Continue button -->
+<div id="continue-btn-wrapper" style="text-align:center; margin: 16px 0;">
+    <button type="button" class="btn btn-decide btn-lg" onclick="revealNext()">
+        Click here to make your decision
+    </button>
+</div>
+
+<!-- Hidden task box -->
+<div id="box-task" class="content-box box-task" style="display:none;">
+    <p>Please indicate your decision below.</p>
+    <p><b>If my match transfers E£10 to me (and thus I receive E£30), I will</b></p>
+    <div style="display:none">
+        {{ formfield 'ret' }}
+    </div>
+
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; margin: 20px 0;">
+        <button type="button" class="transfer-btn" data-value="0"  onclick="selectTransfer(this, 0)">return E£0 to my match</button>
+        <button type="button" class="transfer-btn" data-value="5"  onclick="selectTransfer(this, 5)">return E£5 to my match</button>
+        <button type="button" class="transfer-btn" data-value="10" onclick="selectTransfer(this, 10)">return E£10 to my match</button>
+        <button type="button" class="transfer-btn" data-value="15" onclick="selectTransfer(this, 15)">return E£15 to my match</button>
+        <button type="button" class="transfer-btn" data-value="20" onclick="selectTransfer(this, 20)">return E£20 to my match</button>
+        <button type="button" class="transfer-btn" data-value="25" onclick="selectTransfer(this, 25)">return E£25 to my match</button>
+        <button type="button" class="transfer-btn" data-value="30" onclick="selectTransfer(this, 30)">return E£30 to my match</button>
+    </div>
+
+    <div id="outcome-text" style="display:none; text-align:center; margin: 16px 0; font-size: 15px;">
+        <p id="outcome-player"></p>
+        <p id="outcome-match"></p>
+    </div>
+
+    <center id="next-btn-wrapper" style="display:none;">
+        {{ next_button }}
+    </center>
+</div>
+
+<style>
+    .btn-instruct {
+    background-color: #c4e4e9;
+    color: #000000;
+    border: 2px solid #1c444a;
+    border-radius: 10px;
+    font-size: 18px;
+        text-color: white;
+    transition: background-color 0.2s, color 0.2s;
+}
+.btn-instruct:hover {
+    background-color: #0fa888;
+    color: #000000;
+}
+.btn-instruct:focus,
+.btn-instruct:active {
+    background-color: #0a8a6e;
+    color: #000000;
+    box-shadow: none;
+}
+
+    .btn-decide {
+    background-color: #fff5ee;
+    color: #000000;
+    border: 2px solid #3a2003;
+    border-radius: 10px;
+    font-size: 18px;
+    transition: background-color 0.2s, color 0.2s;
+}
+.btn-decide:hover {
+    background-color: #ffe8d6;
+    color: #000000;
+}
+.btn-decide:focus,
+.btn-decide:active {
+    background-color: #ffd9bf;
+    color: #000000;
+    box-shadow: none;
+}
+    .transfer-btn {
+        padding: 14px 24px;
+        border: 2px solid #000;
+        border-radius: 10px;
+        background-color: #fff;
+        color: #000;
+        font-size: 18px;
+        cursor: pointer;
+        transition: background-color 0.2s, color 0.2s;
+        min-width: 220px;
+    }
+    .transfer-btn.selected {
+        background-color: #000;
+        color: #fff;
+    }
+    .transfer-btn:hover:not(.selected) {
+        background-color: #f0f0f0;
+    }
+#myModal2 .modal-header {
+    background-color: #c4e4e9 !important;
+    text-align: center !important;
+    justify-content: center !important;
+    padding: 20px 24px !important;
+}
+
+#myModal2 .modal-header h2 {
+    color: #000000 !important;
+    text-align: center !important;
+    flex: 1;
+    padding: 8px 0 !important;
+}
+</style>
+
+<!-- Instructions Modal -->
+<div id="myModal2" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Game 2 Instructions</h2>
+            <span class="close" onclick="span_click(2)">&times;</span>
+        </div>
+        <div class="modal-body">
+            <p>The second game proceeds as follows:</p>
+            <ul>
+                <li>The first mover decides whether to send E£10 to the second mover or send nothing.</li>
+                <li>If the first mover sends E£10:</li>
+                <ul class="square">
+                    <li>This amount is tripled and the second mover receives E£30.</li>
+                    <li>The second mover can send some, all, or none of this amount back to the first mover.</li>
+                    <li>The amount the second mover can send must be a multiple of 5 between E£0 and E£30.</li>
+                </ul>
+                <li>If the first mover sends nothing:</li>
+                <ul class="square">
+                    <li>The second mover does not need to make a decision.</li>
+                </ul>
+            </ul>
+            <p>In this game:</p>
+            <ul>
+                <li>The first mover will decide whether to send E£10 or E£0 to the second mover.</li>
+                <li>The second mover will decide how much they would like to return to the first mover if they were to receive E£30 (i.e. the first mover were to send E£10).</li>
+            </ul>
+            <p>
+                First you and your match will make your decisions as the first mover and afterwards as the second mover.
+                If game 2 is chosen to be payoff relevant, then the roles will be randomly assigned to you and your match and you will receive your final bonus by enacting the decisions you both made in the assigned roles.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div style="display:none">
+    {% for field in form %}
+      {% if field.name in hidden_fields %}
+        {{ formfield field.name }}
+      {% endif %}
+    {% endfor %}
+</div>
+
+{{ endblock }}
+{{ block scripts }}
+    {{ super }}
+    {{ load static }}
+    <script>
+        function revealNext() {
+            document.getElementById('box-task').style.display = 'block';
+            document.getElementById('continue-btn-wrapper').style.display = 'none';
+        }
+
+        function selectTransfer(btn, value) {
+            document.querySelectorAll('.transfer-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            document.getElementById('id_ret').value = value;
+
+            const playerFinal = {{ m_transfer_bonus_u }} - value;
+            const matchFinal  = {{ transfer_bonus_l }}  + value;
+
+            document.getElementById('outcome-player').textContent =
+                'Your final bonus will be E£' + playerFinal + '.';
+            document.getElementById('outcome-match').textContent =
+                "Your match's final bonus will be E£" + matchFinal + '.';
+
+            document.getElementById('outcome-text').style.display = 'block';
+            document.getElementById('next-btn-wrapper').style.display = 'block';
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelector('form').addEventListener('submit', function (e) {
+                const val = document.getElementById('id_ret').value;
+                if (val === '' || val === null) {
+                    e.preventDefault();
+                    alert('Please select a return decision before continuing.');
+                }
+            });
+
+            localStorage.removeItem('blur_count_global');
+            localStorage.removeItem('blur_pages');
+            const logField = document.getElementById('id_blur_log');
+            const countField = document.getElementById('id_blur_count');
+            const warnedField = document.getElementById('id_blur_warned');
+            if (logField) logField.value = '[]';
+            if (countField) countField.value = '0';
+            if (warnedField) warnedField.value = '0';
+        });
+    </script>
+    <script src="{{ static 'data_quality.js' }}"></script>
+{{ endblock }}

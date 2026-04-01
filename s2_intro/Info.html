@@ -1,0 +1,118 @@
+{{ block content }}
+<link rel="stylesheet" href="{{static 'css/css.css'}}">
+<link rel="stylesheet" href="{{static 'css/modal.css'}}">
+<script type="text/javascript" src="{{ static 'js/Script_modal.js' }}"></script>
+
+<!-- Box 1: white -->
+<div class="content-box box-white">
+    <div class="text-center">
+        <h3>Stage 2 Information</h3>
+    </div>
+    <hr>
+    <p>
+        <i>Pay attention to the following instructions as you will soon need to pass a comprehension check.</i>
+    </p>
+    <div class="content-box box-info">
+        <div class="text-center">
+            <h4>Your group and your match</h4>
+        </div>
+        <hr>
+        {% if player.participant.merit == 0 %}
+        <p>
+            You were randomly assigned to <b>group {{ g }}</b>.
+        </p>
+        <p>
+            For the rest of stage 2, you have been matched with a participant from your society who was
+            {% if player.participant.match_same == 1 %}also {% endif %}randomly assigned to <b>group {{ m }}</b>.
+        </p>
+        <p>
+            In other words, for stage 2, you have been randomly assigned an initial bonus of E£{{ endowment }} and your match has
+            {% if player.participant.match_same == 1 %}also {% endif %}been randomly assigned an initial bonus of E£{{ m_endowment }}.
+        </p>
+        {% endif %}
+        {% if player.participant.merit == 1 %}
+        <p>
+            In the previous study, participants correctly decrypted {{ average }} codes on average.
+            Since you correctly depicted {{ player.participant.score }} codes, you have been assigned to group {{ g }}.
+        </p>
+        <p>
+            For the rest of stage 2, you have been matched with a participant from your society who was
+            {% if player.participant.match_same == 1 %}also {% endif %}assigned to group {{ m }} due to their score in stage 1.
+        </p>
+        <p>
+            In other words, due to your performance in stage 1, you have been assigned an initial bonus of E£{{ endowment }} and your match has
+            {% if player.participant.match_same == 1 %}also {% endif %}been assigned an initial bonus of E£{{ m_endowment }} for stage 2.
+        </p>
+        {% endif %}
+        <p>
+            During stage 2, you will interact with your match in two <b>games</b>.
+            In each game, you will both make simultaneous decisions that may affect both of your bonuses.
+            You will not learn about your match's decisions until the end of the study.
+        </p>
+    </div>
+
+    <!-- Continue button -->
+    <div id="continue-btn-wrapper" style="text-align:center; margin: 16px 0;">
+        <button type="button" class="btn btn-primary btn-lg" onclick="revealNext()">
+            Continue
+        </button>
+    </div>
+
+    <!-- Hidden second box -->
+    <div id="box-decisions" class="content-box box-contrast" style="display:none;">
+        <div class="text-center">
+            <h4>Your decisions and bonus</h4>
+        </div>
+        <hr>
+        <p>
+            In each game, there are two roles (first mover and second mover).
+            You will make a decision for each role (where applicable).
+            At the end of this stage, one of the two games will be randomly chosen and a random number will be generated (1 or 2).
+        </p>
+        <ul>
+            <li>If the random number is 1, your final bonus payment will be determined by your decision as the first mover and your match's decision as the second mover in the chosen game.</li>
+            <li>If the random number is 2, your final bonus payment will be determined by your decision as the second mover and your match's decision as the first mover in the chosen game.</li>
+        </ul>
+        <p>
+            <b>Therefore, it is in your best interest to treat every decision as if you will be paid for it.</b>
+        </p>
+    </div>
+
+    <center id="next-btn-wrapper" style="display:none;">
+        {{ next_button }}
+    </center>
+</div>
+
+<div style="display:none">
+    {% for field in form %}
+      {% if field.name in hidden_fields %}
+        {{ formfield field.name }}
+      {% endif %}
+    {% endfor %}
+</div>
+
+{{ endblock }}
+{{ block scripts }}
+    {{ super }}
+    {{ load static }}
+    <script>
+        function revealNext() {
+            document.getElementById('box-decisions').style.display = 'block';
+            document.getElementById('continue-btn-wrapper').style.display = 'none';
+            document.getElementById('next-btn-wrapper').style.display = 'block';
+
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            localStorage.removeItem('blur_count_global');
+            localStorage.removeItem('blur_pages');
+            const logField = document.getElementById('id_blur_log');
+            const countField = document.getElementById('id_blur_count');
+            const warnedField = document.getElementById('id_blur_warned');
+            if (logField) logField.value = '[]';
+            if (countField) countField.value = '0';
+            if (warnedField) warnedField.value = '0';
+        });
+    </script>
+    <script src="{{ static 'data_quality.js' }}"></script>
+{{ endblock }}

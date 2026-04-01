@@ -20,20 +20,20 @@
 </div>
 
 <div class="text-center mb-3">
-    <button type="button" onclick="open_modal(2)" class="btn btn-primary btn-lg">
-        📋 Reread Game 2 Instructions
-    </button>
+    <button type="button" onclick="open_modal(2)" class="btn btn-instruct btn-lg">
+    📋 Click here to reread game 2 instructions
+</button>
 </div>
 
 <form method="post" id="cq-form">
 
  <!-- Q1 -->
 <div class="content-box box-white question-block" id="block-Q1">
-    <h4>1. In game 2, how many tokens can the first mover send?</h4>
-    <input type="radio" name="CQ1" id="CQ1_1" value="1"> <label for="CQ1_1">0 or 40</label><br>
-    <input type="radio" name="CQ1" id="CQ1_2" value="2"> <label for="CQ1_2">10 or 20</label><br>
-    <input type="radio" name="CQ1" id="CQ1_3" value="3"> <label for="CQ1_3">0 or 10</label><br>
-    <input type="radio" name="CQ1" id="CQ1_4" value="4"> <label for="CQ1_4">5 or 10</label><br>
+    <h4>1. In game 2, how much can the first mover send?</h4>
+    <input type="radio" name="CQ1" id="CQ1_1" value="1"> <label for="CQ1_1">E£0 or E£40</label><br>
+    <input type="radio" name="CQ1" id="CQ1_2" value="2"> <label for="CQ1_2">E£10 or E£20</label><br>
+    <input type="radio" name="CQ1" id="CQ1_3" value="3"> <label for="CQ1_3">E£0 or E£10</label><br>
+    <input type="radio" name="CQ1" id="CQ1_4" value="4"> <label for="CQ1_4">E£5 or E£10</label><br>
     <div class="cq-feedback mt-2" id="feedback-Q1"></div>
     <button type="button" class="btn btn-secondary mt-2 check-btn" data-q="Q1">Check Answer</button>
 </div>
@@ -66,12 +66,46 @@
     </div>
 
 </form>
+<style>
+    .btn-instruct {
+    background-color: #c4e4e9;
+    color: #000000;
+    border: 2px solid #1c444a;
+    border-radius: 10px;
+    font-size: 18px;
+        text-color: white;
+    transition: background-color 0.2s, color 0.2s;
+}
+.btn-instruct:hover {
+    background-color: #0fa888;
+    color: #000000;
+}
+.btn-instruct:focus,
+.btn-instruct:active {
+    background-color: #0a8a6e;
+    color: #000000;
+    box-shadow: none;
+}
+#myModal2 .modal-header {
+    background-color: #c4e4e9 !important;
+    text-align: center !important;
+    justify-content: center !important;
+    padding: 20px 24px !important;
+}
+
+#myModal2 .modal-header h2 {
+    color: #000000 !important;
+    text-align: center !important;
+    flex: 1;
+    padding: 8px 0 !important;
+}
+</style>
 
 <!-- Instructions Modal -->
 <div id="myModal2" class="modal">
     <div class="modal-content">
         <div class="modal-header">
-            <h2>Game 1 Information</h2>
+            <h2>Game 2 Information</h2>
             <span class="close" onclick="span_click(2)">&times;</span>
         </div>
         <div class="modal-body">
@@ -85,8 +119,9 @@
         </ul>
 
     <p>
-        In situation 3, you will be in the role of the {{ role1 }} mover and your match will be in the role of the {{ m_role1 }} mover.
-        In situation 4, the roles will be reversed.
+        You and your match will make a decision as the first mover.
+        If game 2 is chosen to be payoff relevant, then the role of first mover will be randomly allocated to you or your match.
+        Your final bonus payment will then be determined by the decision of the randomly chosen first mover (you or your match).
     </p>
     <p>
         Click on next to answer some brief questions about the game instructions and then begin game 1.

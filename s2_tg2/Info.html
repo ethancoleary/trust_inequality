@@ -1,4 +1,3 @@
-
 {{ block content }}
 <link rel="stylesheet" href="{{static 'css/css.css'}}">
 <link rel="stylesheet" href="{{static 'css/modal.css'}}">
@@ -7,24 +6,31 @@
 <!-- Box 1: white -->
 <div class="content-box box-white">
     <div class="text-center">
-        <h3>Game 1</h3>
-        </div>
+        <h3>Game 2</h3>
+    </div>
     <hr>
     <p>
         <i>Pay attention to the following instructions as you will soon need to pass a comprehension check.</i>
     </p>
+
     <div class="content-box box-info">
         <div class="text-center">
             <h4>Game overview</h4>
         </div>
         <hr>
-    <p>
-        The first game proceeds as follows:
-    </p>
+        <p>The second game proceeds as follows:</p>
         <ul>
             <li>The first mover decides whether to send E£10 to the second mover or send nothing.</li>
-            <li>If the first mover sends E£10, then this amount is tripled and the second mover receives E£30.</li>
-            <li>The second mover does not make a decision.</li>
+            <li>If the first mover sends E£10:</li>
+            <ul class="square">
+                <li>This amount is tripled and the second mover receives E£30.</li>
+                <li>The second mover can send some, all, or none of this amount back to the first mover.</li>
+                <li>The amount the second mover can send must be a multiple of 5 between E£0 and E£30.</li>
+            </ul>
+            <li>If the first mover sends nothing:</li>
+            <ul class="square">
+                <li>The second mover does not need to make a decision.</li>
+            </ul>
         </ul>
     </div>
 
@@ -34,17 +40,26 @@
             Continue
         </button>
     </div>
+
     <!-- Hidden second box -->
     <div id="box-decisions" class="content-box box-contrast" style="display:none;">
         <div class="text-center">
             <h4>Your decisions</h4>
         </div>
         <hr>
-    <p>
-        You and your match will make a decision as the first mover.
-        If game 1 is chosen to be payoff relevant, then the role of first mover will be randomly allocated to you or your match.
-        Your final bonus payment will then be determined by the decision of the randomly chosen first mover (you or your match).
-    </p>
+        <p>In this game:</p>
+        <ul>
+            <li>The first mover will decide whether to send E£10 or E£0 to the second mover.</li>
+            <li>The second mover will decide how much they would like to return to the first mover if they were to receive E£30 (i.e. the first mover were to send E£10).</li>
+        </ul>
+        <p>
+            First, you and your match will make your decisions as the first mover and afterwards as the second mover.
+            </p>
+        <p>
+            If game 2 is chosen to be payoff relevant, then the roles will be randomly assigned to you and your match and you will receive your final bonus by enacting the decisions you both made in the assigned roles.
+        </p>
+    </div>
+
     <div id="bottom-text" style="display:none;">
         <p>Click on next to answer some brief questions about the game instructions and then begin game 1.</p>
     </div>

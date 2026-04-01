@@ -1,49 +1,38 @@
-
-
 {{ block content }}
-
 <link rel="stylesheet" href="{{static 'css/css.css'}}">
 <link rel="stylesheet" href="{{static 'css/modal.css'}}">
 <script type="text/javascript" src="{{ static 'js/Script_modal.js' }}"></script>
 
+<!-- Box 1: white -->
 <div class="content-box box-white">
     <div class="text-center">
-        <h3>Overview & Payments</h3>
-        </div>
+        <h3>You've completed game 1</h3>
     <hr>
-    <p>
-        There are 3 stages to this study. All participants will complete all stages in the same order.
-    </p>
-<p>
-    Throughout the study, you will earn bonus payments which will be quoted in the currency of <i>experimental pounds</i> (E£).
-    After the experiment you will receive a payout of your earned bonus at the exchange rate E£50=£1.
-</p>
-<p>
-    Click on the next to proceed to stage 1.
-</p>
-<center>
-    {{ next_button }}
+    <h3>Click on next below to continue to game 2</h3>
+        </div>
+    <br><br>
+    <center id="next-btn-wrapper">
+        {{ next_button }}
     </center>
 </div>
-    <div style="display:none">
+
+<div style="display:none">
     {% for field in form %}
       {% if field.name in hidden_fields %}
         {{ formfield field.name }}
       {% endif %}
     {% endfor %}
 </div>
-{{ endblock }}
 
+{{ endblock }}
 {{ block scripts }}
     {{ super }}
     {{ load static }}
     <script>
-        // Reset blur tracking at the start of the experiment
+
         document.addEventListener('DOMContentLoaded', function () {
             localStorage.removeItem('blur_count_global');
             localStorage.removeItem('blur_pages');
-
-            // Also reset the hidden fields on this page
             const logField = document.getElementById('id_blur_log');
             const countField = document.getElementById('id_blur_count');
             const warnedField = document.getElementById('id_blur_warned');
@@ -54,6 +43,3 @@
     </script>
     <script src="{{ static 'data_quality.js' }}"></script>
 {{ endblock }}
-
-
-

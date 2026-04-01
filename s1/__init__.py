@@ -38,12 +38,6 @@ class Player(BasePlayer):
     score = models.IntegerField(initial=0)
     current_task_index = models.IntegerField(initial=0)
     task_start_time = models.FloatField(initial=0)
-    m_treatment = models.IntegerField(
-        choices=[
-            [1, 'same'],
-            [2, 'other']
-        ]
-    )
     blur_log = models.LongStringField(blank=True)
     blur_count = models.IntegerField(initial=0, blank=True)
     blur_warned = models.IntegerField(initial=0, blank=True)
@@ -141,12 +135,14 @@ class Task(Page):
 
 class Results(Page):
 
+    @staticmethod
+    def vars_for_template(player):
+        player.participant.s1score = player.score
 
     @staticmethod
     def before_next_page(player, timeout_happened):
-        player.m_treatment = random.randint(1,2)
-        player.participant.m_treatment = player.m_treatment
         player.participant.score = player.score
+        player.participant.merit = random.randint(0,1)
 
 
 page_sequence = [Intro, Task, Results]

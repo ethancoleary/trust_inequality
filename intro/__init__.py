@@ -22,10 +22,10 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     consent = models.IntegerField()
-    s_treatment = models.IntegerField(
+    merit = models.IntegerField(
         choices=[
-            [1, 'Random'],
-            [2, 'Merit']
+            [0, 'Random'],
+            [1, 'Merit']
         ]
     )
     blur_log = models.LongStringField(blank=True)
@@ -62,8 +62,8 @@ class Overview(Page):
 
     @staticmethod
     def before_next_page(player, timeout_happened):
-        player.s_treatment = random.randint(1,2)
-        player.participant.s_treatment = player.s_treatment
+        player.merit = random.randint(0,1)
+        player.participant.merit = player.merit
 
 
 page_sequence = [

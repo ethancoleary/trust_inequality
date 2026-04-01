@@ -1,10 +1,128 @@
-{{ block title }}
-    Page title
-{{ endblock }}
-
 {{ block content }}
+<link rel="stylesheet" href="{{static 'css/css.css'}}">
+<link rel="stylesheet" href="{{static 'css/modal.css'}}">
+<script type="text/javascript" src="{{ static 'js/Script_modal.js' }}"></script>
 
+<div class="content-box box-white">
+    <div class="text-center">
+        <h3>Results</h3>
+        </div>
+    <hr>
+    <p>
+        Thank you for taking part in this study.
+        For your participation, you have received £1.20.
+    </p>
+    <p>
+        Below we will describe how your bonus payment is computed.
+        Many bonuses depend on the decisions of others in the study so will be determined once data collection is complete.
+    </p>
+</div>
+
+<div class="content-box box-white">
+    <div class="text-center">
+        <h3>Stage 2 Games</h3>
+        </div>
+    <hr>
+    <p>
+    The random game chosen for bonus payment in stage 2 was game {{ player.game_bonus }}.
+    From a random draw, your bonus payment is determined by the decisions when you were in the role of the {{ role }}
+        </p>
+    <p>
+    {% if player.tg_bonus == 0 %}
+        {% if player.role_bonus == 1 %}
+            In this game, as the first mover, you chose to
+                {% if player.participant.dg == 0 %}
+                keep your initial bonus.
+                {% endif %}
+                {% if player.participant.dg == 1 %}
+                transfer E£10 to your match.
+                {% endif %}
+            Your stage 2 final bonus is therefore E£{{ bonus }}.
+        {% endif %}
+        {% if player.role_bonus == 2 %}
+        Therefore, your bonus payment will depend on the decision of your match.
+        {% endif %}
+    {% else %}
+    Therefore, your bonus payment will depend on the decision of your match.
+    {% endif %}
+    </p>
+    <p>
+    During stage 2, you also stated your belief of the decision your match would make.
+        If your selection is the same as your match's decision, you will receive an additional E£40 bonus for stage 2.
+    </p>
+</div>
+
+<div class="content-box box-white">
+    <div class="text-center">
+        <h3>Stage 3</h3>
+        </div>
+    <hr>
+    <p>
+    In stage 3, you made 2 predictions which, if correct, could add E£70 to your bonus payment.
+        </p>
+    <p>
+        In question 3, you made 10 choices between two options.
+        Your randomly chosen choice for payment is choice {{ player.risk_choice }}.
+        In this choice, you selected option {{ option }}.
+    </p>
+    <p>Your selection for this choice corresponded to the following lottery:<br><br>
+    <center>
+    <i>{{ risk1 }}/10 chance of E£{{ risk1_payment }} and {{ risk2 }}/10 chance of E£{{ risk2_payment }}</i>
+</center><br><br>
+    A random number (1-10) was drawn to determine the outcome of this lottery.
+    If the number is less than or equal to {{ risk1 }}, then you will receive E£{{ risk1_payment }}, else you will receive E£{{ risk2_payment }}.
+    </p>
+    <p>
+        The random number drawn was {{ player.random_draw }}.
+        Therefore you will receive an additional bonus payment of E£{{ player.risk_bonus }}.
+    </p>
+
+</div>
+
+<div class="content-box box-white">
+    <div class="text-center">
+        <h3>Final words</h3>
+        </div>
+    <hr>
+    <p>
+        You will receive your bonus payments once we have completed our data collection. We estimate that this will be within 2 weeks.
+    </p>
+    <p>
+        Thank you again for taking part in this study. We wish you a pleasant day.
+    </p>
+    <p>
+        You can click on 'Next' to be redirected back to Prolific.
+    </p>
+
+
+    <center>
     {{ next_button }}
+    </center>
+</div>
+
+<div style="display:none">
+    {% for field in form %}
+      {% if field.name in hidden_fields %}
+        {{ formfield field.name }}
+      {% endif %}
+    {% endfor %}
+</div>
+
 {{ endblock }}
-
-
+{{ block scripts }}
+    {{ super }}
+    {{ load static }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            localStorage.removeItem('blur_count_global');
+            localStorage.removeItem('blur_pages');
+            const logField = document.getElementById('id_blur_log');
+            const countField = document.getElementById('id_blur_count');
+            const warnedField = document.getElementById('id_blur_warned');
+            if (logField) logField.value = '[]';
+            if (countField) countField.value = '0';
+            if (warnedField) warnedField.value = '0';
+        });
+    </script>
+    <script src="{{ static 'data_quality.js' }}"></script>
+{{ endblock }}

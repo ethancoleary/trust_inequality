@@ -42,23 +42,25 @@ class Player(BasePlayer):
 
 
 # PAGES
+class Intro(Page):
+    form_model = 'player'
+    form_fields = ['blur_count', 'blur_log', 'blur_warned']
+
+    @staticmethod
+    def vars_for_template(player: Player):
+
+        return {
+            'hidden_fields': ['blur_log', 'blur_count', 'blur_warned'],
+        }
 class Info(Page):
     form_model = 'player'
     form_fields = ['blur_count', 'blur_log', 'blur_warned']
 
     @staticmethod
     def vars_for_template(player: Player):
-        player.role1 = random.randint(1, 2)
-        if player.role1 == 1:
-            role1 = 'first'
-            m_role1 = 'second'
-        else:
-            role1 = 'second'
-            m_role1 = 'first'
 
         return {
-            'role1': role1,
-            'm_role1': m_role1,
+
             'hidden_fields': ['blur_log', 'blur_count', 'blur_warned'],
         }
 class Comp(Page):
@@ -67,16 +69,8 @@ class Comp(Page):
 
     @staticmethod
     def vars_for_template(player):
-        if player.role1 == 1:
-            role1 = 'first'
-            m_role1 = 'second'
-        else:
-            role1 = 'second'
-            m_role1 = 'first'
 
         return {
-            'role1': role1,
-            'm_role1': m_role1,
             'hidden_fields': ['blur_log', 'blur_count', 'blur_warned'],
         }
 
@@ -89,15 +83,12 @@ class Comp(Page):
 
 
 
-class Situation3_1(Page):
+class Decision(Page):
     form_model = 'player'
     form_fields = ['transfer', 'blur_count', 'blur_log', 'blur_warned']
 
     @staticmethod
     def vars_for_template(player):
-
-        player.participant.group_assignment=1
-        player.participant.match = 1
 
         if player.participant.group_assignment == 1:
             initial_bonus = 80
@@ -112,7 +103,19 @@ class Situation3_1(Page):
             match_bonus = 40
             m_transfer_bonus = 70
 
+        g = player.participant.group_assignment  # 1=A(80), 2=B(40)
+        m = player.participant.match  # 1=A(80), 2=B(40)
+
+        b_no_transfer = 80 if g == 1 else 40
+        b_transfer = 70 if g == 1 else 30
+        m_no_transfer = 80 if m == 1 else 40
+        m_transfer = 110 if m == 1 else 70
+
         return {
+            'b_no_transfer': b_no_transfer,
+            'b_transfer': b_transfer,
+            'm_no_transfer': m_no_transfer,
+            'm_transfer': m_transfer,
             'initial_bonus': initial_bonus,
             'match_bonus': match_bonus,
             'transfer_bonus': transfer_bonus,
@@ -120,164 +123,20 @@ class Situation3_1(Page):
             'hidden_fields': ['blur_log', 'blur_count', 'blur_warned'],
         }
 
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        player.participant.dg = player.transfer
 
     @staticmethod
-    def is_displayed(player):
-        return 1 #player.role1 == 1
-
-class Situation3_2(Page):
-    form_model = 'player'
-    form_fields = [ 'blur_count', 'blur_log', 'blur_warned']
-
-    @staticmethod
-    def vars_for_template(player):
-
-        player.participant.group_assignment=1
-        player.participant.match = 1
-
-        if player.participant.group_assignment == 1:
-            initial_bonus = 80
-            transfer_bonus = 110
-        else:
-            initial_bonus = 40
-            transfer_bonus = 70
-        if player.participant.match == 1:
-            match_bonus = 80
-            m_transfer_bonus = 70
-        else:
-            match_bonus = 40
-            m_transfer_bonus = 30
-
-        return {
-            'initial_bonus': initial_bonus,
-            'match_bonus': match_bonus,
-            'transfer_bonus': transfer_bonus,
-            'm_transfer_bonus': m_transfer_bonus,
-            'hidden_fields': ['blur_log', 'blur_count', 'blur_warned'],
-        }
+    def app_after_this_page(player, upcoming_apps):
+        return "s3"
 
 
-    @staticmethod
-    def is_displayed(player):
-        return 1 #player.role1 == 1
-
-class Situation4_1(Page):
-    form_model = 'player'
-    form_fields = ['transfer', 'blur_count', 'blur_log', 'blur_warned']
-
-    @staticmethod
-    def vars_for_template(player):
-
-        player.participant.group_assignment=1
-        player.participant.match = 1
-
-        if player.participant.group_assignment == 1:
-            initial_bonus = 80
-            transfer_bonus = 70
-        else:
-            initial_bonus = 40
-            transfer_bonus = 30
-        if player.participant.match == 1:
-            match_bonus = 80
-            m_transfer_bonus = 110
-        else:
-            match_bonus = 40
-            m_transfer_bonus = 70
-
-        return {
-            'initial_bonus': initial_bonus,
-            'match_bonus': match_bonus,
-            'transfer_bonus': transfer_bonus,
-            'm_transfer_bonus': m_transfer_bonus,
-            'hidden_fields': ['blur_log', 'blur_count', 'blur_warned'],
-        }
-
-
-    @staticmethod
-    def is_displayed(player):
-        return 1 #player.role1 == 1
-
-class Situation4_2(Page):
-    form_model = 'player'
-    form_fields = [ 'blur_count', 'blur_log', 'blur_warned']
-
-    @staticmethod
-    def vars_for_template(player):
-
-        player.participant.group_assignment=1
-        player.participant.match = 1
-
-        if player.participant.group_assignment == 1:
-            initial_bonus = 80
-            transfer_bonus = 110
-        else:
-            initial_bonus = 40
-            transfer_bonus = 70
-        if player.participant.match == 1:
-            match_bonus = 80
-            m_transfer_bonus = 70
-        else:
-            match_bonus = 40
-            m_transfer_bonus = 30
-
-        return {
-            'initial_bonus': initial_bonus,
-            'match_bonus': match_bonus,
-            'transfer_bonus': transfer_bonus,
-            'm_transfer_bonus': m_transfer_bonus,
-            'hidden_fields': ['blur_log', 'blur_count', 'blur_warned'],
-        }
-
-
-    @staticmethod
-    def is_displayed(player):
-        return 1 #player.role1 == 1
-
-class Belief(Page):
-    form_model = 'player'
-    form_fields = ['belief', 'blur_count', 'blur_log', 'blur_warned']
-
-    @staticmethod
-    def vars_for_template(player):
-
-        player.participant.s_treatment = 1
-        player.participant.group_assignment=1
-        player.participant.match = 1
-
-        if player.participant.group_assignment == 1:
-            initial_bonus = 80
-            transfer_bonus = 110
-        else:
-            initial_bonus = 40
-            transfer_bonus = 70
-        if player.participant.match == 1:
-            match_bonus = 80
-            m_transfer_bonus = 70
-        else:
-            match_bonus = 40
-            m_transfer_bonus = 30
-
-        return {
-            's_treatment': player.participant.s_treatment,
-            'initial_bonus': initial_bonus,
-            'match_bonus': match_bonus,
-            'transfer_bonus': transfer_bonus,
-            'm_transfer_bonus': m_transfer_bonus,
-            'hidden_fields': ['blur_log', 'blur_count', 'blur_warned'],
-        }
-
-
-    @staticmethod
-    def is_displayed(player):
-        return 1 #player.role1 == 1
 
 
 page_sequence = [
+    Intro,
     Info,
     Comp,
-    Situation3_1,
-    Situation3_2,
-    Situation4_1,
-    Situation4_2,
-    Belief
+    Decision
 ]

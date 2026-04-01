@@ -14,6 +14,29 @@
     <p>
         <i>Pay attention to the following instructions as you will soon need to pass a comprehension check.</i>
     </p>
+    {{ if player.participant.merit == 1 }}
+    <p>
+    For stage 2, you have been grouped with 209 other participants to form a <b>society</b>.
+    You will be shortly matched with someone from your society.
+    </p>
+    <p>
+        Each participant in your society will be assigned to a group (A or B).
+        This assignment will be made <b>according to how their individual score in stage 1 compared to the scores of participants in a previous study</b>.
+    </p>
+    <p>
+        A participant in your society will be assigned to group A if their score is <b>at least as high as the average score</b> in the previous study.
+        Alternatively, they will be assigned to group B is their score is <b>lower than the average score</b> in the previous study.
+    </p>
+    <p>
+        The group assignment determines each participant's <b>initial bonus</b> for stage 2.
+        Those assigned to group A will receive E£80 and those assigned to group B will receive E£40.
+    </p>
+    <p>
+        In this previous study, participants had 2 minutes to decrypt as many codes as they could.
+        They faced the same sequence of codes and decryption keys as all participants in the current study.
+    </p>
+    {{ endif }}
+    {{ if player.participant.merit == 0 }}
     <p>
     For stage 2, you have been grouped with 299 other participants to form a <b>society</b>.
     You will be shortly matched with someone from your society.
@@ -21,18 +44,14 @@
     </p>
     <p>
         Each participant in your society will be assigned to a group (A or B).
-        This assignment will be made according to how their individual score in stage 1 compared to the scores of a group of participants in a previous study.
-        A participant in your society will be assigned to group A if their score is at least as high as the average score in the previous study.
-        Alternatively, they will be assigned to group B is their score is lower than the average score in the previous study.
-    </p>
-    <p>
-        In this previous study, participants had 2 minutes to decrypt as many codes as they could.
-        They faced the same sequence of codes and decryption keys as all participants in the current study.
+        This assignment will be made <b>randomly</b>.
+        Therefore, there is a 50% chance that you will be assigned to group A and a 50% chance that you will be assigned to group B.
     </p>
     <p>
         The group assignment determines each participant's <b>initial bonus</b> for stage 2.
         Those assigned to group A will receive E£80 and those assigned to group B will receive E£40.
     </p>
+    {{ endif }}
     <p>
         Click on 'next' to find out what group you have been assigned to and who you have been matched with.
     </p>

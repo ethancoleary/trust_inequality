@@ -12,7 +12,7 @@
         <h3>✅ Comprehension Check</h3>
         <hr>
         <p>
-            Please answer the following questions to check your understanding of the preceding instructions.
+            Please answer the following 3 questions to check your understanding of the preceding instructions.
             You must answer each question correctly before moving on to the next.
             If you need to reread the instructions, click the button below.
         </p>
@@ -20,63 +20,43 @@
 </div>
 
 <div class="text-center mb-3">
-    <button type="button" onclick="open_modal(2)" class="btn btn-primary btn-lg">
-        📋 Reread Stage 2 Instructions
-    </button>
+        <button type="button" onclick="open_modal(2)" class="btn btn-instruct btn-lg">
+    📋 Click here to reread game 1 instructions
+</button>
 </div>
 
 <form method="post" id="cq-form">
 
  <!-- Q1 -->
 <div class="content-box box-white question-block" id="block-Q1">
-    <h4>1. How much initial bonus have you been given for stage 2?</h4>
-    <input type="radio" name="CQ1" id="CQ1_1" value="1"> <label for="CQ1_1">20 NOK</label><br>
-    <input type="radio" name="CQ1" id="CQ1_2" value="2"> <label for="CQ1_2">40 NOK</label><br>
-    <input type="radio" name="CQ1" id="CQ1_3" value="3"> <label for="CQ1_3">60 NOK</label><br>
-    <input type="radio" name="CQ1" id="CQ1_4" value="4"> <label for="CQ1_4">80 NOK</label><br>
+    <h4>1. In game 1, how much can the first mover send?</h4>
+    <input type="radio" name="CQ1" id="CQ1_1" value="1"> <label for="CQ1_1">E£0 or E£40</label><br>
+    <input type="radio" name="CQ1" id="CQ1_2" value="2"> <label for="CQ1_2">E£10 or E£20</label><br>
+    <input type="radio" name="CQ1" id="CQ1_3" value="3"> <label for="CQ1_3">E£0 or E£10</label><br>
+    <input type="radio" name="CQ1" id="CQ1_4" value="4"> <label for="CQ1_4">E£5 or E£10</label><br>
     <div class="cq-feedback mt-2" id="feedback-Q1"></div>
     <button type="button" class="btn btn-secondary mt-2 check-btn" data-q="Q1">Check Answer</button>
 </div>
 
 <!-- Q2 -->
 <div class="content-box box-white question-block" id="block-Q2" style="display:none;">
-    <h4>2. How much initial bonus has your match been given for stage 2?</h4>
-    <input type="radio" name="CQ2" id="CQ2_1" value="1"> <label for="CQ2_1">20 NOK</label><br>
-    <input type="radio" name="CQ2" id="CQ2_2" value="2"> <label for="CQ2_2">40 NOK</label><br>
-    <input type="radio" name="CQ2" id="CQ2_3" value="3"> <label for="CQ2_3">60 NOK</label><br>
-    <input type="radio" name="CQ2" id="CQ2_4" value="4"> <label for="CQ2_4">80 NOK</label><br>
+    <h4>2. In game 1, what must the second mover decide?</h4>
+    <input type="radio" name="CQ2" id="CQ2_1" value="1"> <label for="CQ2_1">How much to return to the first mover</label><br>
+    <input type="radio" name="CQ2" id="CQ2_2" value="2"> <label for="CQ2_2">How much to the first mover's transfer is multiplied by</label><br>
+    <input type="radio" name="CQ2" id="CQ2_3" value="3"> <label for="CQ2_3">Nothing</label><br>
     <div class="cq-feedback mt-2" id="feedback-Q2"></div>
     <button type="button" class="btn btn-secondary mt-2 check-btn" data-q="Q2">Check Answer</button>
 </div>
 
 <!-- Q3 -->
 <div class="content-box box-white question-block" id="block-Q3" style="display:none;">
-    <h4>3. True or false: the allocation of initial bonuses was random.</h4>
-    <input type="radio" name="CQ3" id="CQ3_1" value="1"> <label for="CQ3_1">True</label><br>
-    <input type="radio" name="CQ3" id="CQ3_2" value="2"> <label for="CQ3_2">False</label><br>
+    <h4>3. In game 1, if the first mover sends E£10, how much will the second mover gain?</h4>
+    <input type="radio" name="CQ3" id="CQ3_1" value="1"> <label for="CQ3_1">E£0</label><br>
+    <input type="radio" name="CQ3" id="CQ3_2" value="2"> <label for="CQ3_2">E£30</label><br>
+    <input type="radio" name="CQ3" id="CQ3_3" value="3"> <label for="CQ3_3">E£10</label><br>
+    <input type="radio" name="CQ3" id="CQ3_4" value="4"> <label for="CQ3_4">E£20</label><br>
     <div class="cq-feedback mt-2" id="feedback-Q3"></div>
     <button type="button" class="btn btn-secondary mt-2 check-btn" data-q="Q3">Check Answer</button>
-</div>
-
-<!-- Q4 -->
-<div class="content-box box-white question-block" id="block-Q4" style="display:none;">
-    <h4>4. How many situations will you face during stage 2?</h4>
-    <input type="radio" name="CQ4" id="CQ4_1" value="1"> <label for="CQ4_1">1</label><br>
-    <input type="radio" name="CQ4" id="CQ4_2" value="2"> <label for="CQ4_2">2</label><br>
-    <input type="radio" name="CQ4" id="CQ4_3" value="3"> <label for="CQ4_3">3</label><br>
-    <input type="radio" name="CQ4" id="CQ4_4" value="4"> <label for="CQ4_4">4</label><br>
-    <div class="cq-feedback mt-2" id="feedback-Q4"></div>
-    <button type="button" class="btn btn-secondary mt-2 check-btn" data-q="Q4">Check Answer</button>
-</div>
-
-<!-- Q5 -->
-<div class="content-box box-white question-block" id="block-Q5" style="display:none;">
-    <h4>5. How is your bonus payment computed for stage 2?</h4>
-    <input type="radio" name="CQ5" id="CQ5_1" value="1"> <label for="CQ5_1">Initial bonus only</label><br>
-    <input type="radio" name="CQ5" id="CQ5_2" value="2"> <label for="CQ5_2">Sum of bonuses from each situation</label><br>
-    <input type="radio" name="CQ5" id="CQ5_3" value="3"> <label for="CQ5_3">Final bonus from a randomly chosen situation</label><br>
-    <div class="cq-feedback mt-2" id="feedback-Q5"></div>
-    <button type="button" class="btn btn-secondary mt-2 check-btn" data-q="Q5">Check Answer</button>
 </div>
 
 
@@ -87,22 +67,80 @@
 
 </form>
 
+<style>
+    .btn-instruct {
+    background-color: #c4e4e9;
+    color: #000000;
+    border: 2px solid #1c444a;
+    border-radius: 10px;
+    font-size: 18px;
+        text-color: white;
+    transition: background-color 0.2s, color 0.2s;
+}
+.btn-instruct:hover {
+    background-color: #0fa888;
+    color: #000000;
+}
+.btn-instruct:focus,
+.btn-instruct:active {
+    background-color: #0a8a6e;
+    color: #000000;
+    box-shadow: none;
+}
+
+
+#myModal2 .modal-header {
+    background-color: #c4e4e9 !important;
+    text-align: center !important;
+    justify-content: center !important;
+    padding: 20px 24px !important;
+}
+
+#myModal2 .modal-header h2 {
+    color: #000000 !important;
+    text-align: center !important;
+    flex: 1;
+    padding: 8px 0 !important;
+}
+</style>
+
 <!-- Instructions Modal -->
 <div id="myModal2" class="modal">
     <div class="modal-content">
         <div class="modal-header">
-            <h2>Stage 2 Information</h2>
+            <h2>Game 1 Instructions</h2>
             <span class="close" onclick="span_click(2)">&times;</span>
         </div>
         <div class="modal-body">
-            <p>You were randomly assigned to group {{ g }}.</p>
-            <p>For the rest of stage 2, you have been matched with a participant from your society who was randomly assigned to group {{ m }}.</p>
-            <p>In other words, for stage 2, you have been randomly assigned an initial bonus of E£{{ endowment }} and your match has been randomly assigned an initial bonus of E£{{ m_endowment }}.</p>
-            <p>During stage 2, you will interact with your match in two <b>games</b>. You will each make your decisions simultaneously and you will not learn the outcome of each other's decisions until the end of the study. The games will be played in a random order.</p>
-            <p>In each game, there are two roles (first mover and second mover) and therefore two <b>situations</b>. Each situation corresponds to a possible allocation of roles between you and your match. You will make decisions for each situation i.e. for each possible allocation of roles.</p>
-            <p>This means that during stage 2, you will make decisions in 4 situations (2 decisions for each of 2 games).</p>
-            <p>At the end of this stage, one of the 4 situations will be chosen at random. Your bonus payment will then be equal to your final bonus amount once your randomly selected situation is paid out according to your and your match's decisions.</p>
-            <p><b>Therefore, it is in your best interest to treat every decision as if you will be paid for it.</b></p>
+           <p>
+        The first game proceeds as follows:
+    </p>
+        <ul>
+            <li>The first mover decides whether to send E£10 to the second mover or send nothing.</li>
+            <li>If the first mover sends E£10:</li>
+            <ul class="square">
+                <li>This amount is tripled and the second mover receives E£30.</li>
+                <li>The second mover can send some, all, or none of this amount back to the first mover.</li>
+                <li>The amount the second mover can send must be a multiple of 5 between E£0 and E£30.</li>
+            </ul>
+            <li>If the first mover sends nothing:</li>
+            <ul class="square">
+                <li>The second mover does not need to make a decision</li>
+            </ul>
+        </ul>
+    <p>
+        In this game:
+    </p>
+    <ul>
+        <li>The first mover will decide whether to send E£10 or E£0 to the second mover.</li>
+        <li>The second mover will decide how much they would like to return to the first mover if they were to receive E£30
+        (i.e. the first mover were to send E£10).</li>
+    </ul>
+
+    <p>
+        First you and your match will make your decisions as the first mover and afterwards as the second mover.
+        If game 1 is chosen to be payoff relevant, then the roles will be randomly assigned to you and your match and you will receive your final bonus by enacting the decisions you both made in the assigned roles.
+    </p>
         </div>
     </div>
 </div>
@@ -123,14 +161,12 @@
 <script src="{{ static 'data_quality.js' }}"></script>
 <script>
     const CORRECT = {
-        Q1: {{ correct_CQ1 }},
-        Q2: {{ correct_CQ2 }},
-        Q3: 1,
-        Q4: 4,
-        Q5: 3,
+        Q1: 3,
+        Q2: 1,
+        Q3: 2,
     };
 
-    const ORDER = ['Q1', 'Q2', 'Q3', 'Q4', 'Q5'];
+    const ORDER = ['Q1', 'Q2', 'Q3']
 
     function liveRecv(data) {
         // acknowledge save_cq — no action needed
@@ -175,7 +211,7 @@
                     } else {
                         const sub = document.getElementById('submit-container');
                         sub.style.display = 'flex';
-
+                        
                     }
 
                 } else {

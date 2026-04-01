@@ -1,0 +1,152 @@
+{{ block content }}
+<link rel="stylesheet" href="{{static 'css/css.css'}}">
+<link rel="stylesheet" href="{{static 'css/modal.css'}}">
+<script type="text/javascript" src="{{ static 'js/Script_modal.js' }}"></script>
+
+<div class="content-box box-white">
+    <div class="text-center">
+        <h3>Question 3</h3>
+    </div>
+    <hr>
+    <p>
+        In this page, you need to make 10 choices between two payment options (A or B). Each option represents a lottery.
+    </p>
+    <p>
+        For option A, there is a probability that you will receive E£40 or E£36.<br>
+        For option B, there is a probability that you will receive E£77 or E£2.
+    </p>
+    <p>
+        After you have made your choices, one of the rows will be randomly selected and your chosen option will be paid out.
+        The computer will randomly draw the payment according to the described probabilities.
+    </p>
+    <p>
+        <b>Therefore, you should make each choice as if you will be paid for it.</b>
+    </p>
+</div>
+
+<div class="content-box box-task">
+    <p>For each row in the table below, please click on an option. Your selected option will appear as green.</p>
+    <p>Each choice will only become visible once you have made your selection for the previous choice.
+       You can change your selection in any visible choice until you click 'Next' at the bottom of the page.
+    </p>
+
+    <div style="display:none">
+        {{ formfield 'risk1' }}
+        {{ formfield 'risk2' }}
+        {{ formfield 'risk3' }}
+        {{ formfield 'risk4' }}
+        {{ formfield 'risk5' }}
+        {{ formfield 'risk6' }}
+        {{ formfield 'risk7' }}
+        {{ formfield 'risk8' }}
+        {{ formfield 'risk9' }}
+        {{ formfield 'risk10' }}
+    </div>
+
+    <table class="table" style="text-align: center;">
+        <thead>
+            <tr>
+                <th style="width: 80px;"></th>
+                <th style="text-align:center;">Option A</th>
+                <th style="width: 40px;"></th>
+                <th style="text-align:center;">Option B</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in risk_rows %}
+            <tr id="risk-row-{{ row.i }}" {% if row.i != 1 %}style="display:none;"{% endif %}>
+                <td style="font-size: 12px; color: #888;">Choice {{ row.i }}</td>
+                <td>
+                    <button type="button" class="risk-btn" data-row="{{ row.i }}" data-value="1"
+                        onclick="selectRisk(this, {{ row.i }}, 1)">
+                        {{ row.a }}
+                    </button>
+                </td>
+                <td style="font-size: 12px; color: #888;">or</td>
+                <td>
+                    <button type="button" class="risk-btn" data-row="{{ row.i }}" data-value="2"
+                        onclick="selectRisk(this, {{ row.i }}, 2)">
+                        {{ row.b }}
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <center id="next-btn-wrapper" style="display:none; margin-top: 20px;">
+        {{ next_button }}
+    </center>
+</div>
+
+<style>
+    .risk-btn {
+        width: 100%;
+        min-height: 50px;
+        padding: 8px 12px;
+        border: 2px solid #000;
+        border-radius: 8px;
+        background-color: #fff;
+        color: #000;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.2s, color 0.2s;
+    }
+    .risk-btn.selected {
+        background-color: #2e7d32;
+        color: #fff;
+        border-color: #2e7d32;
+    }
+    .risk-btn:hover:not(.selected) {
+        background-color: #f0f0f0;
+    }
+</style>
+
+<div style="display:none">
+    {% for field in form %}
+      {% if field.name in hidden_fields %}
+        {{ formfield field.name }}
+      {% endif %}
+    {% endfor %}
+</div>
+
+{{ endblock }}
+{{ block scripts }}
+    {{ super }}
+    {{ load static }}
+    <script>
+        const totalRows = 10;
+        const selected = {};
+
+        function selectRisk(btn, row, value) {
+            // Deselect both buttons in this row
+            document.querySelectorAll(`.risk-btn[data-row="${row}"]`).forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            document.getElementById(`id_risk${row}`).value = value;
+            selected[row] = value;
+
+            // Reveal next row if it exists and hasn't been shown yet
+            const nextRow = document.getElementById(`risk-row-${row + 1}`);
+            if (nextRow && nextRow.style.display === 'none') {
+                nextRow.style.display = '';
+            }
+
+            // Show next button only when all 10 rows selected
+            if (Object.keys(selected).length === totalRows) {
+                document.getElementById('next-btn-wrapper').style.display = 'block';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            localStorage.removeItem('blur_count_global');
+            localStorage.removeItem('blur_pages');
+            const logField   = document.getElementById('id_blur_log');
+            const countField  = document.getElementById('id_blur_count');
+            const warnedField = document.getElementById('id_blur_warned');
+            if (logField)    logField.value    = '[]';
+            if (countField)  countField.value  = '0';
+            if (warnedField) warnedField.value = '0';
+        });
+    </script>
+    <script src="{{ static 'data_quality.js' }}"></script>
+{{ endblock }}

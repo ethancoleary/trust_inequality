@@ -4,12 +4,17 @@ SESSION_CONFIGS = [
     dict(
         name='Main',
         app_sequence=[
-            #'intro',
-            #'s1',
-            #'s2_intro',
-            's2_dg1'
+            'intro',
+            's1',
+            's2_intro',
+            's2_dg1',
+            's2_tg1',
+            's2_dg2',
+            's2_tg2',
+            's3'
         ],
         num_demo_participants=10,
+        completionlinkfull='https://app.prolific.com/submissions/complete?cc=CHXPJ2PR',
     )
 ]
 
@@ -23,12 +28,15 @@ SESSION_CONFIG_DEFAULTS = dict(
 )
 
 PARTICIPANT_FIELDS = [
-'s_treatment',
-'m_treatment',
+'merit',
+'match_same',
 'group_assignment',
 'match',
 'score',
     'TG_first',
+    'dg_role1',
+    'dg',
+'s1score'
 ]
 SESSION_FIELDS = []
 

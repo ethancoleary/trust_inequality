@@ -1,49 +1,41 @@
-
-
 {{ block content }}
-
 <link rel="stylesheet" href="{{static 'css/css.css'}}">
 <link rel="stylesheet" href="{{static 'css/modal.css'}}">
 <script type="text/javascript" src="{{ static 'js/Script_modal.js' }}"></script>
 
 <div class="content-box box-white">
     <div class="text-center">
-        <h3>Overview & Payments</h3>
+        <h3>Stage 3</h3>
         </div>
     <hr>
     <p>
-        There are 3 stages to this study. All participants will complete all stages in the same order.
+        During this final stage, you will be asked a series of questions.
+        In some of the questions you will be able to earn additional bonus.
     </p>
-<p>
-    Throughout the study, you will earn bonus payments which will be quoted in the currency of <i>experimental pounds</i> (E£).
-    After the experiment you will receive a payout of your earned bonus at the exchange rate E£50=£1.
-</p>
-<p>
-    Click on the next to proceed to stage 1.
-</p>
-<center>
+    <p>
+        Click on next to proceed.
+    </p>
+    <center>
     {{ next_button }}
     </center>
 </div>
-    <div style="display:none">
+
+<div style="display:none">
     {% for field in form %}
       {% if field.name in hidden_fields %}
         {{ formfield field.name }}
       {% endif %}
     {% endfor %}
 </div>
-{{ endblock }}
 
+{{ endblock }}
 {{ block scripts }}
     {{ super }}
     {{ load static }}
     <script>
-        // Reset blur tracking at the start of the experiment
         document.addEventListener('DOMContentLoaded', function () {
             localStorage.removeItem('blur_count_global');
             localStorage.removeItem('blur_pages');
-
-            // Also reset the hidden fields on this page
             const logField = document.getElementById('id_blur_log');
             const countField = document.getElementById('id_blur_count');
             const warnedField = document.getElementById('id_blur_warned');
@@ -54,6 +46,3 @@
     </script>
     <script src="{{ static 'data_quality.js' }}"></script>
 {{ endblock }}
-
-
-
