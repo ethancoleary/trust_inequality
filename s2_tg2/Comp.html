@@ -29,11 +29,11 @@
 
  <!-- Q1 -->
 <div class="content-box box-white question-block" id="block-Q1">
-    <h4>1. In game 2, how much can the first mover send?</h4>
-    <input type="radio" name="CQ1" id="CQ1_1" value="1"> <label for="CQ1_1">E£0 or E£40</label><br>
-    <input type="radio" name="CQ1" id="CQ1_2" value="2"> <label for="CQ1_2">E£10 or E£20</label><br>
-    <input type="radio" name="CQ1" id="CQ1_3" value="3"> <label for="CQ1_3">E£0 or E£10</label><br>
-    <input type="radio" name="CQ1" id="CQ1_4" value="4"> <label for="CQ1_4">E£5 or E£10</label><br>
+    <h4>1. In game 1, how much can the first mover send?</h4>
+    <input type="radio" name="CQ1" id="CQ1_1" value="1"> <label for="CQ1_1">&#8368;<b>0</b> or &#8368;<b>40</b></label><br>
+    <input type="radio" name="CQ1" id="CQ1_2" value="2"> <label for="CQ1_2">&#8368;<b>10</b> or &#8368;<b>20</b></label><br>
+    <input type="radio" name="CQ1" id="CQ1_3" value="3"> <label for="CQ1_3">&#8368;<b>0</b> or &#8368;<b>10</b></label><br>
+    <input type="radio" name="CQ1" id="CQ1_4" value="4"> <label for="CQ1_4">&#8368;<b>5</b> or &#8368;<b>10</b></label><br>
     <div class="cq-feedback mt-2" id="feedback-Q1"></div>
     <button type="button" class="btn btn-secondary mt-2 check-btn" data-q="Q1">Check Answer</button>
 </div>
@@ -50,11 +50,11 @@
 
 <!-- Q3 -->
 <div class="content-box box-white question-block" id="block-Q3" style="display:none;">
-    <h4>3. In game 2, if the first mover sends E£10, how much will the second mover gain?</h4>
-    <input type="radio" name="CQ3" id="CQ3_1" value="1"> <label for="CQ3_1">E£0</label><br>
-    <input type="radio" name="CQ3" id="CQ3_2" value="2"> <label for="CQ3_2">E£30</label><br>
-    <input type="radio" name="CQ3" id="CQ3_3" value="3"> <label for="CQ3_3">E£10</label><br>
-    <input type="radio" name="CQ3" id="CQ3_4" value="4"> <label for="CQ3_4">E£20</label><br>
+    <h4>3. In game 2, if the first mover sends &#8368;<b>10</b>, how much will the second mover receive?</h4>
+    <input type="radio" name="CQ3" id="CQ3_1" value="1"> <label for="CQ3_1">&#8368;<b>0</b></label><br>
+    <input type="radio" name="CQ3" id="CQ3_2" value="2"> <label for="CQ3_2">&#8368;<b>30</b></label><br>
+    <input type="radio" name="CQ3" id="CQ3_3" value="3"> <label for="CQ3_3">&#8368;<b>10</b></label><br>
+    <input type="radio" name="CQ3" id="CQ3_4" value="4"> <label for="CQ3_4">&#8368;<b>20</b></label><br>
     <div class="cq-feedback mt-2" id="feedback-Q3"></div>
     <button type="button" class="btn btn-secondary mt-2 check-btn" data-q="Q3">Check Answer</button>
 </div>
@@ -112,35 +112,29 @@
             <span class="close" onclick="span_click(2)">&times;</span>
         </div>
         <div class="modal-body">
-           <p>
-        The second game proceeds as follows:
-    </p>
-        <ul>
-            <li>The first mover decides whether to send E£10 to the second mover or send nothing.</li>
-            <li>If the first mover sends E£10:</li>
-            <ul class="square">
-                <li>This amount is tripled and the second mover receives E£30.</li>
-                <li>The second mover can send some, all, or none of this amount back to the first mover.</li>
-                <li>The amount the second mover can send must be a multiple of 5 between E£0 and E£30.</li>
+            <p>The first game proceeds as follows:</p>
+            <ul>
+                <li>The first mover decides whether to send &#8368;<b>10</b> to the second mover or send nothing.</li>
+                <li>If the first mover sends &#8368;<b>10</b>:</li>
+                <ul class="square">
+                    <li>This amount is tripled and the second mover receives &#8368;<b>30</b>.</li>
+                    <li>The second mover can send some, all, or none of this amount back to the first mover.</li>
+                    <li>The amount the second mover can send must be a multiple of 5 between &#8368;<b>0</b> and &#8368;<b>30</b>.</li>
+                </ul>
+                <li>If the first mover sends nothing:</li>
+                <ul class="square">
+                    <li>The second mover does not need to make a decision.</li>
+                </ul>
             </ul>
-            <li>If the first mover sends nothing:</li>
-            <ul class="square">
-                <li>The second mover does not need to make a decision</li>
+            <p>In this game:</p>
+            <ul>
+                <li>The first mover will decide whether to send &#8368;<b>10</b> or &#8368;<b>0</b> to the second mover.</li>
+                <li>The second mover will decide how much they would like to return to the first mover if they were to receive &#8368;<b>30</b> (i.e. the first mover were to send &#8368;<b>10</b>).</li>
             </ul>
-        </ul>
-    <p>
-        In this game:
-    </p>
-    <ul>
-        <li>The first mover will decide whether to send E£10 or E£0 to the second mover.</li>
-        <li>The second mover will decide how much they would like to return to the first mover if they were to receive E£30
-        (i.e. the first mover were to send E£10).</li>
-    </ul>
-
-    <p>
-        First you and your match will make your decisions as the first mover and afterwards as the second mover.
-        If game 2 is chosen to be payoff relevant, then the roles will be randomly assigned to you and your match and you will receive your final bonus by enacting the decisions you both made in the assigned roles.
-    </p>
+            <p>
+                First you and your match will make your decisions as the first mover and afterwards as the second mover.
+                If game 2 is chosen to determine your bonus, then the roles will be randomly assigned to you and your match and you will receive your final bonus by enacting the decisions you both made in the assigned roles.
+            </p>
         </div>
     </div>
 </div>

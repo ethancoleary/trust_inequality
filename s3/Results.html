@@ -35,9 +35,9 @@
                 keep your initial bonus.
                 {% endif %}
                 {% if player.participant.dg == 1 %}
-                transfer E£10 to your match.
+                transfer &#8368;<b>10</b> to your match.
                 {% endif %}
-            Your stage 2 final bonus is therefore E£{{ bonus }}.
+            Your stage 2 final bonus is therefore &#8368;<b>{{ bonus }}</b>.
         {% endif %}
         {% if player.role_bonus == 2 %}
         Therefore, your bonus payment will depend on the decision of your match.
@@ -48,7 +48,7 @@
     </p>
     <p>
     During stage 2, you also stated your belief of the decision your match would make.
-        If your selection is the same as your match's decision, you will receive an additional E£40 bonus for stage 2.
+        If your selection is the same as your match's decision, you will receive an additional &#8368;<b>40</b> bonus for stage 2.
     </p>
 </div>
 
@@ -58,7 +58,7 @@
         </div>
     <hr>
     <p>
-    In stage 3, you made 2 predictions which, if correct, could add E£70 to your bonus payment.
+    In stage 3, you made 2 predictions which, if correct, could add &#8368;<b>70</b> to your bonus payment.
         </p>
     <p>
         In question 3, you made 10 choices between two options.
@@ -67,14 +67,14 @@
     </p>
     <p>Your selection for this choice corresponded to the following lottery:<br><br>
     <center>
-    <i>{{ risk1 }}/10 chance of E£{{ risk1_payment }} and {{ risk2 }}/10 chance of E£{{ risk2_payment }}</i>
+    <i>{{ risk1 }}/10 chance of &#8368;<b>{{ risk1_payment }}</b> and {{ risk2 }}/10 chance of &#8368;<b>{{ risk2_payment }}</b></i>
 </center><br><br>
     A random number (1-10) was drawn to determine the outcome of this lottery.
-    If the number is less than or equal to {{ risk1 }}, then you will receive E£{{ risk1_payment }}, else you will receive E£{{ risk2_payment }}.
+    If the number is less than or equal to {{ risk1 }}, then you will receive &#8368;<b>{{ risk1_payment }}</b>, else you will receive &#8368;<b>{{ risk2_payment }}</b>.
     </p>
     <p>
         The random number drawn was {{ player.random_draw }}.
-        Therefore you will receive an additional bonus payment of E£{{ player.risk_bonus }}.
+        Therefore you will receive an additional bonus payment of &#8368;<b>{{ player.risk_bonus }}</b>.
     </p>
 
 </div>

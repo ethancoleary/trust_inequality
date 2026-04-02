@@ -26,8 +26,8 @@
             {% if player.participant.match_same == 1 %}also {% endif %}randomly assigned to <b>group {{ m }}</b>.
         </p>
         <p>
-            In other words, for stage 2, you have been randomly assigned an initial bonus of E£{{ endowment }} and your match has
-            {% if player.participant.match_same == 1 %}also {% endif %}been randomly assigned an initial bonus of E£{{ m_endowment }}.
+            In other words, for stage 2, you have been randomly assigned an initial bonus of &#8368;<b>{{ endowment }}</b> and your match has
+            {% if player.participant.match_same == 1 %}also {% endif %}been randomly assigned an initial bonus of &#8368;<b>{{ m_endowment }}</b>.
         </p>
         {% endif %}
         {% if player.participant.merit == 1 %}
@@ -40,8 +40,8 @@
             {% if player.participant.match_same == 1 %}also {% endif %}assigned to group {{ m }} due to their score in stage 1.
         </p>
         <p>
-            In other words, due to your performance in stage 1, you have been assigned an initial bonus of E£{{ endowment }} and your match has
-            {% if player.participant.match_same == 1 %}also {% endif %}been assigned an initial bonus of E£{{ m_endowment }} for stage 2.
+            In other words, due to your performance in stage 1, you have been assigned an initial bonus of &#8368;<b>{{ endowment }}</b> and your match has
+            {% if player.participant.match_same == 1 %}also {% endif %}been assigned an initial bonus of &#8368;<b>{{ m_endowment }}</b> for stage 2.
         </p>
         {% endif %}
         <p>
@@ -67,12 +67,12 @@
         <p>
             In each game, there are two roles (first mover and second mover).
             You will make a decision for each role (where applicable).
-            At the end of this stage, one of the two games will be randomly chosen and a random number will be generated (1 or 2).
+            At the end of this stage, one of the two games will be randomly chosen and one of the roles is randomly chosen.
         </p>
-        <ul>
-            <li>If the random number is 1, your final bonus payment will be determined by your decision as the first mover and your match's decision as the second mover in the chosen game.</li>
-            <li>If the random number is 2, your final bonus payment will be determined by your decision as the second mover and your match's decision as the first mover in the chosen game.</li>
-        </ul>
+        <p>
+            You will receive a bonus payment according to your final bonus from the randomly chosen game when you
+            are in the randomly chosen role (and your match is in the other role).
+        </p>
         <p>
             <b>Therefore, it is in your best interest to treat every decision as if you will be paid for it.</b>
         </p>

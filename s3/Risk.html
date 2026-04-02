@@ -12,8 +12,8 @@
         In this page, you need to make 10 choices between two payment options (A or B). Each option represents a lottery.
     </p>
     <p>
-        For option A, there is a probability that you will receive E£40 or E£36.<br>
-        For option B, there is a probability that you will receive E£77 or E£2.
+        For option A, there is a probability that you will receive &#8368;<b>40</b> or &#8368;<b>36</b>.<br>
+        For option B, there is a probability that you will receive &#8368;<b>77</b> or &#8368;<b>2</b>.
     </p>
     <p>
         After you have made your choices, one of the rows will be randomly selected and your chosen option will be paid out.
@@ -59,14 +59,14 @@
                 <td>
                     <button type="button" class="risk-btn" data-row="{{ row.i }}" data-value="1"
                         onclick="selectRisk(this, {{ row.i }}, 1)">
-                        {{ row.a }}
+                        {{ row.a | safe }}
                     </button>
                 </td>
                 <td style="font-size: 12px; color: #888;">or</td>
                 <td>
                     <button type="button" class="risk-btn" data-row="{{ row.i }}" data-value="2"
                         onclick="selectRisk(this, {{ row.i }}, 2)">
-                        {{ row.b }}
+                        {{ row.a | safe }}
                     </button>
                 </td>
             </tr>

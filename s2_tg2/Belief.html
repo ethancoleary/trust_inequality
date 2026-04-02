@@ -10,12 +10,12 @@
     </div>
     <hr>
     <div class="text-center mb-3">
-        <button type="button" onclick="open_modal(2)" class="btn btn-instruct btn-lg">
+                <button type="button" onclick="open_modal(2)" class="btn btn-instruct btn-lg">
     📋 Click here to reread game 2 instructions
 </button>
     </div>
     <p>
-        <i>Recall that you have an initial bonus of E£{{ initial_bonus }} and your match has an initial bonus of E£{{ match_bonus }}.
+        <i>Recall that you have an initial bonus of &#8368;<b>{{ initial_bonus }}</b> and your match has an initial bonus of &#8368;<b>{{ match_bonus }}</b>.
         {% if player.participant.merit == 0 %}
         These bonuses were allocated <b>randomly</b>.
         {% endif %}
@@ -24,46 +24,45 @@
         {% endif %}</i>
     </p>
     <p>
-        You and your match will both be asked how much of the E£30 you would like to return to the first mover, assuming the first mover chose to transfer E£10.
+        You and your match will both make a decision as the second mover assuming the first mover transferred &#8368;<b>10</b>.
+        You both will decide how much of &#8368;<b>30</b> to return to the first mover.
     </p>
     <p>
-        Before you make your decision as a second mover, you need to guess what you <b>believe your match will do in this situation</b>.
-        If your guess matches what your match actually decides to return, you will receive an additional bonus of E£40.
+        Before you make your decision as a second mover, you need to guess what <b>your match will do in this situation</b>.
+        If your guess matches what your match actually decides to return, you will receive an additional bonus of &#8368;<b>40</b>.
     </p>
     <p>
-        <b>Your match will see the following text when making their decision:</b><br>
-        <i>If this decision is chosen to be payoff relevant and your match sends you E£10 when deciding as the first mover:
-            <ul>
-                <li>Your final bonus will be E£{{ m_transfer_bonus_u }} minus the amount you choose to return to the first mover.</li>
-                <li>Your match's final bonus will be E£{{ transfer_bonus_l }} plus the amount you choose to return to them.</li>
-            </ul>
-        </i>
+        Your match knows that if this game/role determines your payments and you sent &#8368;<b>10</b> to them:
     </p>
+        <ul>
+    <li> Their final bonus will be &#8368;<b>{{ m_transfer_bonus_u }}</b> minus what they return to you. </li>
+    <li> Your final bonus will be &#8368;<b>{{ transfer_bonus_l }}</b> plus what they return to you.</li>
+</ul>
 </div>
 
 <!-- Continue button -->
 <div id="continue-btn-wrapper" style="text-align:center; margin: 16px 0;">
     <button type="button" class="btn btn-decide btn-lg" onclick="revealNext()">
-        Click here to state my belief
+        Click here to make my guess
     </button>
 </div>
 
 <!-- Hidden task box -->
 <div id="box-task" class="content-box box-task" style="display:none;">
-    <p><b>Please state your belief of the amount your match will return to you below</b></p>
+    <p><b>How much do you think your match will choose to return to you?</b></p>
     <div style="display:none">
         {{ formfield 'belief' }}
     </div>
 
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; margin: 20px 0;">
-        <button type="button" class="transfer-btn" data-value="0"  onclick="selectTransfer(this, 0)">E£0</button>
-        <button type="button" class="transfer-btn" data-value="5"  onclick="selectTransfer(this, 5)">E£5</button>
-        <button type="button" class="transfer-btn" data-value="10" onclick="selectTransfer(this, 10)">E£10</button>
-        <button type="button" class="transfer-btn" data-value="15" onclick="selectTransfer(this, 15)">E£15</button>
-        <button type="button" class="transfer-btn" data-value="20" onclick="selectTransfer(this, 20)">E£20</button>
-        <button type="button" class="transfer-btn" data-value="25" onclick="selectTransfer(this, 25)">E£25</button>
-        <button type="button" class="transfer-btn" data-value="30" onclick="selectTransfer(this, 30)">E£30</button>
-    </div>
+    <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 20px 0;">
+    <button type="button" class="transfer-btn" data-value="0"  onclick="selectTransfer(this, 0)">&#8368;<b>0</b></button>
+    <button type="button" class="transfer-btn" data-value="5"  onclick="selectTransfer(this, 5)">&#8368;<b>5</b></button>
+    <button type="button" class="transfer-btn" data-value="10" onclick="selectTransfer(this, 10)">&#8368;<b>10</b></button>
+    <button type="button" class="transfer-btn" data-value="15" onclick="selectTransfer(this, 15)">&#8368;<b>15</b></button>
+    <button type="button" class="transfer-btn" data-value="20" onclick="selectTransfer(this, 20)">&#8368;<b>20</b></button>
+    <button type="button" class="transfer-btn" data-value="25" onclick="selectTransfer(this, 25)">&#8368;<b>25</b></button>
+    <button type="button" class="transfer-btn" data-value="30" onclick="selectTransfer(this, 30)">&#8368;<b>30</b></button>
+</div>
 
     <center id="next-btn-wrapper" style="display:none;">
         {{ next_button }}
@@ -110,16 +109,16 @@
     box-shadow: none;
 }
     .transfer-btn {
-        padding: 14px 24px;
-        border: 2px solid #000;
-        border-radius: 10px;
-        background-color: #fff;
-        color: #000;
-        font-size: 18px;
-        cursor: pointer;
-        transition: background-color 0.2s, color 0.2s;
-        min-width: 220px;
-    }
+    padding: 14px 20px;
+    border: 2px solid #000;
+    border-radius: 10px;
+    background-color: #fff;
+    color: #000;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    min-width: 80px;
+}
     .transfer-btn.selected {
         background-color: #000;
         color: #fff;
@@ -142,22 +141,23 @@
 }
 </style>
 
+
 <!-- Instructions Modal -->
 <div id="myModal2" class="modal">
     <div class="modal-content">
         <div class="modal-header">
-            <h2>Game 2 Instructions</h2>
+            <h2>Game 2 Information</h2>
             <span class="close" onclick="span_click(2)">&times;</span>
         </div>
         <div class="modal-body">
-            <p>The first game proceeds as follows:</p>
+            <p>The second game proceeds as follows:</p>
             <ul>
-                <li>The first mover decides whether to send E£10 to the second mover or send nothing.</li>
-                <li>If the first mover sends E£10:</li>
+                <li>The first mover decides whether to send &#8368;<b>10</b> to the second mover or send nothing.</li>
+                <li>If the first mover sends &#8368;<b>10</b>:</li>
                 <ul class="square">
-                    <li>This amount is tripled and the second mover receives E£30.</li>
+                    <li>This amount is tripled and the second mover receives &#8368;<b>30</b>.</li>
                     <li>The second mover can send some, all, or none of this amount back to the first mover.</li>
-                    <li>The amount the second mover can send must be a multiple of 5 between E£0 and E£30.</li>
+                    <li>The amount the second mover can send must be a multiple of 5 between &#8368;<b>0</b> and &#8368;<b>30</b>.</li>
                 </ul>
                 <li>If the first mover sends nothing:</li>
                 <ul class="square">
@@ -166,12 +166,12 @@
             </ul>
             <p>In this game:</p>
             <ul>
-                <li>The first mover will decide whether to send E£10 or E£0 to the second mover.</li>
-                <li>The second mover will decide how much they would like to return to the first mover if they were to receive E£30 (i.e. the first mover were to send E£10).</li>
+                <li>The first mover will decide whether to send &#8368;<b>10</b> or &#8368;<b>0</b> to the second mover.</li>
+                <li>The second mover will decide how much they would like to return to the first mover if they were to receive &#8368;<b>30</b> (i.e. the first mover were to send &#8368;<b>10</b>).</li>
             </ul>
             <p>
                 First you and your match will make your decisions as the first mover and afterwards as the second mover.
-                If game 2 is chosen to be payoff relevant, then the roles will be randomly assigned to you and your match and you will receive your final bonus by enacting the decisions you both made in the assigned roles.
+                If game 2 is chosen to determine your bonus, then the roles will be randomly assigned to you and your match and you will receive your final bonus by enacting the decisions you both made in the assigned roles.
             </p>
         </div>
     </div>

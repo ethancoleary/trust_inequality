@@ -10,17 +10,17 @@
     </div>
     <hr>
     <p>
-        In stage 2, you were given an initial bonus of E£{{ initial_bonus }}.
+        In stage 2, you were given an initial bonus of &#8368;<b>{{ initial_bonus }}</b>.
     </p>
     {% if player.participant.merit == 0 %}
     <p>
-        This bonus was allocated <b>randomly</b> with 50% of participants in your society receiving E£40 and the others receiving E£80.
+        This bonus was allocated <b>randomly</b> with 50% of participants in your society receiving &#8368;<b>40</b> and the others receiving &#8368;<b>80</b>.
     </p>
     {% endif %}
     {% if player.participant.merit == 1 %}
     <p>
         This bonus was allocated <b>according to each participant's performance in stage 1</b>.
-         Those scoring at or above average in stage 1 were given E£80; those scoring below average were given E£40.
+         Those scoring at or above average in stage 1 were given &#8368;<b>80</b>; those scoring below average were given &#8368;<b>40</b>.
     </p>
     {% endif %}
 </div>
@@ -46,10 +46,10 @@
 <!-- Box 3: belief question (hidden until fairness submitted) -->
 <div id="box-belief" class="content-box box-contrast" style="display:none;">
     <p>
-        Recall that your match in stage 2 was given an initial bonus of E£{{ match_bonus }} from this procedure.
+        Recall that your match in stage 2 was given an initial bonus of &#8368;{{ match_bonus }} from this procedure.
         What do you think they responded to the above question?
     </p>
-    <p>You will receive an additional bonus of E£30 if your guess is correct.</p>
+    <p>You will receive an additional bonus of &#8368;<b>30</b> if your guess is correct.</p>
     <div style="display:none">
         {{ formfield 'fairness_belief' }}
     </div>

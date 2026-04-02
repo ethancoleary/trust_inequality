@@ -46,6 +46,9 @@ class Player(BasePlayer):
     CQ4 = models.IntegerField(blank=True)  # number of situations
     CQ5 = models.IntegerField(blank=True)  # payment rule
 
+    cq_errors = models.IntegerField(initial=0, blank=True)
+    cq_errors_detail = models.LongStringField(initial='[]', blank=True)
+
     TG_first = models.IntegerField()
 
 
@@ -107,7 +110,7 @@ class Info(Page):
 
 class Comp(Page):
     form_model = 'player'
-    form_fields = ['blur_count', 'blur_log', 'blur_warned']
+    form_fields = ['cq_errors', 'cq_errors_detail', 'blur_count', 'blur_log', 'blur_warned']
 
     @staticmethod
     def is_displayed(player):
@@ -132,9 +135,15 @@ class Comp(Page):
     @staticmethod
     def live_method(player, data):
         if data['type'] == 'save_cq':
-            field = 'C' + data['question']  # 'Q1' -> 'CQ1'
+            field = 'C' + data['question']
             setattr(player, field, data['answer'])
             return {player.id_in_group: {'type': 'ack'}}
+        elif data['type'] == 'cq_error':
+            import json
+            player.cq_errors += 1
+            detail = json.loads(player.cq_errors_detail or '[]')
+            detail.append(data['question'])
+            player.cq_errors_detail = json.dumps(detail)
 
     @staticmethod
     def app_after_this_page(player, upcoming_apps):
