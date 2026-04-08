@@ -15,15 +15,6 @@
 </button>
     </div>
     <p>
-        <i>You have an initial bonus of &#8368;<b>{{ initial_bonus }}</b> and your match has an initial bonus of &#8368;<b>{{ match_bonus }}</b>.
-        {% if player.participant.merit == 0 %}
-        These bonuses were allocated <b>randomly</b>.
-        {% endif %}
-        {% if player.participant.merit == 1 %}
-        These bonuses were allocated <b>according to your performances in stage 1</b>.
-        {% endif %}</i>
-    </p>
-    <p>
         You are now the <b>second mover</b>.
         You must decide what to do in each possible situation you may be in.
     </p>
@@ -33,6 +24,16 @@
     </ul>
     <p>
         Now, you need to decide how much to return to the first mover, assuming they sent &#8368;<b>10</b> to you.
+    </p>
+
+    <p>
+        <i>You have an initial bonus of &#8368;<b>{{ initial_bonus }}</b> and your match has an initial bonus of &#8368;<b>{{ match_bonus }}</b>.
+        {% if player.participant.merit == 0 %}
+        These bonuses were allocated <b>randomly</b>.
+        {% endif %}
+        {% if player.participant.merit == 1 %}
+        These bonuses were allocated <b>according to your performances in stage 1</b>.
+        {% endif %}</i>
     </p>
 </div>
 

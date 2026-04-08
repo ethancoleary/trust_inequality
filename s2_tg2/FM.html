@@ -15,15 +15,6 @@
 </button>
     </div>
     <p>
-        <i>You have an initial bonus of &#8368;<b>{{ initial_bonus }}</b> and your match has an initial bonus of &#8368;<b>{{ match_bonus }}</b>.
-        {% if player.participant.merit == 0 %}
-        These bonuses were allocated <b>randomly</b>.
-        {% endif %}
-        {% if player.participant.merit == 1 %}
-        These bonuses were allocated <b>according to your performances in stage 1</b>.
-        {% endif %}</i>
-    </p>
-    <p>
         You are now the <b>first mover</b>. You must decide whether to keep all of your initial bonus or send &#8368;<b>10</b> to your match.
         If you choose to send, the &#8368;<b>10</b> will be tripled so that your match will receive &#8368;<b>30</b>.
     </p>
@@ -32,6 +23,16 @@
         They may return any amount that is a multiple of 5 between &#8368;<b>0</b> and &#8368;<b>30</b>.
     </p>
     <p>When you make a selection, you will be able to see the corresponding potential final bonuses should this game be randomly chosen for payment and you be randomly chosen to be the first mover.</p>
+
+    <p>
+        <i>You have an initial bonus of &#8368;<b>{{ initial_bonus }}</b> and your match has an initial bonus of &#8368;<b>{{ match_bonus }}</b>.
+        {% if player.participant.merit == 0 %}
+        These bonuses were allocated <b>randomly</b>.
+        {% endif %}
+        {% if player.participant.merit == 1 %}
+        These bonuses were allocated <b>according to your performances in stage 1</b>.
+        {% endif %}</i>
+    </p>
 </div>
 
 <!-- Continue button -->
