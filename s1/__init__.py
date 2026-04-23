@@ -43,6 +43,12 @@ class Player(BasePlayer):
     blur_warned = models.IntegerField(initial=0, blank=True)
     task_blur_log = models.LongStringField(blank=True)
     task_blur_count = models.IntegerField(initial=0, blank=True)
+    merit = models.IntegerField(
+        choices=[
+            [0, 'Random'],
+            [1, 'Merit']
+        ]
+    )
 
 def creating_session(subsession: Subsession):
     if 'decryption_tasks' not in subsession.session.vars:
@@ -142,7 +148,29 @@ class Results(Page):
     @staticmethod
     def before_next_page(player, timeout_happened):
         player.participant.score = player.score
-        player.participant.merit = random.randint(0,1)
+
+        # Initialize quota counters if they don't exist yet
+        if 'merit_count_0' not in player.session.vars:
+            player.session.vars['merit_count_0'] = 0
+        if 'merit_count_1' not in player.session.vars:
+            player.session.vars['merit_count_1'] = 0
+
+        count_0 = player.session.vars['merit_count_0']
+        count_1 = player.session.vars['merit_count_1']
+
+        # Assign to whichever group has fewer; break ties randomly
+        if count_0 < count_1:
+            merit = 0
+        elif count_1 < count_0:
+            merit = 1
+        else:
+            merit = random.randint(0, 1)  # tied — random tiebreak
+
+        # Increment the chosen group's counter
+        player.session.vars[f'merit_count_{merit}'] += 1
+
+        player.merit = merit
+        player.participant.merit = merit
 
 
 page_sequence = [Intro, Task, Results]

@@ -15,17 +15,17 @@
 </button>
     </div>
     <p>
-        You are now the <b>first mover</b>. You must decide whether to keep all of your initial bonus or send &#8368;<b>10</b> to your match.
-        If you choose to send, the &#8368;<b>10</b> will be tripled so that your match will receive &#8368;<b>30</b>.
+        You are now the <b>first mover</b>. You must decide whether to keep all of your initial bonus or send &#8473;<b>10</b> to your match.
+        If you choose to send, the &#8473;<b>10</b> will be tripled so that your match will receive &#8473;<b>30</b>.
     </p>
     <p>
         Your match will then choose how much they would like to return back to you.
-        They may return any amount that is a multiple of 5 between &#8368;<b>0</b> and &#8368;<b>30</b>.
+        They may return any amount that is a multiple of 5 between &#8473;<b>0</b> and &#8473;<b>30</b>.
     </p>
-    <p>When you make a selection, you will be able to see the corresponding potential final bonuses should this game be randomly chosen for payment and you be randomly chosen to be the first mover.</p>
 
+<hr>
     <p>
-        <i>You have an initial bonus of &#8368;<b>{{ initial_bonus }}</b> and your match has an initial bonus of &#8368;<b>{{ match_bonus }}</b>.
+        <i>You have an initial bonus of &#8473;<b>{{ initial_bonus }}</b> and your match has an initial bonus of &#8473;<b>{{ match_bonus }}</b>.
         {% if player.participant.merit == 0 %}
         These bonuses were allocated <b>randomly</b>.
         {% endif %}
@@ -52,11 +52,11 @@
     <div style="display: flex; justify-content: center; gap: 20px; margin: 20px 0;">
         <button type="button" class="transfer-btn" data-value="0"
             onclick="selectTransfer(this, 0)">
-            I will transfer &#8368;<b>0</b> to my match
+            I will transfer &#8473;<b>0</b> to my match
         </button>
         <button type="button" class="transfer-btn" data-value="1"
             onclick="selectTransfer(this, 1)">
-            I will transfer &#8368;<b>10</b> to my match
+            I will transfer &#8473;<b>10</b> to my match
         </button>
     </div>
 
@@ -165,12 +165,12 @@
         <div class="modal-body">
             <p>The second game proceeds as follows:</p>
             <ul>
-                <li>The first mover decides whether to send &#8368;<b>10</b> to the second mover or send nothing.</li>
-                <li>If the first mover sends &#8368;<b>10</b>:</li>
+                <li>The first mover decides whether to send &#8473;<b>10</b> to the second mover or send nothing.</li>
+                <li>If the first mover sends &#8473;<b>10</b>:</li>
                 <ul class="square">
-                    <li>This amount is tripled and the second mover receives &#8368;<b>30</b>.</li>
+                    <li>This amount is tripled and the second mover receives &#8473;<b>30</b>.</li>
                     <li>The second mover can send some, all, or none of this amount back to the first mover.</li>
-                    <li>The amount the second mover can send must be a multiple of 5 between &#8368;<b>0</b> and &#8368;<b>30</b>.</li>
+                    <li>The amount the second mover can send must be a multiple of 5 between &#8473;<b>0</b> and &#8473;<b>30</b>.</li>
                 </ul>
                 <li>If the first mover sends nothing:</li>
                 <ul class="square">
@@ -179,8 +179,8 @@
             </ul>
             <p>In this game:</p>
             <ul>
-                <li>The first mover will decide whether to send &#8368;<b>10</b> or &#8368;<b>0</b> to the second mover.</li>
-                <li>The second mover will decide how much they would like to return to the first mover if they were to receive &#8368;<b>30</b> (i.e. the first mover were to send &#8368;<b>10</b>).</li>
+                <li>The first mover will decide whether to send &#8473;<b>10</b> or &#8473;<b>0</b> to the second mover.</li>
+                <li>The second mover will decide how much they would like to return to the first mover if they were to receive &#8473;<b>30</b> (i.e. the first mover were to send &#8473;<b>10</b>).</li>
             </ul>
             <p>
                 First you and your match will make your decisions as the first mover and afterwards as the second mover.
@@ -226,11 +226,11 @@
                 tbody.innerHTML = `
                     <tr>
                         <td><b>You</b></td>
-                        <td>&#8368;<b>{{ initial_bonus }}</b></td>
+                        <td>&#8473;<b>{{ initial_bonus }}</b></td>
                     </tr>
                     <tr>
                         <td><b>Your match</b></td>
-                        <td>&#8368;<b>{{ match_bonus }}</b></td>
+                        <td>&#8473;<b>{{ match_bonus }}</b></td>
                     </tr>`;
                 footnote.textContent = '';
             } else {
@@ -243,13 +243,13 @@
                 tbody.innerHTML = `
                     <tr>
                         <td><b>You</b></td>
-                        <td>&#8368;<b>{{ transfer_bonus_l }}</b></td>
-                        <td>&#8368;<b>{{ transfer_bonus_u }}</b></td>
+                        <td>&#8473;<b>{{ transfer_bonus_l }}</b></td>
+                        <td>&#8473;<b>{{ transfer_bonus_u }}</b></td>
                     </tr>
                     <tr>
                         <td><b>Your match</b></td>
-                        <td>&#8368;<b>{{ m_transfer_bonus_l }}</b></td>
-                        <td>&#8368;<b>{{ m_transfer_bonus_u }}</b></td>
+                        <td>&#8473;<b>{{ m_transfer_bonus_l }}</b></td>
+                        <td>&#8473;<b>{{ m_transfer_bonus_u }}</b></td>
                     </tr>`;
                 footnote.textContent = "The final bonuses are determined by your match's return decision.";
             }

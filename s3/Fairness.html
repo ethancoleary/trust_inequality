@@ -10,18 +10,27 @@
     </div>
     <hr>
     <p>
-        In stage 2, you were given an initial bonus of &#8368;<b>{{ initial_bonus }}</b>.
+        In stage 2, you were given an initial bonus of &#8473;<b>{{ initial_bonus }}</b>.
     </p>
     {% if player.participant.merit == 0 %}
     <p>
-        This bonus was allocated <b>randomly</b> with 50% of participants in your society receiving &#8368;<b>40</b> and the others receiving &#8368;<b>80</b>.
-    </p>
+        This bonus was allocated <b>randomly</b>.
+        </p>
+        <ul>
+            <li>50% of participants in your society received &#8473;<b>40</b>.</li>
+            <li>50% of participants in your society received &#8473;<b>80</b>.</li>
+        </ul>
+
     {% endif %}
     {% if player.participant.merit == 1 %}
     <p>
-        This bonus was allocated <b>according to each participant's performance in stage 1</b>.
-         Those scoring at or above average in stage 1 were given &#8368;<b>80</b>; those scoring below average were given &#8368;<b>40</b>.
+        This bonus was allocated <b>according to their performance in stage 1</b>.
     </p>
+        <ul>
+            <li>Those with a score lower than the average score from a previous study were given &#8473;<b>40</b>.</li>
+            <li>Those with a score at least as high as the average from the previous study were given &#8473;<b>80</b>.</li>
+        </ul>
+
     {% endif %}
 </div>
 
@@ -46,10 +55,10 @@
 <!-- Box 3: belief question (hidden until fairness submitted) -->
 <div id="box-belief" class="content-box box-contrast" style="display:none;">
     <p>
-        Recall that your match in stage 2 was given an initial bonus of &#8368;{{ match_bonus }} from this procedure.
+        Recall that your match in stage 2 was given an initial bonus of &#8473;{{ match_bonus }} from this procedure.
         What do you think they responded to the above question?
     </p>
-    <p>You will receive an additional bonus of &#8368;<b>30</b> if your guess is correct.</p>
+    <p>If your guess is correct, you will receive &#8473;30.</p>
     <div style="display:none">
         {{ formfield 'fairness_belief' }}
     </div>

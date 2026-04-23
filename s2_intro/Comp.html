@@ -30,10 +30,10 @@
  <!-- Q1 -->
 <div class="content-box box-white question-block" id="block-Q1">
     <h4>1. How much initial bonus have you been given for stage 2?</h4>
-    <input type="radio" name="CQ1" id="CQ1_1" value="1"> <label for="CQ1_1">&#8368;<b>20</b> </label><br>
-    <input type="radio" name="CQ1" id="CQ1_2" value="2"> <label for="CQ1_2">&#8368;<b>40</b> </label><br>
-    <input type="radio" name="CQ1" id="CQ1_3" value="3"> <label for="CQ1_3">&#8368;<b>60</b> </label><br>
-    <input type="radio" name="CQ1" id="CQ1_4" value="4"> <label for="CQ1_4">&#8368;<b>80</b> </label><br>
+    <input type="radio" name="CQ1" id="CQ1_1" value="1"> <label for="CQ1_1">&#8473;<b>20</b> </label><br>
+    <input type="radio" name="CQ1" id="CQ1_2" value="2"> <label for="CQ1_2">&#8473;<b>40</b> </label><br>
+    <input type="radio" name="CQ1" id="CQ1_3" value="3"> <label for="CQ1_3">&#8473;<b>60</b> </label><br>
+    <input type="radio" name="CQ1" id="CQ1_4" value="4"> <label for="CQ1_4">&#8473;<b>80</b> </label><br>
     <div class="cq-feedback mt-2" id="feedback-Q1"></div>
     <button type="button" class="btn btn-secondary mt-2 check-btn" data-q="Q1">Check Answer</button>
 </div>
@@ -41,10 +41,10 @@
 <!-- Q2 -->
 <div class="content-box box-white question-block" id="block-Q2" style="display:none;">
     <h4>2. How much initial bonus has your match been given for stage 2?</h4>
-    <input type="radio" name="CQ2" id="CQ2_1" value="1"> <label for="CQ2_1">&#8368;<b>20</b> </label><br>
-    <input type="radio" name="CQ2" id="CQ2_2" value="2"> <label for="CQ2_2">&#8368;<b>40</b> </label><br>
-    <input type="radio" name="CQ2" id="CQ2_3" value="3"> <label for="CQ2_3">&#8368;<b>60</b> </label><br>
-    <input type="radio" name="CQ2" id="CQ2_4" value="4"> <label for="CQ2_4">&#8368;<b>80</b> </label><br>
+    <input type="radio" name="CQ2" id="CQ2_1" value="1"> <label for="CQ2_1">&#8473;<b>20</b> </label><br>
+    <input type="radio" name="CQ2" id="CQ2_2" value="2"> <label for="CQ2_2">&#8473;<b>40</b> </label><br>
+    <input type="radio" name="CQ2" id="CQ2_3" value="3"> <label for="CQ2_3">&#8473;<b>60</b> </label><br>
+    <input type="radio" name="CQ2" id="CQ2_4" value="4"> <label for="CQ2_4">&#8473;<b>80</b> </label><br>
     <div class="cq-feedback mt-2" id="feedback-Q2"></div>
     <button type="button" class="btn btn-secondary mt-2 check-btn" data-q="Q2">Check Answer</button>
 </div>
@@ -139,8 +139,8 @@
         For the rest of stage 2, you have been matched with a participant from your society who was {{ if player.participant.match_same == 1 }}also {{ endif }}randomly assigned to <b>group {{ m }}</b>.
     </p>
     <p>
-        In other words, for stage 2, you have been randomly assigned an initial bonus of &#8368;<b>{{ endowment }}</b> and your match has {{ if player.participant.match_same == 1 }}also {{ endif }} been
-        randomly assigned an initial bonus of &#8368;<b>{{ m_endowment }}</b>.
+        In other words, for stage 2, you have been randomly assigned an initial bonus of &#8473;<b>{{ endowment }}</b> and your match has {{ if player.participant.match_same == 1 }}also {{ endif }} been
+        randomly assigned an initial bonus of &#8473;<b>{{ m_endowment }}</b>.
     </p>
     {{ endif }}
     {{ if player.participant.merit == 1 }}
@@ -152,8 +152,8 @@
         For the rest of stage 2, you have been matched with a participant from your society who was assigned to group {{ m }} due to their score in stage 1.
     </p>
     <p>
-        In other words, due to your performance in stage 1, you have been assigned an initial bonus of &#8368;<b>{{ endowment }}</b> and your match has been
-        assigned an initial bonus of &#8368;<b>{{ m_endowment }}</b> for stage 2.
+        In other words, due to your performance in stage 1, you have been assigned an initial bonus of &#8473;<b>{{ endowment }}</b> and your match has been
+        assigned an initial bonus of &#8473;<b>{{ m_endowment }}</b> for stage 2.
     </p>
     {{ endif }}
     <p>

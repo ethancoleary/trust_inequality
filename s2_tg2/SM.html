@@ -14,20 +14,13 @@
     📋 Click here to reread game 2 instructions
 </button>
     </div>
-    <p>
+        <p>
         You are now the <b>second mover</b>.
-        You must decide what to do in each possible situation you may be in.
+        You must decide how much you will return to your match if they transfer &#8473;<b>10</b> to you.
     </p>
-    <ul>
-        <li>If your match chooses to transfer nothing to you, then you cannot send any amount back.</li>
-        <li>If your match chooses to transfer &#8368;<b>10</b> to you, then you will receive &#8368;<b>30</b> and can return up to this amount to them.</li>
-    </ul>
+<hr>
     <p>
-        Now, you need to decide how much to return to the first mover, assuming they sent &#8368;<b>10</b> to you.
-    </p>
-
-    <p>
-        <i>You have an initial bonus of &#8368;<b>{{ initial_bonus }}</b> and your match has an initial bonus of &#8368;<b>{{ match_bonus }}</b>.
+        <i>You have an initial bonus of &#8473;<b>{{ initial_bonus }}</b> and your match has an initial bonus of &#8473;<b>{{ match_bonus }}</b>.
         {% if player.participant.merit == 0 %}
         These bonuses were allocated <b>randomly</b>.
         {% endif %}
@@ -46,19 +39,19 @@
 
 <!-- Hidden task box -->
 <div id="box-task" class="content-box box-task" style="display:none;">
-    <p><b>If your match transfers &#8368;<b>10</b> to you (and thus you receive &#8368;<b>30</b>), how much would you like to return to them?</b></p>
+    <p><b>If your match transfers &#8473;<b>10</b> to you (and thus you receive &#8473;<b>30</b>), how much do you want to return to them?</b></p>
     <div style="display:none">
         {{ formfield 'ret' }}
     </div>
 
     <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 20px 0;">
-    <button type="button" class="transfer-btn" data-value="0"  onclick="selectTransfer(this, 0)">&#8368;<b>0</b></button>
-    <button type="button" class="transfer-btn" data-value="5"  onclick="selectTransfer(this, 5)">&#8368;<b>5</b></button>
-    <button type="button" class="transfer-btn" data-value="10" onclick="selectTransfer(this, 10)">&#8368;<b>10</b></button>
-    <button type="button" class="transfer-btn" data-value="15" onclick="selectTransfer(this, 15)">&#8368;<b>15</b></button>
-    <button type="button" class="transfer-btn" data-value="20" onclick="selectTransfer(this, 20)">&#8368;<b>20</b></button>
-    <button type="button" class="transfer-btn" data-value="25" onclick="selectTransfer(this, 25)">&#8368;<b>25</b></button>
-    <button type="button" class="transfer-btn" data-value="30" onclick="selectTransfer(this, 30)">&#8368;<b>30</b></button>
+    <button type="button" class="transfer-btn" data-value="0"  onclick="selectTransfer(this, 0)">&#8473;<b>0</b></button>
+    <button type="button" class="transfer-btn" data-value="5"  onclick="selectTransfer(this, 5)">&#8473;<b>5</b></button>
+    <button type="button" class="transfer-btn" data-value="10" onclick="selectTransfer(this, 10)">&#8473;<b>10</b></button>
+    <button type="button" class="transfer-btn" data-value="15" onclick="selectTransfer(this, 15)">&#8473;<b>15</b></button>
+    <button type="button" class="transfer-btn" data-value="20" onclick="selectTransfer(this, 20)">&#8473;<b>20</b></button>
+    <button type="button" class="transfer-btn" data-value="25" onclick="selectTransfer(this, 25)">&#8473;<b>25</b></button>
+    <button type="button" class="transfer-btn" data-value="30" onclick="selectTransfer(this, 30)">&#8473;<b>30</b></button>
 </div>
 
 
@@ -171,12 +164,12 @@
         <div class="modal-body">
             <p>The second game proceeds as follows:</p>
             <ul>
-                <li>The first mover decides whether to send &#8368;<b>10</b> to the second mover or send nothing.</li>
-                <li>If the first mover sends &#8368;<b>10</b>:</li>
+                <li>The first mover decides whether to send &#8473;<b>10</b> to the second mover or send nothing.</li>
+                <li>If the first mover sends &#8473;<b>10</b>:</li>
                 <ul class="square">
-                    <li>This amount is tripled and the second mover receives &#8368;<b>30</b>.</li>
+                    <li>This amount is tripled and the second mover receives &#8473;<b>30</b>.</li>
                     <li>The second mover can send some, all, or none of this amount back to the first mover.</li>
-                    <li>The amount the second mover can send must be a multiple of 5 between &#8368;<b>0</b> and &#8368;<b>30</b>.</li>
+                    <li>The amount the second mover can send must be a multiple of 5 between &#8473;<b>0</b> and &#8473;<b>30</b>.</li>
                 </ul>
                 <li>If the first mover sends nothing:</li>
                 <ul class="square">
@@ -185,8 +178,8 @@
             </ul>
             <p>In this game:</p>
             <ul>
-                <li>The first mover will decide whether to send &#8368;<b>10</b> or &#8368;<b>0</b> to the second mover.</li>
-                <li>The second mover will decide how much they would like to return to the first mover if they were to receive &#8368;<b>30</b> (i.e. the first mover were to send &#8368;<b>10</b>).</li>
+                <li>The first mover will decide whether to send &#8473;<b>10</b> or &#8473;<b>0</b> to the second mover.</li>
+                <li>The second mover will decide how much they would like to return to the first mover if they were to receive &#8473;<b>30</b> (i.e. the first mover were to send &#8473;<b>10</b>).</li>
             </ul>
             <p>
                 First you and your match will make your decisions as the first mover and afterwards as the second mover.

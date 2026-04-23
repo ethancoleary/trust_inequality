@@ -13,25 +13,44 @@
     <p>
         <i>Pay attention to the following instructions as you will soon need to pass a comprehension check.</i>
     </p>
+    <div class="content-box box-info">
+        <div class="text-center">
+            <h4>Game overview</h4>
+        </div>
+        <hr>
     <p>
         The second game proceeds as follows:
     </p>
         <ul>
-            <li>The first mover decides whether to send &#8368;<b>10</b> to the second mover or send nothing.</li>
-            <li>If the first mover sends &#8368;<b>10</b>, then this amount is tripled and the second mover receives &#8368;<b>30</b>.</li>
+            <li>The first mover decides whether to send &#8473;<b>10</b> to the second mover or send nothing.</li>
+            <li>If the first mover sends &#8473;<b>10</b>, then this amount is tripled and the second mover receives &#8473;<b>30</b>.</li>
             <li>The second mover does not make a decision.</li>
         </ul>
+    </div>
 
+    <!-- Continue button -->
+    <div id="continue-btn-wrapper" style="text-align:center; margin: 16px 0;">
+        <button type="button" class="btn btn-primary btn-lg" onclick="revealNext()">
+            Continue
+        </button>
+    </div>
+    <!-- Hidden second box -->
+    <div id="box-decisions" class="content-box box-contrast" style="display:none;">
+        <div class="text-center">
+            <h4>Your decisions</h4>
+        </div>
+        <hr>
     <p>
         You and your match will make a decision as the first mover.
         If game 2 is chosen to be payoff relevant, then the role of first mover will be randomly allocated to you or your match.
-        Your final bonus payment will then be determined by the decision of the randomly chosen first mover (you or your match).
+
     </p>
-    <p>
-        Click on next to answer some brief questions about the game instructions and then begin game 2.
-    </p>
-    <center>
-    {{ next_button }}
+    <div id="bottom-text" style="display:none;">
+        <p>Click on next to answer some brief questions about the game instructions and then begin game 1.</p>
+    </div>
+
+    <center id="next-btn-wrapper" style="display:none;">
+        {{ next_button }}
     </center>
 </div>
 
@@ -48,6 +67,14 @@
     {{ super }}
     {{ load static }}
     <script>
+        function revealNext() {
+            document.getElementById('box-decisions').style.display = 'block';
+            document.getElementById('bottom-text').style.display = 'block';
+            document.getElementById('continue-btn-wrapper').style.display = 'none';
+            document.getElementById('next-btn-wrapper').style.display = 'block';
+
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             localStorage.removeItem('blur_count_global');
             localStorage.removeItem('blur_pages');

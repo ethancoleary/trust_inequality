@@ -22,12 +22,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     consent = models.IntegerField()
-    merit = models.IntegerField(
-        choices=[
-            [0, 'Random'],
-            [1, 'Merit']
-        ]
-    )
+
     blur_log = models.LongStringField(blank=True)
     blur_count = models.IntegerField(initial=0, blank=True)
     blur_warned = models.IntegerField(initial=0, blank=True)
@@ -60,10 +55,7 @@ class Overview(Page):
             'hidden_fields': ['blur_log', 'blur_count', 'blur_warned'],
         }
 
-    @staticmethod
-    def before_next_page(player, timeout_happened):
-        player.merit = random.randint(0,1)
-        player.participant.merit = player.merit
+
 
 
 page_sequence = [
