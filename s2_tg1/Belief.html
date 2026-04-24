@@ -6,7 +6,7 @@
 <!-- Box 1: white -->
 <div class="content-box box-white">
     <div class="text-center">
-        <h3>What do you think your match chooses as the second mover?</h3>
+        <h3>What do you think your match chooses as the <span style="color: #196B24; font-weight: bold;">second mover</span>?</h3>
     </div>
     <hr>
     <div class="text-center mb-3">
@@ -15,7 +15,7 @@
 </button>
     </div>
     <p>
-        Before moving on, you need to guess what <b>your match will do as the second mover</b>.
+        Before moving on, you need to guess what <b>your match will do as the <span style="color: #196B24; font-weight: bold;">second mover</span></b>.
         If you guess correctly, you will receive £0.80.
     </p>
     <p>
@@ -26,7 +26,7 @@
         {% if player.participant.merit == 1 %}
         due to your performances in stage 1.
         {% endif %}
-        Your match knows that if you, as the first mover, sent &#8473;<b>10</b> to them:
+        Your match knows that if you, as the <span style="color: #E97132; font-weight: bold;">first mover</span>, sent &#8473;<b>10</b> to them:
     </p>
         <ul>
     <li> Their final bonus will be &#8473;<b>{{ m_transfer_bonus_u }}</b> minus what they return to you. </li>
@@ -146,25 +146,25 @@
         <div class="modal-body">
             <p>The first game proceeds as follows:</p>
             <ul>
-                <li>The first mover decides whether to send &#8473;<b>10</b> to the second mover or send nothing.</li>
-                <li>If the first mover sends &#8473;<b>10</b>:</li>
+                <li>The <span style="color: #E97132; font-weight: bold;">first mover</span> decides whether to send &#8473;<b>10</b> to the <span style="color: #196B24; font-weight: bold;">second mover</span> or send nothing.</li>
+                <li>If the <span style="color: #E97132; font-weight: bold;">first mover</span> sends &#8473;<b>10</b>:</li>
                 <ul class="square">
-                    <li>This amount is tripled and the second mover receives &#8473;<b>30</b>.</li>
-                    <li>The second mover can send some, all, or none of this amount back to the first mover.</li>
-                    <li>The amount the second mover can send must be a multiple of 5 between &#8473;<b>0</b> and &#8473;<b>30</b>.</li>
+                    <li>This amount is tripled and the <span style="color: #196B24; font-weight: bold;">second mover</span> receives &#8473;<b>30</b>.</li>
+                    <li>The <span style="color: #196B24; font-weight: bold;">second mover</span> can send some, all, or none of this amount back to the <span style="color: #E97132; font-weight: bold;">first mover</span>.</li>
+                    <li>The amount the <span style="color: #196B24; font-weight: bold;">second mover</span> can send must be a multiple of 5 between &#8473;<b>0</b> and &#8473;<b>30</b>.</li>
                 </ul>
-                <li>If the first mover sends nothing:</li>
+                <li>If the <span style="color: #E97132; font-weight: bold;">first mover</span> sends nothing:</li>
                 <ul class="square">
-                    <li>The second mover does not need to make a decision.</li>
+                    <li>The <span style="color: #196B24; font-weight: bold;">second mover</span> does not need to make a decision.</li>
                 </ul>
             </ul>
             <p>In this game:</p>
             <ul>
-                <li>The first mover will decide whether to send &#8473;<b>10</b> or &#8473;<b>0</b> to the second mover.</li>
-                <li>The second mover will decide how much they would like to return to the first mover if they were to receive &#8473;<b>30</b> (i.e. the first mover were to send &#8473;<b>10</b>).</li>
+                <li>The <span style="color: #E97132; font-weight: bold;">first mover</span> will decide whether to send &#8473;<b>10</b> or &#8473;<b>0</b> to the <span style="color: #196B24; font-weight: bold;">second mover</span>.</li>
+                <li>The <span style="color: #196B24; font-weight: bold;">second mover</span> will decide how much they would like to return to the <span style="color: #E97132; font-weight: bold;">first mover</span> if they were to receive &#8473;<b>30</b> (i.e. the <span style="color: #E97132; font-weight: bold;">first mover</span> were to send &#8473;<b>10</b>).</li>
             </ul>
             <p>
-                First you and your match will make your decisions as the first mover and afterwards as the second mover.
+                First you and your match will make your decisions as the <span style="color: #E97132; font-weight: bold;">first mover</span> and afterwards as the <span style="color: #196B24; font-weight: bold;">second mover</span>.
                 If game 1 is chosen to determine your bonus, then the roles will be randomly assigned to you and your match and you will receive your final bonus by enacting the decisions you both made in the assigned roles.
             </p>
         </div>

@@ -112,11 +112,10 @@
     <!-- end box-task -->
 
 <!-- end box-info -->
-<div class="content-box box-white">
+
     <center>
-        Click on next to begin the task.<br><br>
     {{ next_button }}</center>
-</div>
+
 
 <div style="display:none">
     {% for field in form %}
@@ -134,15 +133,25 @@
     {{ load static }}
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            localStorage.removeItem('blur_count_global');
-            localStorage.removeItem('blur_pages');
-            const logField = document.getElementById('id_blur_log');
-            const countField = document.getElementById('id_blur_count');
-            const warnedField = document.getElementById('id_blur_warned');
-            if (logField) logField.value = '[]';
-            if (countField) countField.value = '0';
-            if (warnedField) warnedField.value = '0';
-        });
+    localStorage.removeItem('blur_count_global');
+    localStorage.removeItem('blur_pages');
+    const logField = document.getElementById('id_blur_log');
+    const countField = document.getElementById('id_blur_count');
+    const warnedField = document.getElementById('id_blur_warned');
+    if (logField) logField.value = '[]';
+    if (countField) countField.value = '0';
+    if (warnedField) warnedField.value = '0';
+
+    // Rename the next button
+    // Rename the next button
+const nextBtn = document.getElementById('form-next-button')
+             || document.querySelector('button[type="submit"]')
+             || document.querySelector('.otree-btn-next')
+             || document.querySelector('input[type="submit"]');
+if (nextBtn) nextBtn.textContent = 'Begin the task';
+
+});
+
     </script>
     <script src="{{ static 'data_quality.js' }}"></script>
 {{ endblock }}

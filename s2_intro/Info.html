@@ -12,44 +12,146 @@
     <p>
         <i>Pay attention to the following instructions as you will soon need to pass a comprehension check.</i>
     </p>
-    <div class="content-box box-info">
+    <div class="content-box box-white">
         <div class="text-center">
-            <h4>Your group and your match</h4>
+            <h4>Your group</h4>
         </div>
         <hr>
-        {% if player.participant.merit == 0 %}
+<div style="display: flex; gap: 2rem; align-items: flex-start;">
+  {% if player.participant.merit == 0 %}
+                        <!-- Left column: paragraph -->
+    <div style="flex: 1;">
         <p>
-            You were randomly assigned to <b>group {{ g }}</b>.
+            You were randomly assigned to
+            {% if player.group_assignment == 1 %}<span style="color: #A02B93;"><b>group A</b></span>{% endif %}
+            {% if player.group_assignment == 2 %}<span style="color: #AB7942;"><b>group B</b></span>{% endif %}.
         </p>
         <p>
-            For the rest of stage 2, you have been matched with a participant from your society who was
-            {% if player.participant.match_same == 1 %}also {% endif %}randomly assigned to <b>group {{ m }}</b>.
+            This means you were randomly assigned an initial bonus of &#8473;<b>{{ endowment }}</b>.
         </p>
-        <p>
-            In other words, for stage 2, you have been randomly assigned an initial bonus of &#8473;<b>{{ endowment }}</b> and your match has
-            {% if player.participant.match_same == 1 %}also {% endif %}been randomly assigned an initial bonus of &#8473;<b>{{ m_endowment }}</b>.
-        </p>
-        {% endif %}
-        {% if player.participant.merit == 1 %}
+    </div>
+
+    <!-- Right column: borderless 2x2 table -->
+    <div style="flex: 1;">
+<center>
+                    You<br>
+
+                    {% if player.group_assignment == 1 %}<img src="{% static 'images/you_a_luck.png' %}" alt="Group A" style="max-width: 35%;"><br>{{ endif }}
+                    {% if player.group_assignment == 2 %}<img src="{% static 'images/you_b_luck.png' %}" alt="Group A" style="max-width: 35%;"><br>{{ endif }}
+        </center>
+    </div>
+    {% endif %}
+
+    {% if player.participant.merit == 1 %}
+                        <!-- Left column: paragraph -->
+    <div style="flex: 1;">
         <p>
             In the previous study, participants correctly decrypted {{ average }} codes on average.
-            Since you correctly depicted {{ player.participant.score }} codes, you have been assigned to <b>group {{ g }}</b>.
+            Since you correctly depicted {{ player.participant.score }} codes, you have been assigned to
+            {% if player.group_assignment == 1 %}<span style="color: #A02B93;"><b>group A</b></span>{% endif %}
+            {% if player.group_assignment == 2 %}<span style="color: #AB7942;"><b>group B</b></span>{% endif %}.
         </p>
+        <p>
+            This means you were assigned an initial bonus of &#8473;<b>{{ endowment }}</b> as your score was
+            {% if player.group_assignment == 1 %} at least as high as {% endif %}
+            {% if player.group_assignment == 2 %} less than {% endif %}
+            the average from the previous study.
+        </p>
+    </div>
+
+    <!-- Right column: borderless 2x2 table -->
+    <div style="flex: 1;">
+
+            <center>
+
+                    You<br>
+                    {% if player.group_assignment == 1 %}<img src="{% static 'images/you_a_merit.png' %}" alt="Group A" style="max-width: 35%;"><br>{{ endif }}
+                    {% if player.group_assignment == 2 %}<img src="{% static 'images/you_b_merit.png' %}" alt="Group A" style="max-width: 35%;"><br>{{ endif }}
+        </center>
+
+    </div>
+    {% endif %}
+
+</div>
+</div>
+
+
+     <div class="content-box box-white">
+        <div class="text-center">
+            <h4>Your match</h4>
+        </div>
+        <hr>
+<div style="display: flex; gap: 2rem; align-items: flex-start;">
+  {% if player.participant.merit == 0 %}
+                        <!-- Left column: paragraph -->
+    <div style="flex: 1;">
         <p>
             For the rest of stage 2, you have been matched with a participant from your society who was
-            {% if player.participant.match_same == 1 %}also {% endif %}assigned to <b>group {{ m }}</b> due to their score in stage 1.
+            {% if player.participant.match_same == 1 %}also {% endif %}randomly assigned to
+            {% if player.match == 1 %}<span style="color: #A02B93;"><b>group A</b></span>{% endif %}
+            {% if player.match == 2 %}<span style="color: #AB7942;"><b>group B</b></span>{% endif %}.
         </p>
         <p>
-            In other words, due to your performance in stage 1, you have been assigned an initial bonus of &#8473;<b>{{ endowment }}</b> and your match has
-            {% if player.participant.match_same == 1 %}also {% endif %}been assigned an initial bonus of &#8473;<b>{{ m_endowment }}</b> for stage 2.
+            This means your match was randomly assigned an initial bonus of &#8473;<b>{{ m_endowment }}</b>.
         </p>
-        {% endif %}
+    </div>
+
+    <!-- Right column: borderless 2x2 table -->
+    <div style="flex: 1;">
+        <center>
+                    Your match<br>
+
+
+                    {% if player.match == 1 %}<img src="{% static 'images/match_a_luck.png' %}" alt="Group A" style="max-width: 35%;"><br>{{ endif }}
+                    {% if player.match == 2 %}<img src="{% static 'images/match_b_luck.png' %}" alt="Group A" style="max-width: 35%;"><br>{{ endif }}
+                    </center>
+    </div>
+    {% endif %}
+
+    {% if player.participant.merit == 1 %}
+                        <!-- Left column: paragraph -->
+    <div style="flex: 1;">
+        <p>
+            For the rest of stage 2, you have been matched with a participant from your society who was
+            {% if player.participant.match_same == 1 %}also {% endif %}assigned to
+            {% if player.match == 1 %}<span style="color: #A02B93;"><b>group A</b></span>{% endif %}
+            {% if player.match == 2 %}<span style="color: #AB7942;"><b>group B</b></span>{% endif %}
+            due to their score in stage 1.
+        </p>
+        <p>
+            This means that your match was assigned an initial bonus of &#8473;<b>{{ m_endowment }}</b> as their score was
+            {% if player.group_assignment == 1 %} at least as high as {% endif %}
+            {% if player.group_assignment == 2 %} less than {% endif %}
+            the average from the previous study.
+        </p>
+    </div>
+
+    <!-- Right column: borderless 2x2 table -->
+    <div style="flex: 1;">
+
+            <center>
+
+                    Your match<br>
+                    {% if player.match == 1 %}<img src="{% static 'images/match_a_merit.png' %}" alt="Group A" style="max-width: 35%;"><br>{{ endif }}
+                    {% if player.match == 2 %}<img src="{% static 'images/match_b_merit.png' %}" alt="Group A" style="max-width: 35%;"><br>{{ endif }}
+        </center>
+
+    </div>
+    {% endif %}
+
+</div>
+</div>
+
+    <div class="content-box box-info">
         <p>
             During stage 2, you will interact with your match in two <b>games</b>.
             In each game, you will both make simultaneous decisions that may affect both of your bonuses.
             You will not learn about your match's decisions until the end of the study.
         </p>
-    </div>
+        </div>
+</div>
+
+
 
     <!-- Continue button -->
     <div id="continue-btn-wrapper" style="text-align:center; margin: 16px 0;">
@@ -65,7 +167,7 @@
         </div>
         <hr>
         <p>
-            In each game, there are two roles (first mover and second mover).
+            In each game, there are two roles (<span style="color: #E97132; font-weight: bold;">first mover</span> and <span style="color: #196B24; font-weight: bold;">second mover</span>).
             You will make a decision for each role (where applicable).
             At the end of this stage, one of the two games will be randomly chosen and one of the roles will be randomly chosen.
         </p>
