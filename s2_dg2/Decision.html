@@ -24,7 +24,7 @@
         {% endif %}</i>
     </p>
     <p>
-        You are now the <b><span style="color: #E97132; font-weight: bold;">first mover</span><b>. You must decide whether to keep all of your initial bonus or send &#8473;<b>10</b> to your match.
+        You are now the <b><span style="color: #E97132; font-weight: bold;">first mover</span></b>. You must decide whether to keep all of your initial bonus or send &#8473;<b>10</b> to your match.
         If you choose to send, the &#8473;<b>10</b> will be tripled so that your match will receive &#8473;<b>30</b>.
     </p>
     <p>When you make a selection, you will be able to see the corresponding final bonuses should this game be randomly chosen for payment and you be randomly chosen to be the <span style="color: #E97132; font-weight: bold;">first mover</span>.</p>
@@ -209,7 +209,7 @@ function selectTransfer(btn, value) {
     btn.classList.add('selected');
     document.getElementById('id_transfer').value = value;
 
-    const sym = '\u20B0';
+    const sym = '&#8473';
     document.getElementById('outcome-tbody').innerHTML = `
         <tr>
             <td><b>You</b></td>
