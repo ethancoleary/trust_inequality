@@ -1,0 +1,172 @@
+{{ block content }}
+<link rel="stylesheet" href="{{static 'css/css.css'}}">
+<link rel="stylesheet" href="{{static 'css/modal.css'}}">
+<script type="text/javascript" src="{{ static 'js/Script_modal.js' }}"></script>
+
+<!-- Box 1: info -->
+<div class="content-box box-white">
+    <div class="text-center">
+        <h3>Question 2</h3>
+    </div>
+    <hr>
+    <p>
+        In stage 2, you were assigned to group  an initial bonus of &#8473;<b>{{ initial_bonus }}</b>.
+    </p>
+    {% if player.participant.merit == 0 %}
+    <p>
+        This bonus was allocated <b>randomly</b>.
+        </p>
+        <ul>
+            <li>50% of participants in your society received &#8473;<b>40</b>.</li>
+            <li>50% of participants in your society received &#8473;<b>80</b>.</li>
+        </ul>
+
+    {% endif %}
+    {% if player.participant.merit == 1 %}
+    <p>
+        This bonus was allocated <b>according to their performance in stage 1</b>.
+    </p>
+        <ul>
+            <li>Those with a score lower than the average score from a previous study were given &#8473;<b>40</b>.</li>
+            <li>Those with a score at least as high as the average from the previous study were given &#8473;<b>80</b>.</li>
+        </ul>
+
+    {% endif %}
+</div>
+
+<!-- Box 2: fairness question (visible on load) -->
+<div id="box-fairness" class="content-box box-task">
+    <p>To what extent do you consider the initial bonus allocation as fair?</p>
+    <div style="display:none">
+        {{ formfield 'fairness' }}
+    </div>
+    <div style="display: flex; flex-direction: row; justify-content: center; gap: 12px; margin: 20px 0;">
+        <button type="button" class="fair-btn" data-value="1" onclick="selectFairness(this, 1)">Very unfair</button>
+        <button type="button" class="fair-btn" data-value="2" onclick="selectFairness(this, 2)">Rather unfair</button>
+        <button type="button" class="fair-btn" data-value="3" onclick="selectFairness(this, 3)">Neither unfair nor fair</button>
+        <button type="button" class="fair-btn" data-value="4" onclick="selectFairness(this, 4)">Rather fair</button>
+        <button type="button" class="fair-btn" data-value="5" onclick="selectFairness(this, 5)">Very fair</button>
+    </div>
+    <center id="submit-btn-wrapper" style="display:none;">
+        <button type="button" class="btn btn-primary btn-lg" onclick="submitFairness()">Submit</button>
+    </center>
+</div>
+
+<!-- Box 3: belief question (hidden until fairness submitted) -->
+<div id="box-belief" class="content-box box-contrast" style="display:none;">
+    <p>
+        Recall that your match in stage 2 was given an initial bonus of &#8473;{{ match_bonus }} from this procedure.
+        What do you think they responded to the above question?
+    </p>
+
+    <div style="display:none">
+        {{ formfield 'fairness_belief' }}
+    </div>
+    <div style="display: flex; flex-direction: row; justify-content: center; gap: 12px; margin: 20px 0;">
+        <button type="button" class="fair-btn belief-btn" data-value="1" onclick="selectBelief(this, 1)">Very unfair</button>
+        <button type="button" class="fair-btn belief-btn" data-value="2" onclick="selectBelief(this, 2)">Rather unfair</button>
+        <button type="button" class="fair-btn belief-btn" data-value="3" onclick="selectBelief(this, 3)">Neither unfair nor fair</button>
+        <button type="button" class="fair-btn belief-btn" data-value="4" onclick="selectBelief(this, 4)">Rather fair</button>
+        <button type="button" class="fair-btn belief-btn" data-value="5" onclick="selectBelief(this, 5)">Very fair</button>
+    </div>
+    <center id="next-btn-wrapper" style="display:none;">
+        {{ next_button }}
+    </center>
+</div>
+
+<style>
+    .fair-btn {
+        flex: 1;
+        max-width: 180px;
+        min-height: 80px;
+        padding: 10px;
+        border: 2px solid #000;
+        border-radius: 10px;
+        background-color: #fff;
+        color: #000;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.2s, color 0.2s;
+        text-align: center;
+    }
+    .fair-btn.selected {
+        background-color: #000;
+        color: #fff;
+    }
+    .fair-btn.locked {
+        opacity: 0.6;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+    .fair-btn:hover:not(.selected):not(.locked) {
+        background-color: #f0f0f0;
+    }
+</style>
+
+<div style="display:none">
+    {% for field in form %}
+      {% if field.name in hidden_fields %}
+        {{ formfield field.name }}
+      {% endif %}
+    {% endfor %}
+</div>
+
+{{ endblock }}
+{{ block scripts }}
+    {{ super }}
+    {{ load static }}
+    <script>
+        // Box 2: fairness selection — shows Submit button
+        function selectFairness(btn, value) {
+            document.querySelectorAll('#box-fairness .fair-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            document.getElementById('id_fairness').value = value;
+            document.getElementById('submit-btn-wrapper').style.display = 'block';
+        }
+
+        // Submit button — locks Box 2, reveals Box 3
+        function submitFairness() {
+            const val = document.getElementById('id_fairness').value;
+            if (val === '' || val === null) {
+                alert('Please select an option before submitting.');
+                return;
+            }
+            // Lock all fairness buttons
+            document.querySelectorAll('#box-fairness .fair-btn').forEach(b => b.classList.add('locked'));
+            document.getElementById('submit-btn-wrapper').style.display = 'none';
+
+            // Reveal belief box
+            document.getElementById('box-belief').style.display = 'block';
+
+        }
+
+        // Box 3: belief selection — shows Next button
+        function selectBelief(btn, value) {
+            document.querySelectorAll('#box-belief .belief-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            document.getElementById('id_fairness_belief').value = value;
+            document.getElementById('next-btn-wrapper').style.display = 'block';
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelector('form').addEventListener('submit', function (e) {
+                const f  = document.getElementById('id_fairness').value;
+                const fb = document.getElementById('id_fairness_belief').value;
+                if (f === '' || fb === '') {
+                    e.preventDefault();
+                    alert('Please complete both questions before continuing.');
+                }
+            });
+
+            localStorage.removeItem('blur_count_global');
+            localStorage.removeItem('blur_pages');
+            const logField   = document.getElementById('id_blur_log');
+            const countField = document.getElementById('id_blur_count');
+            const warnedField = document.getElementById('id_blur_warned');
+            if (logField)   logField.value   = '[]';
+            if (countField) countField.value  = '0';
+            if (warnedField) warnedField.value = '0';
+        });
+    </script>
+    <script src="{{ static 'data_quality.js' }}"></script>
+{{ endblock }}

@@ -1,0 +1,35 @@
+<div style="flex: 1;">
+        <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+                <td></td>
+                <td style="border: none; text-align: center; padding: 0.5rem;">
+                    You<br>
+                    {% if player.group_assignment == 1 %}<img src="{% static 'images/groupA_avatar.jpg' %}" alt="Group A" style="max-width: 100%;"><br>{{ endif }}
+                    {% if player.group_assignment == 2 %}<img src="{% static 'images/groupB_avatar.jpg' %}" alt="Group A" style="max-width: 100%;"><br>{{ endif }}
+                </td>
+                <td style="border: none; text-align: center; padding: 0.5rem;">
+                    Your match<br>
+                    {% if player.match == 1 %}<img src="{% static 'images/groupA_avatar.jpg' %}" alt="Group A" style="max-width: 100%;"><br>{{ endif }}
+                    {% if player.match == 2 %}<img src="{% static 'images/groupB_avatar.jpg' %}" alt="Group A" style="max-width: 100%;"><br>{{ endif }}
+                </td>
+            </tr>
+            <tr>
+                <td style="border: none; text-align: center; padding: 1rem; font-size: 0.9rem;"><i>Initial bonus</i></td>
+                <td style="border: none; text-align: center; padding: 1rem; font-size: 0.9rem;">
+                    <span style="font-size:0.9rem">&#8473;<b>{{ endowment }}</b></span>
+                </td>
+                <td style="border: none; text-align: center; padding: 1rem; font-size: 0.9rem;">
+                    <span style="font-size:0.9rem">&#8473;<b>{{ m_endowment }}</b></span>
+                </td>
+            </tr>
+            <tr>
+                <td style="border: none; text-align: center; padding: 1rem; font-size: 0.9rem;"><i>Allocation procedure</i></td>
+                <td style="border: none; text-align: center; padding: 1rem; font-size: 0.9rem;">
+                    Score &#8805; average of previous study
+                </td>
+                <td style="border: none; text-align: center; padding: 1rem; font-size: 0.9rem;">
+                    Score < average of previous study
+                </td>
+            </tr>
+        </table>
+    </div>

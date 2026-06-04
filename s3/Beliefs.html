@@ -1,0 +1,90 @@
+{{ block content }}
+<link rel="stylesheet" href="{{static 'css/css.css'}}">
+<link rel="stylesheet" href="{{static 'css/modal.css'}}">
+<script type="text/javascript" src="{{ static 'js/Script_modal.js' }}"></script>
+
+<div class="content-box box-white">
+    <div class="text-center">
+        <h3>Question 1</h3>
+        </div>
+    <hr>
+    <div class="content-box box-info">
+    <div class="text-center">
+        <h3>Recap</h3>
+        </div>
+    <hr>
+    <p>
+        In stage 1 of this study, you performed a decryption task.
+    </p>
+        <p>
+        In stage 2, you became a member of a society. Each member was allocated to group A or group B
+            {% if player.participant.merit == 0 %}
+            randomly.
+            {% endif %}
+            {% if player.participant.merit == 1 %}
+            according to their performance in stage 1. Those scoring at or above average in stage 1 were assigned to group A; those scoring below average were assigned to group B.
+            {% endif %}<br><br>
+            You were assigned to <b>group {{ own_group }}</b>.
+        </p>
+    <p>
+        Finally, you were then matched with another participant in your society who was assigned to group {{ match_group }}.
+    </p>
+        </div>
+    <div class="content-box box-task">
+    <div class="text-center">
+        <h3>Your task</h3>
+        </div>
+    <hr>
+    <p>
+        We will randomly select 10 participants who are from your society and assigned to group {{ match_group }}: the same as{% if player.participant.match_same == 1 %} you and{% endif %} your match's.
+        Out of these 10 participants, how many do you think successfully decrypted <b>more</b> codes than you in stage 1?
+    </p>
+    <p>
+        If your guess is correct, you will be paid &#8473;<b>20</b>.
+    </p>
+
+    <div style="display: flex; justify-content: center; margin: 20px 0;">
+        <input type="number" id="id_belief" name="belief_perf"
+               min="0" max="10" step="1"
+               placeholder="0 – 10"
+               style="
+                   width: 120px;
+                   padding: 10px;
+                   font-size: 18px;
+                   text-align: center;
+                   border: 2px solid #000;
+                   border-radius: 8px;
+                   background-color: #fff;
+               ">
+    </div>
+    <center>
+    {{ next_button }}
+    </center>
+</div>
+
+<div style="display:none">
+    {% for field in form %}
+      {% if field.name in hidden_fields %}
+        {{ formfield field.name }}
+      {% endif %}
+    {% endfor %}
+</div>
+
+{{ endblock }}
+{{ block scripts }}
+    {{ super }}
+    {{ load static }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            localStorage.removeItem('blur_count_global');
+            localStorage.removeItem('blur_pages');
+            const logField = document.getElementById('id_blur_log');
+            const countField = document.getElementById('id_blur_count');
+            const warnedField = document.getElementById('id_blur_warned');
+            if (logField) logField.value = '[]';
+            if (countField) countField.value = '0';
+            if (warnedField) warnedField.value = '0';
+        });
+    </script>
+    <script src="{{ static 'data_quality.js' }}"></script>
+{{ endblock }}

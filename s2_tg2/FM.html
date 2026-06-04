@@ -1,0 +1,316 @@
+{{ block content }}
+<link rel="stylesheet" href="{{static 'css/css.css'}}">
+<link rel="stylesheet" href="{{static 'css/modal.css'}}">
+<script type="text/javascript" src="{{ static 'js/Script_modal.js' }}"></script>
+
+<!-- Box 1: white -->
+<div class="content-box box-white">
+    <div class="text-center">
+        <h3>Game 2 : <span style="color: #E97132; font-weight: bold;">first mover</span></h3>
+    </div>
+    <hr>
+    <div class="text-center mb-3">
+        <button type="button" onclick="open_modal(2)" class="btn btn-instruct btn-lg">
+    📋 Click here to reread game 2 instructions
+</button>
+    </div>
+     <div style="display: flex; gap: 2rem; align-items: flex-start;">
+                        <!-- Left column: paragraph -->
+        <div style="flex: 1.5;">
+
+             <p>
+        You are now the <b><span style="color: #E97132; font-weight: bold;">first mover</span></b>. You must decide whether to keep all of your initial bonus or send &#8473;<b>10</b> to your match.
+        If you choose to send, the &#8473;<b>10</b> will be tripled so that your match will receive &#8473;<b>30</b>.
+    </p>
+    <p>
+        Your match will then choose how much they would like to return back to you.
+        They may return any amount that is a multiple of 5 between &#8473;<b>0</b> and &#8473;<b>30</b>.
+    </p>
+            <p>
+        <i>You have an initial bonus of &#8473;<b>{{ initial_bonus }}</b> and your match has an initial bonus of &#8473;<b>{{ match_bonus }}</b>.
+        {% if player.participant.merit == 0 %}
+        These bonuses were allocated <b>randomly</b>.
+        {% endif %}
+        {% if player.participant.merit == 1 %}
+        These bonuses were allocated <b>according to your performances in stage 1</b>.
+        {% endif %}</i>
+    </p>
+
+        <!--</div>
+        <div style="flex: 1;">
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                    <td style="border: none; text-align: center; padding: 1rem; font-size: 0.9rem;">You</td>
+                        <td style="border: none; text-align: center; padding: 1rem; font-size: 0.9rem;">Your match</td>
+                </tr>
+                <tr>
+                    <td style="border: none; text-align: center; padding: 0.5rem;">
+                        {% if player.participant.merit == 0 %}
+                            {% if player.participant.group_assignment == 1 %}<img src="{% static 'images/you_a.png' %}" alt="You A" style="max-width: 80%;"><br>{{ endif }}
+                            {% if player.participant.group_assignment == 2 %}<img src="{% static 'images/you_b.png' %}" alt="You B" style="max-width: 80%;"><br>{{ endif }}
+                        {% else %}
+                            {% if player.participant.group_assignment == 1 %}<img src="{% static 'images/you_a.png' %}" alt="You A" style="max-width: 80%;"><br>{{ endif }}
+                            {% if player.participant.group_assignment == 2 %}<img src="{% static 'images/you_b.png' %}" alt="You B" style="max-width: 80%;"><br>{{ endif }}
+                        {% endif %}
+                        </td>
+                    <td style="border: none; text-align: center; padding: 0.5rem;">
+                        {% if player.participant.merit == 0 %}
+                            {% if player.participant.match == 1 %}<img src="{% static 'images/you_a.png' %}" alt="Match A" style="max-width: 70%;"><br>{{ endif }}
+                            {% if player.participant.match == 2 %}<img src="{% static 'images/you_b.png' %}" alt="Match B" style="max-width: 70%;"><br>{{ endif }}
+                        {% else %}
+                            {% if player.participant.match == 1 %}<img src="{% static 'images/you_a.png' %}" alt="Match A" style="max-width: 70%;"><br>{{ endif }}
+                            {% if player.participant.match == 2 %}<img src="{% static 'images/you_b.png' %}" alt="Match B" style="max-width: 70%;"><br>{{ endif }}
+                        {% endif %}
+                    </td>
+                    </td>
+                </tr>
+            </table>
+        </div> -->
+</div>
+     </div>
+
+<!-- Continue button -->
+<div id="continue-btn-wrapper" style="text-align:center; margin: 16px 0;">
+    <button type="button" class="btn btn-decide btn-lg" onclick="revealNext()">
+        Click here to make your decision
+    </button>
+</div>
+
+<!-- Hidden task box -->
+<div id="box-task" class="content-box box-task" style="display:none;">
+    <p>Please indicate your decision below.</p>
+    <div style="display:none">
+        {{ formfield 'transfer' }}
+    </div>
+
+    <div style="display: flex; justify-content: center; gap: 20px; margin: 20px 0;">
+        <button type="button" class="transfer-btn" data-value="0"
+            onclick="selectTransfer(this, 0)">
+            I will transfer &#8473;<b>0</b> to my match
+        </button>
+        <button type="button" class="transfer-btn" data-value="1"
+            onclick="selectTransfer(this, 1)">
+            I will transfer &#8473;<b>10</b> to my match
+        </button>
+    </div>
+
+    <div id="outcome-text" style="display:none; text-align:center; margin: 16px 0; font-size: 15px;">
+    <p>The final bonuses for this game/role assignment would be:</p>
+    <table id="outcome-table" class="table" style="max-width: 480px; margin: 12px auto; text-align: center;">
+        <thead id="outcome-thead"></thead>
+        <tbody id="outcome-tbody"></tbody>
+    </table>
+    <p id="outcome-footnote" style="font-size: 13px; color: #555;"></p>
+</div>
+
+    <center id="next-btn-wrapper" style="display:none;">
+        {{ next_button }}
+    </center>
+</div>
+
+<style>
+    .btn-instruct {
+    background-color: #c4e4e9;
+    color: #000000;
+    border: 2px solid #1c444a;
+    border-radius: 10px;
+    font-size: 18px;
+        text-color: white;
+    transition: background-color 0.2s, color 0.2s;
+}
+.btn-instruct:hover {
+    background-color: #0fa888;
+    color: #000000;
+}
+.btn-instruct:focus,
+.btn-instruct:active {
+    background-color: #0a8a6e;
+    color: #000000;
+    box-shadow: none;
+}
+
+    .btn-decide {
+    background-color: #fff5ee;
+    color: #000000;
+    border: 2px solid #3a2003;
+    border-radius: 10px;
+    font-size: 18px;
+    transition: background-color 0.2s, color 0.2s;
+}
+.btn-decide:hover {
+    background-color: #ffe8d6;
+    color: #000000;
+}
+.btn-decide:focus,
+.btn-decide:active {
+    background-color: #ffd9bf;
+    color: #000000;
+    box-shadow: none;
+}
+    .transfer-btn {
+        padding: 14px 24px;
+        border: 2px solid #000;
+        border-radius: 10px;
+        background-color: #fff;
+        color: #000;
+        font-size: 18px;
+        cursor: pointer;
+        transition: background-color 0.2s, color 0.2s;
+        min-width: 220px;
+    }
+    .transfer-btn.selected {
+        background-color: #000;
+        color: #fff;
+    }
+    .transfer-btn:hover:not(.selected) {
+        background-color: #f0f0f0;
+    }
+#myModal2 .modal-header {
+    background-color: #c4e4e9 !important;
+    text-align: center !important;
+    justify-content: center !important;
+    padding: 20px 24px !important;
+}
+
+#myModal2 .modal-header h2 {
+    color: #000000 !important;
+    text-align: center !important;
+    flex: 1;
+    padding: 8px 0 !important;
+}
+
+#outcome-table th, #outcome-table td {
+    border: 1px solid #ccc;
+    padding: 8px 16px;
+}
+#outcome-table thead {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+</style>
+
+<!-- Instructions Modal -->
+<div id="myModal2" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Game 2 Information</h2>
+            <span class="close" onclick="span_click(2)">&times;</span>
+        </div>
+        <div class="modal-body">
+            <p>The second game proceeds as follows:</p>
+            <ul>
+                <li>The <span style="color: #E97132; font-weight: bold;">first mover</span> decides whether to send &#8473;<b>10</b> to the <span style="color: #196B24; font-weight: bold;">second mover</span> or send nothing.</li>
+                <li>If the <span style="color: #E97132; font-weight: bold;">first mover</span> sends &#8473;<b>10</b>:</li>
+                <ul class="square">
+                    <li>This amount is tripled and the <span style="color: #196B24; font-weight: bold;">second mover</span> receives &#8473;<b>30</b>.</li>
+                    <li>The <span style="color: #196B24; font-weight: bold;">second mover</span> can send some, all, or none of this amount back to the <span style="color: #E97132; font-weight: bold;">first mover</span>.</li>
+                    <li>The amount the <span style="color: #196B24; font-weight: bold;">second mover</span> can send must be a multiple of 5 between &#8473;<b>0</b> and &#8473;<b>30</b>.</li>
+                </ul>
+                <li>If the <span style="color: #E97132; font-weight: bold;">first mover</span> sends nothing:</li>
+                <ul class="square">
+                    <li>The <span style="color: #196B24; font-weight: bold;">second mover</span> does not need to make a decision.</li>
+                </ul>
+            </ul>
+            <p>In this game:</p>
+            <ul>
+                <li>The <span style="color: #E97132; font-weight: bold;">first mover</span> will decide whether to send &#8473;<b>10</b> or &#8473;<b>0</b> to the <span style="color: #196B24; font-weight: bold;">second mover</span>.</li>
+                <li>The <span style="color: #196B24; font-weight: bold;">second mover</span> will decide how much they would like to return to the <span style="color: #E97132; font-weight: bold;">first mover</span> if they were to receive &#8473;<b>30</b> (i.e. the <span style="color: #E97132; font-weight: bold;">first mover</span> were to send &#8473;<b>10</b>).</li>
+            </ul>
+            <p>
+                First you and your match will make your decisions as the <span style="color: #E97132; font-weight: bold;">first mover</span> and afterwards as the <span style="color: #196B24; font-weight: bold;">second mover</span>.
+                If game 2 is chosen to determine your bonus, then the roles will be randomly assigned to you and your match and you will receive your final bonus by enacting the decisions you both made in the assigned roles.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div style="display:none">
+    {% for field in form %}
+      {% if field.name in hidden_fields %}
+        {{ formfield field.name }}
+      {% endif %}
+    {% endfor %}
+</div>
+
+{{ endblock }}
+{{ block scripts }}
+    {{ super }}
+    {{ load static }}
+    <script>
+        function revealNext() {
+            document.getElementById('box-task').style.display = 'block';
+            document.getElementById('continue-btn-wrapper').style.display = 'none';
+        }
+
+        function selectTransfer(btn, value) {
+            document.querySelectorAll('.transfer-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            document.getElementById('id_transfer').value = value;
+
+            const thead = document.getElementById('outcome-thead');
+            const tbody = document.getElementById('outcome-tbody');
+            const footnote = document.getElementById('outcome-footnote');
+
+            if (value === 0) {
+                thead.innerHTML = `
+                    <tr>
+                        <th></th>
+                        <th>Bonus</th>
+                    </tr>`;
+                tbody.innerHTML = `
+                    <tr>
+                        <td><b>You</b></td>
+                        <td>&#8473;<b>{{ initial_bonus }}</b></td>
+                    </tr>
+                    <tr>
+                        <td><b>Your match</b></td>
+                        <td>&#8473;<b>{{ match_bonus }}</b></td>
+                    </tr>`;
+                footnote.textContent = '';
+            } else {
+                thead.innerHTML = `
+                    <tr>
+                        <th></th>
+                        <th>Minimum bonus</th>
+                        <th>Maximum bonus</th>
+                    </tr>`;
+                tbody.innerHTML = `
+                    <tr>
+                        <td><b>You</b></td>
+                        <td>&#8473;<b>{{ transfer_bonus_l }}</b></td>
+                        <td>&#8473;<b>{{ transfer_bonus_u }}</b></td>
+                    </tr>
+                    <tr>
+                        <td><b>Your match</b></td>
+                        <td>&#8473;<b>{{ m_transfer_bonus_l }}</b></td>
+                        <td>&#8473;<b>{{ m_transfer_bonus_u }}</b></td>
+                    </tr>`;
+                footnote.textContent = "The final bonuses are determined by your match's return decision.";
+            }
+
+            document.getElementById('outcome-text').style.display = 'block';
+            document.getElementById('next-btn-wrapper').style.display = 'block';
+        }
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelector('form').addEventListener('submit', function (e) {
+                const val = document.getElementById('id_transfer').value;
+                if (val === '' || val === null) {
+                    e.preventDefault();
+                    alert('Please select a transfer decision before continuing.');
+                }
+            });
+
+            localStorage.removeItem('blur_count_global');
+            localStorage.removeItem('blur_pages');
+            const logField = document.getElementById('id_blur_log');
+            const countField = document.getElementById('id_blur_count');
+            const warnedField = document.getElementById('id_blur_warned');
+            if (logField) logField.value = '[]';
+            if (countField) countField.value = '0';
+            if (warnedField) warnedField.value = '0';
+        });
+    </script>
+    <script src="{{ static 'data_quality.js' }}"></script>
+{{ endblock }}
