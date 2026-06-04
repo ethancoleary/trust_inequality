@@ -19,6 +19,10 @@
                         <!-- Left column: paragraph -->
         <div style="flex: 1.5;">
             <p>
+                You are now the <b><span style="color: #E97132; font-weight: bold;">first mover</span></b>. You must decide whether to keep all of your initial bonus or send &#8473;<b>10</b> to your match.
+                If you choose to send, the &#8473;<b>10</b> will be tripled so that your match will receive &#8473;<b>30</b>.
+            </p>
+                        <p>
         <i>You have an initial bonus of &#8473;<b>{{ initial_bonus }}</b> and your match has an initial bonus of &#8473;<b>{{ match_bonus }}</b>.
         {% if player.participant.merit == 0 %}
         These bonuses were allocated <b>randomly</b>.
@@ -27,12 +31,8 @@
         These bonuses were allocated <b>according to your performances in stage 1</b>.
         {% endif %}</i>
     </p>
-            <p>
-                You are now the <b><span style="color: #E97132; font-weight: bold;">first mover</span></b>. You must decide whether to keep all of your initial bonus or send &#8473;<b>10</b> to your match.
-                If you choose to send, the &#8473;<b>10</b> will be tripled so that your match will receive &#8473;<b>30</b>.
-            </p>
         </div>
-        <div style="flex: 1;">
+        <!--<div style="flex: 1;">
             <table style="width: 100%; border-collapse: collapse;">
                 <tr>
                     <td style="border: none; text-align: center; padding: 1rem; font-size: 0.9rem;">You</td>
@@ -60,7 +60,7 @@
                     </td>
                 </tr>
             </table>
-        </div>
+        </div> -->
 </div>
 
 <!-- Continue button -->

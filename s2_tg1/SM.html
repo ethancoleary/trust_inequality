@@ -6,7 +6,7 @@
 <!-- Box 1: white -->
 <div class="content-box box-white">
     <div class="text-center">
-        <h3>Game 1 : <span style="color: #196B24; font-weight: bold;">second mover</span></h3>
+        <h3>Game 1 : <span style="color: #196B24; font-weight: bold;">Second mover</span></h3>
     </div>
     <hr>
     <div class="text-center mb-3">
@@ -18,6 +18,11 @@
                         <!-- Left column: paragraph -->
         <div style="flex: 1.5;">
             <br>
+
+     <p>
+        You are now the <b><span style="color: #196B24; font-weight: bold;">second mover</span></b>.
+        You must decide how much you will return to your match if they transfer &#8473;<b>10</b> to you.
+    </p>
             <p>
         <i>You have an initial bonus of &#8473;<b>{{ initial_bonus }}</b> and your match has an initial bonus of &#8473;<b>{{ match_bonus }}</b>.
         {% if player.participant.merit == 0 %}
@@ -27,12 +32,8 @@
         These bonuses were allocated <b>according to your performances in stage 1</b>.
         {% endif %}</i>
     </p>
-     <p>
-        You are now the <b><span style="color: #196B24; font-weight: bold;">second mover</span></b>.
-        You must decide how much you will return to your match if they transfer &#8473;<b>10</b> to you.
-    </p>
 
-        </div>
+       <!--</div>
         <div style="flex: 1;">
             <table style="width: 100%; border-collapse: collapse;">
                 <tr>
@@ -61,8 +62,9 @@
                     </td>
                 </tr>
             </table>
+        </div>-->
         </div>
-</div>
+    </div>
 
 <!-- Continue button -->
 <div id="continue-btn-wrapper" style="text-align:center; margin: 16px 0;">

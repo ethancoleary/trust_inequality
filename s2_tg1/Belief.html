@@ -17,21 +17,28 @@
     <p>
         Before moving on, you need to guess what <b>your match will do as the <span style="color: #196B24; font-weight: bold;">second mover</span></b>.
         If you guess correctly, you will receive &#8473;40. This amount is independent of your other earnings.
-    </p>
+       </p>
     <p>
-        Recall that you have an initial bonus of &#8473;<b>{{ initial_bonus }}</b> and your match has an initial bonus of &#8473;<b>{{ match_bonus }}</b>
+        As the <span style="color: #196B24; font-weight: bold;">second mover</span>, your match will decide how much to return to
+        you in the case that you were to send &#8473;<b>10</b> to them
+        (and thus they were to receive &#8473;<b>30</b>).
+        <br><br>
+        Recall that,
         {% if player.participant.merit == 0 %}
-        due to a random draw.
+        due to a random draw,
         {% endif %}
         {% if player.participant.merit == 1 %}
-        due to your performances in stage 1.
+        due to your performances in stage 1,
         {% endif %}
-        Your match knows that if you, as the <span style="color: #E97132; font-weight: bold;">first mover</span>, sent &#8473;<b>10</b> to them:
+        your initial bonus is &#8473;<b>{{ initial_bonus }}</b> and your match's is &#8473;<b>{{ match_bonus }}</b>.
+        Therefore, your match knows that if you, as the <span style="color: #E97132; font-weight: bold;">first mover</span>, sent &#8473;<b>10</b> to them:
     </p>
         <ul>
     <li> Their final bonus will be &#8473;<b>{{ m_transfer_bonus_u }}</b> minus what they return to you. </li>
     <li> Your final bonus will be &#8473;<b>{{ transfer_bonus_l }}</b> plus what they return to you.</li>
 </ul>
+
+
 </div>
 
 <!-- Continue button -->

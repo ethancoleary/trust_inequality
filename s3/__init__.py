@@ -204,6 +204,8 @@ class Fairness(Page):
             'hidden_fields': ['blur_log', 'blur_count', 'blur_warned'],
         }
 
+
+
 class Risk(Page):
     form_model = 'player'
     form_fields = ['risk1', 'risk2', 'risk3', 'risk4', 'risk5', 'risk6', 'risk7', 'risk8', 'risk9', 'risk10', 'blur_count', 'blur_log', 'blur_warned']

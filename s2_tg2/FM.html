@@ -17,6 +17,15 @@
      <div style="display: flex; gap: 2rem; align-items: flex-start;">
                         <!-- Left column: paragraph -->
         <div style="flex: 1.5;">
+
+             <p>
+        You are now the <b><span style="color: #E97132; font-weight: bold;">first mover</span></b>. You must decide whether to keep all of your initial bonus or send &#8473;<b>10</b> to your match.
+        If you choose to send, the &#8473;<b>10</b> will be tripled so that your match will receive &#8473;<b>30</b>.
+    </p>
+    <p>
+        Your match will then choose how much they would like to return back to you.
+        They may return any amount that is a multiple of 5 between &#8473;<b>0</b> and &#8473;<b>30</b>.
+    </p>
             <p>
         <i>You have an initial bonus of &#8473;<b>{{ initial_bonus }}</b> and your match has an initial bonus of &#8473;<b>{{ match_bonus }}</b>.
         {% if player.participant.merit == 0 %}
@@ -26,16 +35,8 @@
         These bonuses were allocated <b>according to your performances in stage 1</b>.
         {% endif %}</i>
     </p>
-             <p>
-        You are now the <b><span style="color: #E97132; font-weight: bold;">first mover</span></b>. You must decide whether to keep all of your initial bonus or send &#8473;<b>10</b> to your match.
-        If you choose to send, the &#8473;<b>10</b> will be tripled so that your match will receive &#8473;<b>30</b>.
-    </p>
-    <p>
-        Your match will then choose how much they would like to return back to you.
-        They may return any amount that is a multiple of 5 between &#8473;<b>0</b> and &#8473;<b>30</b>.
-    </p>
 
-        </div>
+        <!--</div>
         <div style="flex: 1;">
             <table style="width: 100%; border-collapse: collapse;">
                 <tr>
@@ -64,10 +65,9 @@
                     </td>
                 </tr>
             </table>
-        </div>
+        </div> -->
 </div>
-
-</div>
+     </div>
 
 <!-- Continue button -->
 <div id="continue-btn-wrapper" style="text-align:center; margin: 16px 0;">
