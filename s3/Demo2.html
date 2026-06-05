@@ -60,30 +60,17 @@
     <div style="display:none">{{ formfield 'gentrust' }}</div>
 
     <div class="trust-scale">
-        <div class="scale-item">
-            <div class="scale-label">Need to be very careful</div>
-            <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 1)">1</button>
-        </div>
+        <div class="scale-label">Need to be very careful</div>
+        <div class="scale-label">&nbsp;</div>
+        <div class="scale-label">&nbsp;</div>
+        <div class="scale-label">&nbsp;</div>
+        <div class="scale-label">Most people can be trusted</div>
 
-        <div class="scale-item">
-            <div class="scale-label">&nbsp;</div>
-            <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 2)">2</button>
-        </div>
-
-        <div class="scale-item">
-            <div class="scale-label">&nbsp;</div>
-            <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 3)">3</button>
-        </div>
-
-        <div class="scale-item">
-            <div class="scale-label">&nbsp;</div>
-            <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 4)">4</button>
-        </div>
-
-        <div class="scale-item">
-            <div class="scale-label">Most people can be trusted</div>
-            <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 5)">5</button>
-        </div>
+        <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 1)">1</button>
+        <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 2)">2</button>
+        <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 3)">3</button>
+        <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 4)">4</button>
+        <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 5)">5</button>
     </div>
 </div>
 
@@ -200,45 +187,40 @@
         margin: 20px 0;
     }
 
-    .btn-group-horizontal {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 12px;
-        margin: 20px 0;
-    }
-
-    .btn-group-horizontal .survey-btn {
-        min-width: 160px;
-    }
-
-    .trust-scale {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 8px;
-    align-items: start;
+.btn-group-horizontal {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 12px;
     margin: 20px 0;
-    width: 100%;
 }
 
-.scale-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+.btn-group-horizontal .survey-btn {
+    min-width: 0;
+    flex: 1 1 0;
+    white-space: nowrap;
+}
+
+.trust-scale {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-rows: auto auto;
+    gap: 8px;
+    align-items: end;
     width: 100%;
+    margin: 20px 0;
 }
 
 .scale-label {
     font-size: 13px;
-    min-height: 38px;
-    margin-bottom: 8px;
+    line-height: 1.2;
+    text-align: center;
+    min-height: 32px;
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    line-height: 1.2;
-    width: 100%;
+    padding: 0 4px;
 }
 
 .scale-btn {
@@ -247,11 +229,6 @@
     padding: 10px 0;
 }
 
-@media (max-width: 768px) {
-    .trust-scale {
-        grid-template-columns: repeat(3, minmax(90px, 1fr));
-    }
-}
 </style>
 {{ endblock }}
 {{ block scripts }}
