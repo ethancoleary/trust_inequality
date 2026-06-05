@@ -56,6 +56,7 @@ class Player(BasePlayer):
         [25, '25'],
         [30, '30']
     ])
+    belief_explain = models.LongStringField()
 
 
 # PAGES
@@ -134,7 +135,7 @@ class FM(Page):
 
 class Belief(Page):
     form_model = 'player'
-    form_fields = ['belief', 'blur_count', 'blur_log', 'blur_warned']
+    form_fields = ['belief', 'belief_explain', 'blur_count', 'blur_log', 'blur_warned']
 
     @staticmethod
     def vars_for_template(player):

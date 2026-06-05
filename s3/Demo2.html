@@ -35,7 +35,7 @@
 <div class="content-box box-task">
     <p>What is your political leaning?</p>
     <div style="display:none">{{ formfield 'political' }}</div>
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; margin: 20px 0;">
+    <div class="btn-group-horizontal">
         <button type="button" class="survey-btn" onclick="selectField(this, 'political', 1)">Left</button>
         <button type="button" class="survey-btn" onclick="selectField(this, 'political', 2)">Centre Left</button>
         <button type="button" class="survey-btn" onclick="selectField(this, 'political', 3)">Centre</button>
@@ -48,23 +48,111 @@
     <p>In your opinion, is there too little, too much, or an acceptable level of
         economic inequality in the United Kingdom today?</p>
     <div style="display:none">{{ formfield 'inequality' }}</div>
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; margin: 20px 0;">
+    <div class="btn-group-horizontal">
         <button type="button" class="survey-btn" onclick="selectField(this, 'inequality', 1)">Too little inequality</button>
         <button type="button" class="survey-btn" onclick="selectField(this, 'inequality', 2)">Acceptable inequality</button>
         <button type="button" class="survey-btn" onclick="selectField(this, 'inequality', 3)">Too much inequality</button>
     </div>
 </div>
 
-<!-- Fix: gentrust buttons must pass 'gentrust' not 'inequality' -->
 <div class="content-box box-task">
-    <p>Generally speaking, would you say that most people can be trusted or that you need to be very careful in dealing with people?</p>
+    <p>On a scale of 1 to 5, how much would you say people can be trusted, generally speaking?</p>
     <div style="display:none">{{ formfield 'gentrust' }}</div>
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; margin: 20px 0;">
-        <button type="button" class="survey-btn" onclick="selectField(this, 'gentrust', 1)">Most people can be trusted</button>
-        <button type="button" class="survey-btn" onclick="selectField(this, 'gentrust', 2)">Do not know</button>
-        <button type="button" class="survey-btn" onclick="selectField(this, 'gentrust', 3)">Need to be very careful</button>
+
+    <div class="trust-scale">
+        <div class="scale-item">
+            <div class="scale-label">Need to be very careful</div>
+            <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 1)">1</button>
+        </div>
+
+        <div class="scale-item">
+            <div class="scale-label">&nbsp;</div>
+            <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 2)">2</button>
+        </div>
+
+        <div class="scale-item">
+            <div class="scale-label">&nbsp;</div>
+            <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 3)">3</button>
+        </div>
+
+        <div class="scale-item">
+            <div class="scale-label">&nbsp;</div>
+            <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 4)">4</button>
+        </div>
+
+        <div class="scale-item">
+            <div class="scale-label">Most people can be trusted</div>
+            <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 5)">5</button>
+        </div>
     </div>
 </div>
+
+<div class="content-box box-task">
+    <p>On a scale of 1 to 5, do you think that most people would try to take advantage of you if they got the chance, or would they try to be fair, generally speaking?</p>
+    <div style="display:none">{{ formfield 'advantage' }}</div>
+
+    <div class="trust-scale">
+        <div class="scale-item">
+            <div class="scale-label">People take advantage</div>
+            <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 1)">1</button>
+        </div>
+
+        <div class="scale-item">
+            <div class="scale-label">&nbsp;</div>
+            <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 2)">2</button>
+        </div>
+
+        <div class="scale-item">
+            <div class="scale-label">&nbsp;</div>
+            <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 3)">3</button>
+        </div>
+
+        <div class="scale-item">
+            <div class="scale-label">&nbsp;</div>
+            <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 4)">4</button>
+        </div>
+
+        <div class="scale-item">
+            <div class="scale-label">People try to be fair</div>
+            <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 5)">5</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="content-box box-task">
+    <p>On a scale of 1 to 5, would you say that most of the time people are looking out for themselves or that they are mostly trying to be helpful, generally speaking?</p>
+    <div style="display:none">{{ formfield 'helpful' }}</div>
+
+    <div class="trust-scale">
+        <div class="scale-item">
+            <div class="scale-label">People look out for themselves</div>
+            <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 1)">1</button>
+        </div>
+
+        <div class="scale-item">
+            <div class="scale-label">&nbsp;</div>
+            <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 2)">2</button>
+        </div>
+
+        <div class="scale-item">
+            <div class="scale-label">&nbsp;</div>
+            <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 3)">3</button>
+        </div>
+
+        <div class="scale-item">
+            <div class="scale-label">&nbsp;</div>
+            <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 4)">4</button>
+        </div>
+
+        <div class="scale-item">
+            <div class="scale-label">People try to be helpful</div>
+            <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 5)">5</button>
+        </div>
+    </div>
+</div>
+
+
 
 <center>
     {{ next_button }}
@@ -93,14 +181,77 @@
         min-width: 280px;
         text-align: center;
     }
+
     .survey-btn.selected {
         background-color: #2e7d32;
         color: #fff;
         border-color: #2e7d32;
     }
+
     .survey-btn:hover:not(.selected) {
         background-color: #f0f0f0;
     }
+
+    .btn-group-vertical {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        margin: 20px 0;
+    }
+
+    .btn-group-horizontal {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        margin: 20px 0;
+    }
+
+    .btn-group-horizontal .survey-btn {
+        min-width: 160px;
+    }
+
+    .trust-scale {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    margin: 20px 0;
+    width: 100%;
+}
+
+.scale-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.scale-label {
+    font-size: 13px;
+    min-height: 38px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    line-height: 1.2;
+    width: 100%;
+}
+
+.scale-btn {
+    width: 100%;
+    min-width: 0;
+    padding: 10px 0;
+}
+
+@media (max-width: 768px) {
+    .trust-scale {
+        grid-template-columns: repeat(3, minmax(90px, 1fr));
+    }
+}
 </style>
 {{ endblock }}
 {{ block scripts }}

@@ -128,14 +128,12 @@ class Player(BasePlayer):
         [4, 'Centre right'],
         [5, 'Right']
     ])
-    inequality = models.IntegerField(choices=[
-        [1, 'Too little inequality'],
-        [2, 'Acceptable inequality'],
-        [3, 'Too much inequality']
-    ])
+    inequality = models.IntegerField()
     recall = models.IntegerField()
     situation = models.IntegerField(min=1, max=4)
     gentrust = models.IntegerField()
+    advantage = models.IntegerField()
+    helpful = models.IntegerField()
 
     blur_log = models.LongStringField(blank=True)
     blur_count = models.IntegerField(initial=0, blank=True)
@@ -303,7 +301,7 @@ class Demo1(Page):
 
 class Demo2(Page):
     form_model = 'player'
-    form_fields = ['ethnicity', 'native', 'political', 'inequality', 'gentrust', 'blur_count', 'blur_log', 'blur_warned']
+    form_fields = ['ethnicity', 'native', 'political', 'inequality', 'gentrust', 'advantage', 'helpful', 'blur_count', 'blur_log', 'blur_warned']
 
     @staticmethod
     def vars_for_template(player):
