@@ -27,6 +27,15 @@ SESSION_CONFIG_DEFAULTS = dict(
     real_world_currency_per_point=1.00, participation_fee=0.00, doc=""
 )
 
+ROOMS = [
+    dict(
+        name='prolific_main',
+        display_name='Main Experiment Room',
+        # participant_label_file='_rooms/prolific_main.txt',  # optional: for fixed labels
+        # use_secure_urls=True,  # optional: adds participant-specific tokens
+    ),
+]
+
 PARTICIPANT_FIELDS = [
 'merit',
 'match_same',
@@ -55,3 +64,6 @@ ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 DEMO_PAGE_INTRO_HTML = """ """
 
 SECRET_KEY = '7127299695462'
+
+OTREE_PRODUCTION = environ.get('OTREE_PRODUCTION', '0') == '1'
+AUTH_LEVEL = environ.get('OTREE_AUTH_LEVEL', '')

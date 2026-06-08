@@ -81,7 +81,7 @@ class Player(BasePlayer):
         [2, 'B']
     ])
     risk_choice = models.IntegerField()
-    risk_bonus = models.IntegerField()
+    risk_bonus = models.IntegerField(blank=True)
     age = models.IntegerField(min=18, max=100)
     gender = models.IntegerField(choices=[
         [1, 'Female'],
@@ -143,6 +143,7 @@ class Player(BasePlayer):
     role_bonus = models.IntegerField()
     tg_bonus = models.IntegerField()
     random_draw = models.IntegerField()
+    Risk = models.IntegerField(blank=True)
 
 
 # PAGES
@@ -301,7 +302,25 @@ class Demo1(Page):
 
 class Demo2(Page):
     form_model = 'player'
-    form_fields = ['ethnicity', 'native', 'political', 'inequality', 'gentrust', 'advantage', 'helpful', 'blur_count', 'blur_log', 'blur_warned']
+    form_fields = ['ethnicity', 'native', 'political', 'inequality', 'blur_count', 'blur_log', 'blur_warned']
+
+    @staticmethod
+    def vars_for_template(player):
+        return {
+            'hidden_fields': ['blur_log', 'blur_count', 'blur_warned'],
+        }
+
+
+class Demo3(Page):
+    form_model = 'player'
+    form_fields = ['gentrust', 'advantage', 'helpful', 'Risk', 'blur_count', 'blur_log', 'blur_warned']
+
+    @staticmethod
+    def error_message(player, values):
+        if values['Risk'] is None:
+            return 'Please answer all questions before continuing.'
+        if not (0 <= values['Risk'] <= 10):
+            return 'Risk must be between 0 and 10.'
 
     @staticmethod
     def vars_for_template(player):
@@ -311,15 +330,13 @@ class Demo2(Page):
 
     @staticmethod
     def before_next_page(player, timeout_happened):
-
-        player.game_bonus = random.randint(1,2)
-        player.role_bonus = random.randint(1,2)
-
-        if player.participant.TG_first == 1:
+        player.game_bonus = random.randint(1, 2)
+        player.role_bonus = random.randint(1, 2)
+        tg_first = getattr(player.participant, 'TG_first', 1)
+        if tg_first == 1:
             player.tg_bonus = 1 if player.game_bonus == 1 else 0
         else:
             player.tg_bonus = 0 if player.game_bonus == 1 else 1
-
 
 
 class Results(Page):
@@ -378,6 +395,7 @@ page_sequence = [
     Risk,
     Demo1,
     Demo2,
+    Demo3,
     Results,
     Redirect
 ]

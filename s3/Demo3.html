@@ -1,0 +1,251 @@
+{{ block content }}
+<link rel="stylesheet" href="{{ static 'css/css.css' }}">
+<link rel="stylesheet" href="{{ static 'css/modal.css' }}">
+<script type="text/javascript" src="{{ static 'js/Script_modal.js' }}"></script>
+
+<div class="content-box box-white">
+    <div class="text-center"><h3>Final questions (Page 3/3)</h3></div>
+    <hr>
+    <p>Please answer the following final questions.</p>
+</div>
+
+<!-- gentrust -->
+<div class="content-box box-task">
+    <p>On a scale of 1 to 5, how much would you say people can be trusted, generally speaking?</p>
+    <div style="display:none">{{ formfield 'gentrust' }}</div>
+    <div class="trust-scale">
+        <div class="scale-label">Need to be very careful</div>
+        <div class="scale-label">&nbsp;</div>
+        <div class="scale-label">&nbsp;</div>
+        <div class="scale-label">&nbsp;</div>
+        <div class="scale-label">Most people can be trusted</div>
+        <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 1)">1</button>
+        <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 2)">2</button>
+        <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 3)">3</button>
+        <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 4)">4</button>
+        <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'gentrust', 5)">5</button>
+    </div>
+</div>
+
+<!-- advantage — fixed: was incorrectly using 'gentrust' -->
+<div class="content-box box-task">
+    <p>On a scale of 1 to 5, do you think that most people would try to take advantage of you if they got the chance, or would they try to be fair, generally speaking?</p>
+    <div style="display:none">{{ formfield 'advantage' }}</div>
+    <div class="trust-scale">
+        <div class="scale-label">People take advantage</div>
+        <div class="scale-label">&nbsp;</div>
+        <div class="scale-label">&nbsp;</div>
+        <div class="scale-label">&nbsp;</div>
+        <div class="scale-label">People try to be fair</div>
+        <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'advantage', 1)">1</button>
+        <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'advantage', 2)">2</button>
+        <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'advantage', 3)">3</button>
+        <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'advantage', 4)">4</button>
+        <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'advantage', 5)">5</button>
+    </div>
+</div>
+
+<!-- helpful — fixed: was incorrectly using 'gentrust' -->
+<div class="content-box box-task">
+    <p>On a scale of 1 to 5, would you say that most of the time people are looking out for themselves or that they are mostly trying to be helpful, generally speaking?</p>
+    <div style="display:none">{{ formfield 'helpful' }}</div>
+    <div class="trust-scale">
+        <div class="scale-label">People look out for themselves</div>
+        <div class="scale-label">&nbsp;</div>
+        <div class="scale-label">&nbsp;</div>
+        <div class="scale-label">&nbsp;</div>
+        <div class="scale-label">People try to be helpful</div>
+        <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'helpful', 1)">1</button>
+        <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'helpful', 2)">2</button>
+        <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'helpful', 3)">3</button>
+        <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'helpful', 4)">4</button>
+        <button type="button" class="survey-btn scale-btn" onclick="selectField(this, 'helpful', 5)">5</button>
+    </div>
+</div>
+
+<!-- Risk -->
+<div class="content-box box-task">
+    <p>How do you see yourself: are you generally a person who is fully prepared to take risks or do you try to avoid taking risks?<br>
+    <em>Please select a number on the scale below.</em></p>
+
+    <div style="display:none">{{ formfield 'Risk' }}</div>
+    <!-- Fallback hidden input we control directly -->
+    <input type="hidden" id="risk_value_store" value="">
+
+    <div class="risk-scale">
+        <div class="scale-label risk-label-left">Not at all willing to take risks</div>
+        <div class="scale-label risk-label-right">Very willing to take risks</div>
+        <button type="button" class="survey-btn scale-btn" onclick="selectRisk(this, 0)">0</button>
+        <button type="button" class="survey-btn scale-btn" onclick="selectRisk(this, 1)">1</button>
+        <button type="button" class="survey-btn scale-btn" onclick="selectRisk(this, 2)">2</button>
+        <button type="button" class="survey-btn scale-btn" onclick="selectRisk(this, 3)">3</button>
+        <button type="button" class="survey-btn scale-btn" onclick="selectRisk(this, 4)">4</button>
+        <button type="button" class="survey-btn scale-btn" onclick="selectRisk(this, 5)">5</button>
+        <button type="button" class="survey-btn scale-btn" onclick="selectRisk(this, 6)">6</button>
+        <button type="button" class="survey-btn scale-btn" onclick="selectRisk(this, 7)">7</button>
+        <button type="button" class="survey-btn scale-btn" onclick="selectRisk(this, 8)">8</button>
+        <button type="button" class="survey-btn scale-btn" onclick="selectRisk(this, 9)">9</button>
+        <button type="button" class="survey-btn scale-btn" onclick="selectRisk(this, 10)">10</button>
+    </div>
+</div>
+
+<center>{{ next_button }}</center>
+
+<div style="display:none">
+    {% for field in form %}
+      {% if field.name in hidden_fields %}
+        {{ formfield field.name }}
+      {% endif %}
+    {% endfor %}
+</div>
+
+<style>
+    .survey-btn {
+        padding: 10px 24px;
+        border: 2px solid #000;
+        border-radius: 10px;
+        background-color: #fff;
+        color: #000;
+        font-size: 15px;
+        cursor: pointer;
+        transition: background-color 0.2s, color 0.2s;
+        min-width: 280px;
+        text-align: center;
+    }
+
+    .survey-btn.selected {
+        background-color: #2e7d32;
+        color: #fff;
+        border-color: #2e7d32;
+    }
+
+    .survey-btn:hover:not(.selected) {
+        background-color: #f0f0f0;
+    }
+
+    .btn-group-vertical {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        margin: 20px 0;
+    }
+
+.btn-group-horizontal {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.btn-group-horizontal .survey-btn {
+    min-width: 0;
+    flex: 1 1 0;
+    white-space: nowrap;
+}
+
+.trust-scale {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-rows: auto auto;
+    gap: 8px;
+    align-items: end;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.scale-label {
+    font-size: 13px;
+    line-height: 1.2;
+    text-align: center;
+    min-height: 32px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0 4px;
+}
+
+.scale-btn {
+    width: 100%;
+    min-width: 0;
+    padding: 10px 0;
+}
+.risk-scale {
+    display: grid;
+    grid-template-columns: repeat(11, minmax(0, 1fr));
+    grid-template-rows: auto auto;
+    gap: 8px;
+    align-items: end;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.risk-label-left {
+    grid-column: 1 / 4;
+    text-align: left;
+    align-items: flex-end;
+    justify-content: flex-start;
+    font-size: 14px;
+}
+
+.risk-label-right {
+    grid-column: 9 / 12;
+    text-align: right;
+    align-items: flex-end;
+    justify-content: flex-end;
+    font-size: 14px;
+}
+
+</style>
+
+{{ endblock }}
+
+{{ block scripts }}
+{{ super }}
+<script>
+    function selectField(btn, fieldName, value) {
+        const box = btn.closest('.content-box');
+        box.querySelectorAll('.survey-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        document.getElementById('id_' + fieldName).value = value;
+    }
+
+    function selectRisk(btn, value) {
+        const box = btn.closest('.content-box');
+        box.querySelectorAll('.survey-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        // Write to both — whichever oTree actually uses
+        document.getElementById('risk_value_store').value = value;
+        const riskField = document.getElementById('id_Risk');
+        if (riskField) riskField.value = value;
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelector('form').addEventListener('submit', function (e) {
+            // Check button-based fields
+            const fields = ['gentrust', 'advantage', 'helpful'];
+            for (const f of fields) {
+                const el = document.getElementById('id_' + f);
+                if (!el || el.value === '') {
+                    e.preventDefault();
+                    alert('Please answer all questions before continuing.');
+                    return;
+                }
+            }
+            // Check Risk via our own store — reliable regardless of oTree field rendering
+            const riskVal = document.getElementById('risk_value_store').value;
+            if (riskVal === '') {
+                e.preventDefault();
+                alert('Please answer all questions before continuing.');
+                return;
+            }
+            // Final sync to oTree field before submit
+            const riskField = document.getElementById('id_Risk');
+            if (riskField) riskField.value = riskVal;
+        });
+    });
+</script>
+<script src="{{ static 'data_quality.js' }}"></script>
+{{ endblock }}
