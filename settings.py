@@ -14,7 +14,7 @@ SESSION_CONFIGS = [
             's3'
         ],
         num_demo_participants=10,
-        completionlinkfull='https://app.prolific.com/submissions/complete?cc=CHXPJ2PR',
+        completionlinkfull='https://app.prolific.com/submissions/complete?cc=C1PO8E12',
     )
 ]
 
