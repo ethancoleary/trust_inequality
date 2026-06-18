@@ -61,7 +61,7 @@ class Intro(Page):
     def before_next_page(player, timeout_happened):
 
         if player.participant.merit == 0:
-            player.group_assignment = 1
+            player.group_assignment = random.randint(1,2)
             player.participant.group_assignment = player.group_assignment
         else:
             if player.participant.s1score >= C.AVG_PILOT:
