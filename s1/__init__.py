@@ -149,14 +149,19 @@ class Results(Page):
 
         count_0 = player.session.vars['merit_count_0']
         count_1 = player.session.vars['merit_count_1']
+        total = count_0 + count_1
 
-        # Assign to whichever group has fewer; break ties randomly
-        if count_0 < count_1:
-            merit = 0
-        elif count_1 < count_0:
-            merit = 1
+        if total == 0:
+            # First participant: assign randomly with 2/3 probability to merit=1
+            merit = random.choices([0, 1], weights=[1, 2])[0]
         else:
-            merit = random.randint(0, 1)  # tied — random tiebreak
+            # Assign to whichever group is most under-represented relative to target ratio
+            # Target: count_1/total = 2/3, count_0/total = 1/3
+            target_1 = (2 / 3) * (total + 1)  # how many merit=1 we'd want after this assignment
+            if count_1 < target_1:
+                merit = 1
+            else:
+                merit = 0
 
         # Increment the chosen group's counter
         player.session.vars[f'merit_count_{merit}'] += 1
